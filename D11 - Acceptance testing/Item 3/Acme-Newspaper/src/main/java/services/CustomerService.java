@@ -19,6 +19,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Customer;
 import domain.Subscription;
+import domain.Underwrite;
 import forms.CustomerForm;
 
 @Service
@@ -44,16 +45,19 @@ public class CustomerService {
 		UserAccount userAccount;
 		Authority authority;
 		Collection<Subscription> subscriptions;
+		Collection<Underwrite> underwrites;
 
 		result = new Customer();
 		userAccount = new UserAccount();
 		authority = new Authority();
 		subscriptions = new ArrayList<>();
+		underwrites = new ArrayList<>();
 
 		authority.setAuthority(Authority.CUSTOMER);
 		userAccount.addAuthority(authority);
 		result.setUserAccount(userAccount);
 		result.setSubcriptions(subscriptions);
+		result.setUnderwrites(underwrites);
 
 		return result;
 	}
@@ -142,6 +146,7 @@ public class CustomerService {
 			UserAccount userAccount;
 			Authority authority;
 			Collection<Subscription> subscriptions;
+			Collection<Underwrite> underwrites;
 
 			userAccount = customerForm.getCustomer().getUserAccount();
 			authority = new Authority();
@@ -149,8 +154,10 @@ public class CustomerService {
 			userAccount.addAuthority(authority);
 			customerForm.getCustomer().setUserAccount(userAccount);
 			subscriptions = new ArrayList<>();
+			underwrites = new ArrayList<>();
 
 			customerForm.getCustomer().setSubcriptions(subscriptions);
+			customerForm.getCustomer().setUnderwrites(underwrites);
 
 			result = customerForm;
 
@@ -160,6 +167,7 @@ public class CustomerService {
 			customerForm.getCustomer().setVersion(customer.getVersion());
 			customerForm.getCustomer().setUserAccount(customer.getUserAccount());
 			customerForm.getCustomer().setSubcriptions(customer.getSubcriptions());
+			customerForm.getCustomer().setUnderwrites(customer.getUnderwrites());
 
 			result = customerForm;
 		}
