@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.NewspaperRepository;
+import domain.Advertisement;
 import domain.Article;
 import domain.Customer;
 import domain.Newspaper;
@@ -69,12 +70,15 @@ public class NewspaperService {
 		final Newspaper result;
 		User userPrincipal;
 		final Collection<Article> articles;
+		Collection<Advertisement> advertisements;
 
 		userPrincipal = this.userService.findByPrincipal();
 		articles = new ArrayList<Article>();
+		advertisements = new ArrayList<Advertisement>();
 		result = new Newspaper();
 		result.setArticles(articles);
 		result.setPublisher(userPrincipal);
+		result.setAdvertisements(advertisements);
 
 		return result;
 	}
@@ -278,11 +282,14 @@ public class NewspaperService {
 		if (newspaper.getId() == 0) {
 			User userPrincipal;
 			final Collection<Article> articles;
+			Collection<Advertisement> advertisements;
 
 			userPrincipal = this.userService.findByPrincipal();
 			articles = new ArrayList<Article>();
+			advertisements = new ArrayList<Advertisement>();
 			newspaper.setArticles(articles);
 			newspaper.setPublisher(userPrincipal);
+			newspaper.setAdvertisements(advertisements);
 			result = newspaper;
 		} else {
 			newspaperBD = this.newspaperRepository.findOne(newspaper.getId());
@@ -294,6 +301,10 @@ public class NewspaperService {
 				newspaper.setArticles(new ArrayList<Article>());
 			else
 				newspaper.setArticles(newspaperBD.getArticles());
+			if (newspaper.getAdvertisements() == null)
+				newspaper.setAdvertisements(new ArrayList<Advertisement>());
+			else
+				newspaper.setAdvertisements(newspaperBD.getAdvertisements());
 			result = newspaper;
 		}
 		this.validator.validate(result, bindingResult);
