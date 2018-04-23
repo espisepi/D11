@@ -439,6 +439,10 @@
 				<ref bean="article1"/>
 			</list>
 		</property>
+		<property name="advertisements">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="newspaper2" class="domain.Newspaper">
@@ -451,6 +455,10 @@
 		<property name="articles">
 			<list>
 				<ref bean="article2"/>
+			</list>
+		</property>
+		<property name="advertisements">
+			<list>
 			</list>
 		</property>
 	</bean>
@@ -468,6 +476,10 @@
 				<ref bean="article3"/>
 			</list>
 		</property>
+		<property name="advertisements">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="newspaper4" class="domain.Newspaper">
@@ -483,6 +495,10 @@
 				<ref bean="article7"/>
 			</list>
 		</property>
+		<property name="advertisements">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="newspaper5" class="domain.Newspaper">
@@ -495,6 +511,10 @@
 		<property name="articles">
 			<list>
 				<ref bean="article8"/>
+			</list>
+		</property>
+		<property name="advertisements">
+			<list>
 			</list>
 		</property>
 	</bean>
@@ -512,6 +532,10 @@
 				<ref bean="article9"/>
 			</list>
 		</property>
+		<property name="advertisements">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="newspaper7" class="domain.Newspaper">
@@ -524,6 +548,10 @@
 		<property name="articles">
 			<list>
 				<ref bean="article10"/>
+			</list>
+		</property>
+		<property name="advertisements">
+			<list>
 			</list>
 		</property>
 	</bean>
@@ -540,6 +568,10 @@
 				<ref bean="article11"/>
 			</list>
 		</property>
+		<property name="advertisements">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="newspaper9" class="domain.Newspaper">
@@ -552,6 +584,10 @@
 		<property name="articles">
 			<list>
 				<ref bean="article12"/>
+			</list>
+		</property>
+		<property name="advertisements">
+			<list>
 			</list>
 		</property>
 	</bean>
