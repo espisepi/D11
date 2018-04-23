@@ -85,8 +85,9 @@ public class Newspaper extends DomainEntity {
 
 	// Relationships ---------------------------------------------------------------
 
-	private Collection<Article>	articles;
-	private User				publisher;
+	private Collection<Article>			articles;
+	private User						publisher;
+	private Collection<Advertisement>	advertisements;
 
 
 	@OneToMany(mappedBy = "newspaper", cascade = CascadeType.REMOVE)
@@ -108,6 +109,16 @@ public class Newspaper extends DomainEntity {
 
 	public void setPublisher(final User publisher) {
 		this.publisher = publisher;
+	}
+
+	@OneToMany
+	@Valid
+	public Collection<Advertisement> getAdvertisements() {
+		return this.advertisements;
+	}
+
+	public void setAdvertisements(final Collection<Advertisement> advertisements) {
+		this.advertisements = advertisements;
 	}
 
 }

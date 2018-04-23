@@ -17,6 +17,8 @@ public class Customer extends Actor {
 
 	private Collection<Subscription>	subcriptions;
 
+	private Collection<Underwrite>		underwrites;
+
 
 	@OneToMany(mappedBy = "customer")
 	@Valid
@@ -26,6 +28,16 @@ public class Customer extends Actor {
 
 	public void setSubcriptions(final Collection<Subscription> subcriptions) {
 		this.subcriptions = subcriptions;
+	}
+
+	@OneToMany
+	@Valid
+	public Collection<Underwrite> getUnderwrites() {
+		return this.underwrites;
+	}
+
+	public void setUnderwrites(final Collection<Underwrite> underwrites) {
+		this.underwrites = underwrites;
 	}
 
 }
