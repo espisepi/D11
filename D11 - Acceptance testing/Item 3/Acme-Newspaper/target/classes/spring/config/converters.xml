@@ -64,6 +64,27 @@
 		
 		<bean class="converters.TabooWordToStringConverter" /> 
 		<bean class="converters.StringToTabooWordConverter" /> 
+		
+		<bean class="converters.AgentToStringConverter" /> 
+		<bean class="converters.StringToAgentConverter" /> 
+		
+		<bean class="converters.AdvertisementToStringConverter" /> 
+		<bean class="converters.StringToAdvertisementConverter" /> 
+		
+		<bean class="converters.UnderwriteToStringConverter" /> 
+		<bean class="converters.StringToUnderwriteConverter" /> 
+		
+		<bean class="converters.VolumeToStringConverter" /> 
+		<bean class="converters.StringToVolumeConverter" /> 
+		
+		<bean class="converters.MessageToStringConverter" /> 
+		<bean class="converters.StringToMessageConverter" /> 
+		
+		<bean class="converters.MessageFolderToStringConverter" /> 
+		<bean class="converters.StringToMessageFolderConverter" /> 
+		
+		
+		
 	</util:list>
 	
 </beans>
