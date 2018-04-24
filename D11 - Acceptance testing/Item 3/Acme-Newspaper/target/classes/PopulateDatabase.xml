@@ -204,6 +204,11 @@
 				 <ref bean="chirp4"/>  
 			</list>
 		</property>
+		<property name="volumes">
+			<list> 
+				<ref bean="volume1"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="user2" class="domain.User">
@@ -244,6 +249,10 @@
 				 <ref bean="chirp2"/> 
 				 <ref bean="chirp5"/>  
 				 
+			</list>
+		</property>
+		<property name="volumes">
+			<list> 
 			</list>
 		</property>
 	</bean>
@@ -288,6 +297,10 @@
 				 <ref bean="chirp3"/>  
 			</list>
 		</property>
+		<property name="volumes">
+			<list> 
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="user4" class="domain.User">
@@ -325,6 +338,10 @@
 				<ref bean="chirp7"/>
 			</list>
 		</property>
+		<property name="volumes">
+			<list> 
+			</list>
+		</property>
 	</bean>
 	
 		<!-- Customers -->
@@ -341,6 +358,10 @@
 				<ref bean="subcription1"/>
 			</list>
 		</property>
+		<property name="underwrites">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="customer2" class="domain.Customer">
@@ -353,6 +374,10 @@
 		<property name="subcriptions">
 			<list>
 				<ref bean="subcription2"/>
+			</list>
+		</property>
+		<property name="underwrites">
+			<list>
 			</list>
 		</property>
 	</bean>
@@ -369,6 +394,10 @@
 				<ref bean="subcription3"/>
 			</list>
 		</property>
+		<property name="underwrites">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="customer4" class="domain.Customer">
@@ -381,6 +410,11 @@
 		<property name="subcriptions">
 			<list>
 				<ref bean="subcription4"/>
+			</list>
+		</property>
+		<property name="underwrites">
+			<list>
+				<ref bean="underwrite1"/>
 			</list>
 		</property>
 	</bean>
@@ -467,6 +501,7 @@
 		<property name="expirationYear" value="19" />
 		<property name="cvv" value="614" />
 	</bean> 
+	
 
 		<!-- Subcriptions -->
 		
@@ -1117,6 +1152,26 @@
 		<property name="targetPage" value="https://sumedico.com/por-que-adoptar-un-gato/" />
 		<property name="banner" value="https://sumedico.com/por-que-adoptar-un-gato/" />
 		<property name="creditCard" ref="creditCard5" />
+	</bean>
+	
+	<!-- Volumes -->
+	
+	<bean id="volume1" class="domain.Volume">
+		<property name="title" value="title volume1 user1" />
+		<property name="description" value="description1" />
+		<property name="year" value="2018" />
+		<property name="newspapers">
+			<list>
+				<ref bean="newspaper1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Underwrites -->
+	
+	<bean id="underwrite1" class="domain.Underwrite">
+		<property name="creditCard" ref="creditCard4" />
+		<property name="volume" ref="volume1" />
 	</bean>
 	
 </beans>
