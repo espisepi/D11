@@ -79,6 +79,7 @@
 		<security:intercept-url pattern="/profile/agent/**" access="hasRole('AGENT')"/>
 		<security:intercept-url pattern="/agent/**" access="permitAll"/>
 		<security:intercept-url pattern="/newspaper/agent/**" access="hasRole('AGENT')"/>
+		<security:intercept-url pattern="/advertisement/agent/**" access="hasRole('AGENT')"/>
 		
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />

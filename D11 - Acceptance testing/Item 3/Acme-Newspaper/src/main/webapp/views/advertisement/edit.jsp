@@ -20,7 +20,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="advertisement/agent/edit.do" modelAttribute="advertisement">
+<form:form action="${requestURI}" modelAttribute="advertisement">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -28,11 +28,11 @@
 	
 <!-- ATRIBUTOS -->
 
-<acme:textbox code="advertisement.title" path="title"/>
+<B><acme:textbox code="advertisement.title" path="title"/></B>
 	<br />
-	<acme:textbox code="advertisement.banner" path="banner"/>
+	<B><acme:textbox code="advertisement.banner" path="banner"/></B>
 	<br />
-	<acme:textbox code="advertisement.targetPage" path="targetPage"/>
+	<B><acme:textbox code="advertisement.targetPage" path="targetPage"/></B>
 	<br />
 
 	<fieldset>
@@ -48,7 +48,7 @@
 	<br>
 	<B><acme:textbox code="advertisement.creditCard.cvv" path="creditCard.cvv"/></B>
 	</fieldset>
-	
+	<br>
 <!-- BOTONES -->
 
 	<input type="submit" name="save" value="<spring:message code="advertisement.save" />" />&nbsp; 
