@@ -1174,4 +1174,36 @@
 		<property name="volume" ref="volume1" />
 	</bean>
 	
+	<!-- Default folder of agent -->
+ 
+	<bean id="InBoxAgent1" class="domain.MessageFolder">
+		<property name="name" value="In box" />
+		<property name="modifiable" value="false" />
+		<property name="actor" ref="agent1" />
+	</bean>
+
+	<bean id="OutBoxAgent1" class="domain.MessageFolder">
+		<property name="name" value="Out box" />
+		<property name="modifiable" value="false" />
+		<property name="actor" ref="agent1" />
+	</bean>
+
+	<bean id="NotificationBoxAgent1" class="domain.MessageFolder">
+		<property name="name" value="Notification box" />
+		<property name="modifiable" value="false" />
+		<property name="actor" ref="agent1" />
+	</bean>
+
+	<bean id="TrashBoxAgent1" class="domain.MessageFolder">
+		<property name="name" value="Trash box" />
+		<property name="modifiable" value="false" />
+		<property name="actor" ref="agent1" />
+	</bean>
+
+	<bean id="SpamBoxAgent1" class="domain.MessageFolder">
+		<property name="name" value="Spam box" />
+		<property name="modifiable" value="false" />
+		<property name="actor" ref="agent1" />
+	</bean>
+	
 </beans>
