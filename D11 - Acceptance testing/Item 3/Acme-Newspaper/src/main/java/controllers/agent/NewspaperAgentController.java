@@ -35,11 +35,15 @@ public class NewspaperAgentController extends AbstractController {
 
 		ModelAndView result;
 		Collection<Newspaper> newspapers;
+		Collection<Newspaper> newspapersHavingAnAdvertisement;
 
 		newspapers = this.newspaperService.findAllNewspaperToWriteAnAdvertisement();
+		newspapersHavingAnAdvertisement = this.newspaperService.findAllNewspaperHavingAtLeastOneAdvertisement();
 
 		result = new ModelAndView("newspaper/list");
 		result.addObject("newspapers", newspapers);
+
+		result.addObject("newspapersHavingAnAdvertisement", newspapersHavingAnAdvertisement);
 		result.addObject("showDelete", true);
 		result.addObject("requestURI", "newspaper/agent/list.do?d-16544-p=1");
 		return result;
