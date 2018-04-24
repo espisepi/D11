@@ -24,8 +24,15 @@
 
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="users" requestURI="${requestURI}" id="row">
+	name="volume" requestURI="${requestURI}" id="row">
 	
 
 	
 </display:table>
+
+
+	<div>
+		<a href="volume/user/create.do"> 
+			<spring:message	code="volume.create" />
+		</a>
+	</div>

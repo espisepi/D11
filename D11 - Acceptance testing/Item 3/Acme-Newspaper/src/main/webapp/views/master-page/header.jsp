@@ -152,6 +152,14 @@
 					<li><a href="article/user/list.do?d-16544-p=1"><spring:message code="master.page.articles.mylist" /></a></li>
 				</ul>
 			</li>
+			
+			
+			<li><a class="fNiv"><spring:message	code="master.page.Myvolumes" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="volume/user/mylist.do?d-16544-p=1"><spring:message code="master.page.user.volume.list" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		

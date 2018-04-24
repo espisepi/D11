@@ -78,4 +78,15 @@ public class VolumeService {
 	//		this.newspaperRepository.delete(newspaper);
 	//	}
 
+	//other Method Utilities
+
+	public Collection<Volume> myVolumes() {
+		Collection<Volume> result;
+		User user;
+		user = this.userService.findByPrincipal();
+		result = this.volumeRepository.myVolumes(user.getId());
+
+		return result;
+
+	}
 }
