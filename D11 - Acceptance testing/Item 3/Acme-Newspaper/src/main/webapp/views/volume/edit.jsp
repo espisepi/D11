@@ -31,7 +31,7 @@
 	<br /> 
 	<acme:textbox code="volume.year" path="year" placeHolder="http://"/>
 	<br />
-	<acme:select items="${newspapers}" itemLabel="title" code="volume.newspaper" path="newspapers"/>
+	<acme:selectmultiple items="${newspapers}" itemLabel="title" code="volume.newspaper" path="newspapers"/>
 	<br />
 <!-- BOTONES -->
 

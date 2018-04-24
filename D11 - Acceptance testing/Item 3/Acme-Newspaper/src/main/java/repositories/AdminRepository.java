@@ -49,7 +49,7 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
 	//B1: The average number of follow-ups per article.
 	@Query("select avg(a.followUps.size) from Article a")
 	Double avgFollowupsPerArticle();
-	//B2: The average number of follow-ups per article up to one week after the corresponding newspaper’s been published.
+	//B2: The average number of follow-ups per article up to one week after the corresponding newspaperâs been published.
 	@Query("select avg(a.followUps.size) from Article a where a.newspaper.publicationDate<?1")
 	Double avgNumberOfFollowUpsPerArticleAfterOneWeek(Date since);
 	//B3: The average number of follow-ups per article up to two weeks after the corresponding newspapers been published.
@@ -76,5 +76,20 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
 	//A5: The average ratio of private versus public newspapers per publisher.
 	@Query("select count(ne)*1.0/(select count(n) from User us join us.newspapers n where n.open=true)from User u join u.newspapers ne where ne.open=false")
 	Double theAverageRatioOfPrivateVersusPublicNewspaperPerPublished();
+
+	//Acme-Newspaper 2.0
+
+	//C1: The ratio of newspapers that have at least one advertisement versus the newspapers that haven’t any.
+	@Query("select (select count(n) from Newspaper n where n.advertisements.size>1)*1.0/count(ne) from Newspaper ne where ne.advertisements.size=0")
+	Double theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement();
+	//C2: The ratio of advertisements that have taboo words.
+
+	//B1: The average number of newspapers per volume.
+	@Query("select avg(a.newspapers.size) from Volume a")
+	Double theAverageNumberOfNewspaperPerVolume();
+
+	//B2: The ratio of subscriptions to volumes versus subscriptions to newspapers.
+	@Query("select count(u)*1.0 /(select count(s) from Subscription s) from Underwrite u")
+	Double theRatioOfSubcrptionsToVolumesVersusSubcriptionsToNewspapers();
 
 }

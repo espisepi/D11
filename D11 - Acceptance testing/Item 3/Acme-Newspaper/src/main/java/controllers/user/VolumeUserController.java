@@ -106,7 +106,7 @@ public class VolumeUserController extends AbstractController {
 
 		ModelAndView result;
 		Collection<Newspaper> newspapers;
-		newspapers = this.newspaperService.findAll();
+		newspapers = this.newspaperService.findNewspapersCreatedByUser();
 		result = new ModelAndView("volume/edit");
 		result.addObject("volume", volume);
 		result.addObject("newspapers", newspapers);

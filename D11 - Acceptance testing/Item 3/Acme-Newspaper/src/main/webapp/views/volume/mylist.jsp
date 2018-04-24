@@ -45,14 +45,7 @@
 	
 	<spring:message code="volume.year" var="titleHeader" />
 	<display:column property="year" title="${titleHeader}" sortable="true" />
-	
-<%-- 	<spring:message code="volume.newspaper" var="titleHeader" />
-	<display:column title="titleHeader" property="newspapers">
-		<jstl:forEach items="${newspapers.title}" var="picture">
-		<jstl:out value="${title }"></jstl:out>
-	</jstl:forEach>
-	</display:column> --%>
-		
+			
 
 	
 </display:table>
