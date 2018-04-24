@@ -68,4 +68,8 @@ public interface NewspaperRepository extends JpaRepository<Newspaper, Integer> {
 	@Query("select n from Newspaper n where (n.title like %?1% or n.description like %?1%)")
 	Collection<Newspaper> findAllNewspapersByAdmin(String keyWord);
 
+	//Me devuelve todos aquellos periódicos que son públicos para que el agente
+	// escriba advertencias en ellos
+	@Query("select n from Newspaper n where n.open=true")
+	Collection<Newspaper> findAllNewspaperToWriteAnAdvertisement();
 }

@@ -46,14 +46,17 @@ public class AgentService {
 		Agent result;
 		UserAccount userAccount;
 		Authority authority;
+		Collection<Advertisement> advertisements;
 
 		result = new Agent();
 		userAccount = new UserAccount();
 		authority = new Authority();
+		advertisements = new ArrayList<Advertisement>();
 
 		authority.setAuthority(Authority.AGENT);
 		userAccount.addAuthority(authority);
 		result.setUserAccount(userAccount);
+		result.setAdvertisements(advertisements);
 
 		return result;
 	}
@@ -122,36 +125,36 @@ public class AgentService {
 
 	//Reconstructor----------------------------------------------------------
 
-	public AgentForm reconstruct(final AgentForm AgentForm, final BindingResult binding) {
+	public AgentForm reconstruct(final AgentForm agentForm, final BindingResult binding) {
 
 		AgentForm result = null;
-		Agent Agent;
-		Agent = AgentForm.getAgent();
+		Agent agent;
+		agent = agentForm.getAgent();
 
-		if (Agent.getId() == 0) {
+		if (agent.getId() == 0) {
 			UserAccount userAccount;
 			Authority authority;
 			Collection<Advertisement> advertisements;
 
-			userAccount = AgentForm.getAgent().getUserAccount();
+			userAccount = agentForm.getAgent().getUserAccount();
 			authority = new Authority();
 			authority.setAuthority(Authority.AGENT);
 			userAccount.addAuthority(authority);
-			AgentForm.getAgent().setUserAccount(userAccount);
+			agentForm.getAgent().setUserAccount(userAccount);
 			advertisements = new ArrayList<>();
 
-			AgentForm.getAgent().setAdvertisements(advertisements);
+			agentForm.getAgent().setAdvertisements(advertisements);
 
-			result = AgentForm;
+			result = agentForm;
 
 		} else {
-			Agent = this.agentRepository.findOne(AgentForm.getAgent().getId());
-			AgentForm.getAgent().setId(Agent.getId());
-			AgentForm.getAgent().setVersion(Agent.getVersion());
-			AgentForm.getAgent().setUserAccount(Agent.getUserAccount());
-			AgentForm.getAgent().setAdvertisements(Agent.getAdvertisements());
+			agent = this.agentRepository.findOne(agentForm.getAgent().getId());
+			agentForm.getAgent().setId(agent.getId());
+			agentForm.getAgent().setVersion(agent.getVersion());
+			agentForm.getAgent().setUserAccount(agent.getUserAccount());
+			agentForm.getAgent().setAdvertisements(agent.getAdvertisements());
 
-			result = AgentForm;
+			result = agentForm;
 		}
 
 		this.validator.validate(result, binding);

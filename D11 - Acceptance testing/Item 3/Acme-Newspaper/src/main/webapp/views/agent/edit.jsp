@@ -23,7 +23,7 @@
 
 <form:form action="agent/edit.do" modelAttribute="agentForm">
 	
-	
+
 	
 <jstl:choose>
 			<jstl:when test="${agentForm.agent.id != 0}">

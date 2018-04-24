@@ -67,25 +67,9 @@ public class AgentController extends AbstractController {
 		return result;
 	}
 
-	//Edition------------------------------------------------------------
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit() {
-		ModelAndView result;
-		Agent agent;
-
-		agent = this.agentService.findByPrincipal();
-		AgentForm agentForm;
-		agentForm = new AgentForm(agent);
-		result = new ModelAndView("agent/edit");
-		result.addObject("agentForm", agentForm);
-
-		return result;
-
-	}
-
 	//Save	------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView saveagent(@ModelAttribute("agentForm") AgentForm agentForm, final BindingResult binding) {
+	public ModelAndView saveAgent(@ModelAttribute("agentForm") AgentForm agentForm, final BindingResult binding) {
 		ModelAndView result;
 
 		agentForm = this.agentService.reconstruct(agentForm, binding);

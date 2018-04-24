@@ -30,38 +30,24 @@ public class ProfileAgentController extends AbstractController {
 		super();
 	}
 
-	//Create------------------------------------------------------------
-
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
-		ModelAndView result;
-		Agent agent;
-		AgentForm agentForm;
-
-		agent = this.agentService.create();
-		Assert.notNull(agent);
-		agentForm = new AgentForm(agent);
-		result = this.createEditModelAndView(agentForm);
-		return result;
-	}
-
 	//Edition------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
 		ModelAndView result;
-		AgentForm agentForm;
 		Agent agent;
 
 		agent = this.agentService.findByPrincipal();
-		Assert.notNull(agent);
+		AgentForm agentForm;
 		agentForm = new AgentForm(agent);
-		result = this.createEditModelAndView(agentForm);
+		result = new ModelAndView("agent/edit");
+		result.addObject("agentForm", agentForm);
+
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(AgentForm agentForm, final BindingResult bindingResult) {
+	public ModelAndView saveAgent(AgentForm agentForm, final BindingResult bindingResult) {
 		ModelAndView result;
 
 		agentForm = this.agentService.reconstruct(agentForm, bindingResult);

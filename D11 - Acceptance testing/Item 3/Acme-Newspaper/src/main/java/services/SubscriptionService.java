@@ -44,7 +44,7 @@ public class SubscriptionService {
 	// Constructors -----------------------------------------------------------
 
 	public SubscriptionService() {
-
+		super();
 	}
 
 	// Simple CRUD methods ----------------------------------------------------

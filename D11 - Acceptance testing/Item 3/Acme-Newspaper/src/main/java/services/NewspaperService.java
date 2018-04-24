@@ -338,4 +338,12 @@ public class NewspaperService {
 
 	}
 
+	public Collection<Newspaper> findAllNewspaperToWriteAnAdvertisement() {
+		Collection<Newspaper> result;
+
+		result = this.newspaperRepository.findAllNewspaperToWriteAnAdvertisement();
+
+		return result;
+	}
+
 }
