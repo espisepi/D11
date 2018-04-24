@@ -18,6 +18,7 @@ import org.springframework.validation.Validator;
 
 import repositories.NewspaperRepository;
 import domain.Advertisement;
+import domain.Agent;
 import domain.Article;
 import domain.Customer;
 import domain.Newspaper;
@@ -51,6 +52,9 @@ public class NewspaperService {
 
 	@Autowired
 	TabooWordService	tabooWordService;
+
+	@Autowired
+	AgentService		agentService;
 
 	//Importar la que pertenece a Spring
 	@Autowired
@@ -366,16 +370,10 @@ public class NewspaperService {
 
 	public Collection<Newspaper> findAllNewspaperHavingAtLeastOneAdvertisement() {
 		Collection<Newspaper> result;
+		Agent agent;
 
-		result = this.newspaperRepository.findAllNewspaperHavingAtLeastOneAdvertisement();
-
-		return result;
-	}
-
-	public Collection<Newspaper> findAllNewspaperHavingCeroAdvertisement() {
-		Collection<Newspaper> result;
-
-		result = this.newspaperRepository.findAllNewspaperHavingCeroAdvertisement();
+		agent = this.agentService.findByPrincipal();
+		result = this.newspaperRepository.findAllNewspaperHavingAtLeastOneAdvertisement(agent.getId());
 
 		return result;
 	}
