@@ -13,9 +13,12 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AdvertisementRepository;
 import domain.Advertisement;
+import domain.Agent;
 import domain.CreditCard;
 import domain.Newspaper;
 
@@ -42,6 +45,10 @@ public class AdvertisementService {
 	@Autowired
 	TabooWordService		tabooWordService;
 
+	//Importar la que pertenece a Spring
+	@Autowired
+	private Validator		validator;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -53,8 +60,11 @@ public class AdvertisementService {
 
 	public Advertisement create() {
 		Advertisement result;
+		Agent agent;
 
+		agent = this.agentService.findByPrincipal();
 		result = new Advertisement();
+		result.setAgent(agent);
 
 		return result;
 	}
@@ -118,6 +128,30 @@ public class AdvertisementService {
 
 	public void flush() {
 		this.advertisementRepository.flush();
+	}
+
+	//RECONSTRUCTOR--------------------------------------------------------------
+
+	public Advertisement reconstruct(final Advertisement advertisement, final BindingResult bindingResult) {
+		Advertisement result;
+		Advertisement advertisementBD;
+		if (advertisement.getId() == 0) {
+			Agent agentPrincipal;
+
+			agentPrincipal = this.agentService.findByPrincipal();
+			advertisement.setAgent(agentPrincipal);
+
+			result = advertisement;
+		} else {
+			advertisementBD = this.advertisementRepository.findOne(advertisement.getId());
+			advertisement.setId(advertisementBD.getId());
+			advertisement.setVersion(advertisementBD.getVersion());
+			advertisement.setAgent(advertisementBD.getAgent());
+
+			result = advertisement;
+		}
+		this.validator.validate(result, bindingResult);
+		return result;
 	}
 
 	public Collection<Advertisement> findAdvertisementWithTabooWord(final String tabooWord) {

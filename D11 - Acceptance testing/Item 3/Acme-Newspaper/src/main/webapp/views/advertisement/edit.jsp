@@ -22,9 +22,6 @@
 
 <form:form action="${requestURI}" modelAttribute="advertisement">
 
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-
 	
 <!-- ATRIBUTOS -->
 

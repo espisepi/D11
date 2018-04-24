@@ -1,8 +1,6 @@
 
 package controllers.agent;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -59,8 +57,9 @@ public class AdvertisementAgentController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/addNewspaper", method = RequestMethod.POST, params = "save")
-	public ModelAndView addNewspaper(@Valid Advertisement advertisement, final BindingResult bindingResult, @RequestParam final int newspaperId) {
+	public ModelAndView addNewspaper(Advertisement advertisement, final BindingResult bindingResult, @RequestParam final int newspaperId) {
 		ModelAndView result;
+		advertisement = this.advertisementService.reconstruct(advertisement, bindingResult);
 		Newspaper newspaper;
 
 		if (bindingResult.hasErrors())
@@ -82,9 +81,9 @@ public class AdvertisementAgentController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Advertisement advertisement, final BindingResult bindingResult) {
+	public ModelAndView save(Advertisement advertisement, final BindingResult bindingResult) {
 		ModelAndView result;
-
+		advertisement = this.advertisementService.reconstruct(advertisement, bindingResult);
 		if (bindingResult.hasErrors())
 			result = this.createEditModelAndView(advertisement);
 		else
