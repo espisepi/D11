@@ -77,4 +77,8 @@ public interface NewspaperRepository extends JpaRepository<Newspaper, Integer> {
 	//Me hace falta para el delete de advertisement para el admin
 	@Query("select t from Newspaper t join t.advertisements r where r.id=?1")
 	Newspaper findNewspaperByAdvertisement(int advertisementId);
+
+	//Me devuelve aquellos periódicos los cuales tienes al menos un aviso
+	@Query("select n from Newspaper n where n.advertisements.size>=1")
+	Collection<Newspaper> findAllNewspaperHavingAtLeastOneAdvertisement();
 }

@@ -364,4 +364,12 @@ public class NewspaperService {
 		return result;
 	}
 
+	public Collection<Newspaper> findAllNewspaperHavingAtLeastOneAdvertisement() {
+		Collection<Newspaper> result;
+
+		result = this.newspaperRepository.findAllNewspaperHavingAtLeastOneAdvertisement();
+
+		return result;
+	}
+
 }

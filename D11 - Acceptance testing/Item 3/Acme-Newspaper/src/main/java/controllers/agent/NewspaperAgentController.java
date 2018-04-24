@@ -29,7 +29,7 @@ public class NewspaperAgentController extends AbstractController {
 		super();
 	}
 
-	//Listing all the newspapers
+	//Lista de los periodicos que estan en modo publico para escribir un aviso 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 
@@ -42,6 +42,22 @@ public class NewspaperAgentController extends AbstractController {
 		result.addObject("newspapers", newspapers);
 		result.addObject("showDelete", true);
 		result.addObject("requestURI", "newspaper/agent/list.do?d-16544-p=1");
+		return result;
+	}
+
+	//Lista de los periodicos que tienen al menos un aviso
+	@RequestMapping(value = "/listNewspapersWithAdvertisement", method = RequestMethod.GET)
+	public ModelAndView listNewspapersWithAdvertisement() {
+
+		ModelAndView result;
+		Collection<Newspaper> newspapers;
+
+		newspapers = this.newspaperService.findAllNewspaperHavingAtLeastOneAdvertisement();
+
+		result = new ModelAndView("newspaper/listForAdvertisement");
+		result.addObject("newspapers", newspapers);
+		result.addObject("showDelete", true);
+		result.addObject("requestURI", "newspaper/agent/listNewspapersWithAdvertisement.do?d-16544-p=1");
 		return result;
 	}
 
