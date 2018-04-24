@@ -50,5 +50,15 @@ public class ActorService {
 			result = true;
 		return result;
 	}
+	
+	public Actor findPrincipal() {
+		Actor result;
+		int userAccountId;
+		userAccountId = LoginService.getPrincipal().getId();
+		result = this.actorRepository.findActorByUseraccount(userAccountId);
+		Assert.notNull(result);
+
+		return result;
+	} 
 
 }
