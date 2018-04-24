@@ -4,7 +4,9 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -63,6 +65,21 @@ public class Advertisement extends DomainEntity {
 		this.creditCard = creditCard;
 	}
 
+
 	// Relationships ---------------------------------------------------------------
+
+	private Agent	agent;
+
+
+	@ManyToOne(optional = false)
+	@NotNull
+	@Valid
+	public Agent getAgent() {
+		return this.agent;
+	}
+
+	public void setAgent(final Agent agent) {
+		this.agent = agent;
+	}
 
 }

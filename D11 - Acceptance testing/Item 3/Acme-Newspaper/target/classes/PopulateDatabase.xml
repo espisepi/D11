@@ -1131,6 +1131,7 @@
 		<property name="targetPage" value="https://sumedico.com/por-que-adoptar-un-gato/" />
 		<property name="banner" value="https://sumedico.com/por-que-adoptar-un-gato/" />
 		<property name="creditCard" ref="creditCard5" />
+		<property name="agent" ref="agent1" />
 	</bean>
 	
 	<bean id="advertisement2" class="domain.Advertisement">
@@ -1138,6 +1139,7 @@
 		<property name="targetPage" value="https://sumedico.com/por-que-adoptar-un-gato/" />
 		<property name="banner" value="https://sumedico.com/por-que-adoptar-un-gato/" />
 		<property name="creditCard" ref="creditCard5" />
+		<property name="agent" ref="agent1" />
 	</bean>
 	
 	<bean id="advertisement3" class="domain.Advertisement">
@@ -1145,6 +1147,7 @@
 		<property name="targetPage" value="https://sumedico.com/por-que-adoptar-un-gato/" />
 		<property name="banner" value="https://sumedico.com/por-que-adoptar-un-gato/" />
 		<property name="creditCard" ref="creditCard5" />
+		<property name="agent" ref="agent1" />
 	</bean>
 	
 	<bean id="advertisement4" class="domain.Advertisement">
@@ -1152,6 +1155,7 @@
 		<property name="targetPage" value="https://sumedico.com/por-que-adoptar-un-gato/" />
 		<property name="banner" value="https://sumedico.com/por-que-adoptar-un-gato/" />
 		<property name="creditCard" ref="creditCard5" />
+		<property name="agent" ref="agent2" />
 	</bean>
 	
 	<!-- Volumes -->
