@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import repositories.AdvertisementRepository;
 import domain.Advertisement;
 import domain.CreditCard;
+import domain.Newspaper;
 
 @Service
 @Transactional
@@ -27,6 +28,9 @@ public class AdvertisementService {
 
 	@Autowired
 	AgentService			agentService;
+
+	@Autowired
+	NewspaperService		newspaperService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -54,6 +58,28 @@ public class AdvertisementService {
 
 		result = this.advertisementRepository.save(advertisement);
 		return result;
+	}
+
+	public Advertisement findOne(final int advertisementId) {
+		Assert.isTrue(advertisementId != 0);
+		Advertisement result;
+		result = this.advertisementRepository.findOne(advertisementId);
+
+		return result;
+	}
+
+	public void delete(final Advertisement advertisement) {
+		Assert.notNull(advertisement);
+
+		Newspaper newspaper;
+
+		if (this.newspaperService.findNewspaperByAdvertisement(advertisement) != null) {
+			newspaper = this.newspaperService.findNewspaperByAdvertisement(advertisement);
+			newspaper.getAdvertisements().remove(advertisement);
+		}
+
+		this.advertisementRepository.delete(advertisement);
+
 	}
 
 	//Other business methods--------------------------------------------------------------

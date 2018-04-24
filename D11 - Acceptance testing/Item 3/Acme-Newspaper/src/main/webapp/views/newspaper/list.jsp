@@ -287,10 +287,40 @@
 </display:column>
 		</security:authorize>
 	
-	
-	
+	<!-- LA PARTE DE AGENTE -->
+
+<security:authorize access="hasRole('AGENT')">
+		<spring:message code="newspaper.open" var="draftMode" />
+	<display:column title="${draftMode}">
+		<jstl:if test="${row.open==true}">
+			<div
+				style="position: relative; width: 30px; height: 30px; margin-left: auto; margin-right: auto;">
+
+				<img src="images/yes.png" width="30" height="30">
+			</div>
+		</jstl:if>
+		<jstl:if test="${row.open==false}">
+			<div
+				style="position: relative; width: 30px; height: 30px; margin-left: auto; margin-right: auto;">
+
+				<img src="images/no.png" width="30" height="30">
+			</div>
+		</jstl:if>
 		
-	
+</display:column>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('AGENT')">
+	<spring:message code="newspaper.advertisement" var="Create" />
+	<display:column title="${Create}" sortable="true">
+	<jstl:if test="${row.open==true}">
+		<spring:url value="advertisement/agent/create.do" var="createURL">
+			<spring:param name="newspaperId" value="${row.id}" />
+		</spring:url>
+		<a href="${createURL}"><spring:message code="newspaper.advertisement.create" /></a>
+	</jstl:if>
+	</display:column>
+</security:authorize>
 	
 
 </display:table>

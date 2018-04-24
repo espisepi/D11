@@ -35,6 +35,7 @@ public class Advertisement extends DomainEntity {
 	}
 
 	@URL
+	@NotBlank
 	public String getBanner() {
 		return this.banner;
 	}
@@ -44,6 +45,7 @@ public class Advertisement extends DomainEntity {
 	}
 
 	@URL
+	@NotBlank
 	public String getTargetPage() {
 		return this.targetPage;
 	}

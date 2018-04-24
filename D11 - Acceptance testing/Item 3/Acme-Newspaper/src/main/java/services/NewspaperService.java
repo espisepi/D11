@@ -88,10 +88,20 @@ public class NewspaperService {
 		Newspaper result;
 
 		Assert.notNull(newspaper);
+
 		Assert.isTrue(newspaper.getPublisher().equals(this.userService.findByPrincipal()));
 
 		result = this.newspaperRepository.save(newspaper);
 
+		return result;
+	}
+
+	//SAVE que hace falta para advertisement
+	public Newspaper saveA(final Newspaper newspaper) {
+		Newspaper result;
+		Assert.notNull(newspaper);
+
+		result = this.newspaperRepository.save(newspaper);
 		return result;
 	}
 
@@ -342,6 +352,14 @@ public class NewspaperService {
 		Collection<Newspaper> result;
 
 		result = this.newspaperRepository.findAllNewspaperToWriteAnAdvertisement();
+
+		return result;
+	}
+
+	public Newspaper findNewspaperByAdvertisement(final Advertisement advertisement) {
+		Newspaper result;
+
+		result = this.newspaperRepository.findNewspaperByAdvertisement(advertisement.getId());
 
 		return result;
 	}
