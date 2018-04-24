@@ -126,6 +126,30 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccountAgent1" class="security.UserAccount">
+		<property name="username" value="agent1" />
+		<property name="password" value="83a87fd756ab57199c0bb6d5e11168cb" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AGENT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountAgent2" class="security.UserAccount">
+		<property name="username" value="agent2" />
+		<property name="password" value="b1a4a6b01cc297d4677c4ca6656e14d7" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AGENT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 		<!-- Admin -->
 		
 		<bean id="admin" class="domain.Admin">
@@ -361,6 +385,33 @@
 		</property>
 	</bean>
 	
+	<!-- Agents -->
+	<bean id="agent1" class="domain.Agent">
+		<property name="userAccount" ref="userAccountAgent1" />
+		<property name="name" value="agent 1" />
+		<property name="surname" value="surname agent 1" />
+		<property name="postalAddress" value="postal Adress agent 1" />
+		<property name="email" value="agent1@acmenewspaper.com" />
+		<property name="phone" value="+34652582643" />
+		<property name="advertisements">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="agent2" class="domain.Agent">
+		<property name="userAccount" ref="userAccountAgent2" />
+		<property name="name" value="agent 2" />
+		<property name="surname" value="surname agent 2" />
+		<property name="postalAddress" value="postal Adress agent 2" />
+		<property name="email" value="agent2@acmenewspaper.com" />
+		<property name="phone" value="+34652582643" />
+		<property name="advertisements">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 		<!-- Credit Cards -->
 
 	 <bean id="creditCard1" class="domain.CreditCard">
@@ -393,6 +444,24 @@
 	<bean id="creditCard4" class="domain.CreditCard">
 		<property name="holderName" value="holder name 4" />
 		<property name="brandName" value="Brand name 4" />
+		<property name="number" value="4388576018410707" />
+		<property name="expirationMonth" value="01" />
+		<property name="expirationYear" value="19" />
+		<property name="cvv" value="614" />
+	</bean> 
+	
+	<bean id="creditCard5" class="domain.CreditCard">
+		<property name="holderName" value="Agent1 holder name 5" />
+		<property name="brandName" value="Brand name 5" />
+		<property name="number" value="4388576018410707" />
+		<property name="expirationMonth" value="01" />
+		<property name="expirationYear" value="19" />
+		<property name="cvv" value="614" />
+	</bean> 
+	
+	<bean id="creditCard6" class="domain.CreditCard">
+		<property name="holderName" value="Agent2 holder name 6" />
+		<property name="brandName" value="Brand name 6" />
 		<property name="number" value="4388576018410707" />
 		<property name="expirationMonth" value="01" />
 		<property name="expirationYear" value="19" />
@@ -459,6 +528,8 @@
 		</property>
 		<property name="advertisements">
 			<list>
+				<ref bean="advertisement1"/>
+				<ref bean="advertisement4"/>
 			</list>
 		</property>
 	</bean>
@@ -478,6 +549,7 @@
 		</property>
 		<property name="advertisements">
 			<list>
+			<ref bean="advertisement2"/>
 			</list>
 		</property>
 	</bean>
@@ -515,6 +587,7 @@
 		</property>
 		<property name="advertisements">
 			<list>
+			<ref bean="advertisement3"/>
 			</list>
 		</property>
 	</bean>
@@ -1015,4 +1088,35 @@
 		<property name="name" value="cialis 1"/>
 		<property name="default_word" value="false"/>
 	</bean>
+	
+	<!-- Advertisements -->
+	
+	<bean id="advertisement1" class="domain.Advertisement">
+		<property name="title" value="title 1 Agent1" />
+		<property name="targetPage" value="https://sumedico.com/por-que-adoptar-un-gato/" />
+		<property name="banner" value="https://sumedico.com/por-que-adoptar-un-gato/" />
+		<property name="creditCard" ref="creditCard5" />
+	</bean>
+	
+	<bean id="advertisement2" class="domain.Advertisement">
+		<property name="title" value="title 2 Agent1" />
+		<property name="targetPage" value="https://sumedico.com/por-que-adoptar-un-gato/" />
+		<property name="banner" value="https://sumedico.com/por-que-adoptar-un-gato/" />
+		<property name="creditCard" ref="creditCard5" />
+	</bean>
+	
+	<bean id="advertisement3" class="domain.Advertisement">
+		<property name="title" value="title 3 Agent1" />
+		<property name="targetPage" value="https://sumedico.com/por-que-adoptar-un-gato/" />
+		<property name="banner" value="https://sumedico.com/por-que-adoptar-un-gato/" />
+		<property name="creditCard" ref="creditCard5" />
+	</bean>
+	
+	<bean id="advertisement4" class="domain.Advertisement">
+		<property name="title" value="title 4 Agent2" />
+		<property name="targetPage" value="https://sumedico.com/por-que-adoptar-un-gato/" />
+		<property name="banner" value="https://sumedico.com/por-que-adoptar-un-gato/" />
+		<property name="creditCard" ref="creditCard5" />
+	</bean>
+	
 </beans>
