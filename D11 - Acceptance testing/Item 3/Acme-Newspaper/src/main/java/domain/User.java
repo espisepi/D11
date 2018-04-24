@@ -21,7 +21,18 @@ public class User extends Actor {
 	private Collection<User>		followers;	// Seguidores
 	private Collection<User>		followed;	// Seguidos
 	private Collection<Chirp>		chirps;
+	private Collection<Volume>		volumes;
 
+
+	@OneToMany
+	@Valid
+	public Collection<Volume> getVolumes() {
+		return this.volumes;
+	}
+
+	public void setVolumes(Collection<Volume> volumes) {
+		this.volumes = volumes;
+	}
 
 	@OneToMany(mappedBy = "user")
 	@Valid

@@ -1,5 +1,5 @@
 
-package controllers.user;
+package controllers.customer;
 
 import java.util.Collection;
 
@@ -16,8 +16,8 @@ import controllers.AbstractController;
 import domain.Volume;
 
 @Controller
-@RequestMapping("/volume/user")
-public class VolumeUserController extends AbstractController {
+@RequestMapping("/volume/customer")
+public class VolumeCustomerController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 	@Autowired
@@ -30,16 +30,18 @@ public class VolumeUserController extends AbstractController {
 	private VolumeService		volumeService;
 
 
-	//List my newspapers-----------------------------------------------------------
-	@RequestMapping(value = "/mylist", method = RequestMethod.GET)
+	//List volumen con los periodicos abiertos y publicados -----------------------------------------------------------
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Volume> volumes;
-		volumes = this.volumeService.myVolumes();
-		result = new ModelAndView("volume/mylist");
-		result.addObject("volumes", volumes);
-		result.addObject("requestURI", "volume/user/mylist.do");
+		//TODO realizar query con los volumenes a mostrar
+		//volumes = this.volumeService.myVolumes();
+		result = new ModelAndView("volume/list");
+		//result.addObject("volumes", volumes);
+		result.addObject("requestURI", "volume/customer/list.do");
 		return result;
 
 	}
+
 }
