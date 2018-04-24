@@ -35,6 +35,7 @@
 		<value>/views/article/messages</value>
 		<value>/views/subscription/messages</value>
 		<value>/views/agent/messages</value>
+		<value>/views/volume/messages</value>
 		
 	</util:list>
 

@@ -21,6 +21,7 @@ import domain.Article;
 import domain.Chirp;
 import domain.Newspaper;
 import domain.User;
+import domain.Volume;
 import forms.UserForm;
 
 @Service
@@ -190,6 +191,7 @@ public class UserService {
 			Collection<User> followed;
 			Collection<Chirp> chirps;
 			Collection<Newspaper> newspapers;
+			Collection<Volume> volumes;
 
 			userAccount = userForm.getUser().getUserAccount();
 			authority = new Authority();
@@ -201,11 +203,13 @@ public class UserService {
 			followed = new ArrayList<>();
 			chirps = new ArrayList<>();
 			newspapers = new ArrayList<>();
+			volumes = new ArrayList<>();
 			userForm.getUser().setArticles(articles);
 			userForm.getUser().setFollowers(followers);
 			userForm.getUser().setFollowed(followed);
 			userForm.getUser().setChirps(chirps);
 			userForm.getUser().setNewspapers(newspapers);
+			userForm.getUser().setVolumes(volumes);
 			result = userForm;
 
 		} else {
