@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -13,6 +14,7 @@ import org.springframework.validation.Validator;
 
 import repositories.MessageFolderRepository;
 import domain.Actor;
+import domain.Message;
 import domain.MessageFolder;
 
 @Service
@@ -27,6 +29,9 @@ public class MessageFolderService {
 	
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private MessageService messageService;
 	
 	@Autowired
 	private Validator	validator;
@@ -80,27 +85,27 @@ public class MessageFolderService {
 		
 	}
 	
-	public MessageFolder save(MessageFolder messageFolder){
+	public void save(MessageFolder messageFolder){
 		
 		Assert.notNull(messageFolder);
 		
-		MessageFolder result;
 		Iterator<MessageFolder> it;
-		Actor principal;
+		Actor principal = null;
 		
 		it = this.findAll().iterator();
-		principal = this.actorService.findPrincipal();
+		
 		
 		while (it.hasNext())
 			Assert.isTrue(messageFolder.getName() != it.next().getName());
 		
-		if(messageFolder.getId() != 0)
-			Assert.isTrue(messageFolder.isModifiable() == true, "This message folder doesn't edit");
-			Assert.isTrue(messageFolder.getActor() == principal);
-		
-		result = this.messageFolderRepository.save(messageFolder);
-		
-		return result;
+//		if(messageFolder.getId() != 0 && principal == null)
+//			principal = this.actorService.findPrincipal();
+//			Assert.isTrue(messageFolder.isModifiable() == true, "This message folder doesn't edit");
+//			Assert.isTrue(messageFolder.getActor() == principal);
+			
+			
+		this.messageFolderRepository.save(messageFolder);
+	
 		
 	}
 	
@@ -122,6 +127,83 @@ public class MessageFolderService {
 	public void flush(){
 		this.messageFolderRepository.flush();
 	}
+	
+	//Other method-------------------------------------------------
+	
+	public Collection<MessageFolder> createDefaultMessageFolder(Actor actor){
+		
+		MessageFolder inBox;
+		MessageFolder outBox;
+		MessageFolder trashBox;
+		MessageFolder spamBox;
+		MessageFolder notificationBox;
+		Collection<MessageFolder> result;
+		
+		
+		inBox = new MessageFolder();
+		outBox = new MessageFolder();
+		trashBox = new MessageFolder();
+		spamBox = new MessageFolder(); 
+		notificationBox = new MessageFolder();
+		result = new ArrayList<>();
+		
+		inBox.setName("In box");
+		outBox.setName("Out box");
+		trashBox.setName("Trash box");
+		spamBox.setName("Spam box");
+		notificationBox.setName("Notification box");
+		
+		inBox.setActor(actor);
+		outBox.setActor(actor);
+		trashBox.setActor(actor);
+		spamBox.setActor(actor);
+		notificationBox.setActor(actor);
+
+		
+		inBox.setModifiable(false);
+		outBox.setModifiable(false);
+		trashBox.setModifiable(false);
+		spamBox.setModifiable(false);
+		notificationBox.setModifiable(false);
+		
+				
+//		this.save(inBox);
+//		this.save(outBox);
+//		this.save(trashBox);
+//		this.save(spamBox);
+//		this.save(notificationBox);
+		
+		result.add(inBox);
+		result.add(outBox);
+		result.add(trashBox);
+		result.add(spamBox);
+		result.add(notificationBox);
+		
+		return result;
+		
+		
+	}
+	
+	public Collection<MessageFolder> findMessageFolderByActor(int actorId){
+		
+		Collection<MessageFolder> result;
+		
+		result = this.messageFolderRepository.findMessageFolderByActor(actorId);
+		
+		return result;
+		
+	}
+	
+	public MessageFolder findMessageFolderByNameAndActor(String name, int actorId){
+		
+		MessageFolder result;
+		
+		result = this.messageFolderRepository.findMessageFolderByNameAndActor(name, actorId);
+		
+		return result;
+		
+	}
+	
 	
 	public MessageFolder reconstruct(MessageFolder messageFolder, BindingResult bindingResult){
 		MessageFolder result;
