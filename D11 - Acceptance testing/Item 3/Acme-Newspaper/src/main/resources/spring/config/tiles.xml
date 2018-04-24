@@ -34,6 +34,7 @@
 		<value>/views/tabooWord/tiles.xml</value>
 		<value>/views/article/tiles.xml</value>
 		<value>/views/subscription/tiles.xml</value>
+		<value>/views/agent/tiles.xml</value>
 	</util:list>
 
 </beans>

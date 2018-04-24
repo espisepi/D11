@@ -154,6 +154,19 @@
 			</li>
 		</security:authorize>
 		
+		
+		
+		
+		<security:authorize access="hasRole('AGENT')">
+			<li><a class="fNiv"><spring:message	code="master.page.agent" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="profile/agent/edit.do"><spring:message code="master.page.users.edit" /></a></li>
+				</ul>
+			</li>
+		</security:authorize>
+		
+		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 					
@@ -163,6 +176,7 @@
 					<li class="arrow"></li>
 					<li><a href="user/create.do"><spring:message code="master.page.user.register" /></a></li>
 					<li><a href="customer/create.do"><spring:message code="master.page.customer.register" /></a></li>
+					<li><a href="agent/create.do"><spring:message code="master.page.agent.register" /></a></li>
 				</ul>
 			</li>
 			
