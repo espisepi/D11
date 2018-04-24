@@ -91,6 +91,11 @@ public class AdvertisementService {
 		this.advertisementRepository.delete(advertisement);
 
 	}
+	public Collection<Advertisement> findAll() {
+		Collection<Advertisement> advertisments;
+		advertisments = this.advertisementRepository.findAll();
+		return advertisments;
+	}
 
 	//Other business methods--------------------------------------------------------------
 
