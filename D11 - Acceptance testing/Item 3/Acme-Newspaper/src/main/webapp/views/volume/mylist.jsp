@@ -24,8 +24,35 @@
 
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="volume" requestURI="${requestURI}" id="row">
+	name="volumes" requestURI="${requestURI}" id="row">
 	
+		<spring:message code="volume.edit" var="Edit" />
+		<display:column title="${Edit}" sortable="true">
+<%-- 			<jstl:if test="${row.publicationDate==null}">
+ --%>				<spring:url value="volume/user/edit.do" var="editURL">
+					<spring:param name="volumeId" value="${row.id}" />
+				</spring:url>
+				<a href="${editURL}"><spring:message code="volume.edit" /></a>
+	<%-- 		</jstl:if> --%>
+		</display:column>
+		
+		
+	<spring:message code="volume.title" var="titleHeader" />
+	<display:column property="title" title="${titleHeader}" sortable="true" />
+	
+	<spring:message code="volume.description" var="titleHeader" />
+	<display:column property="description" title="${titleHeader}" sortable="true" />
+	
+	<spring:message code="volume.year" var="titleHeader" />
+	<display:column property="year" title="${titleHeader}" sortable="true" />
+	
+<%-- 	<spring:message code="volume.newspaper" var="titleHeader" />
+	<display:column title="titleHeader" property="newspapers">
+		<jstl:forEach items="${newspapers.title}" var="picture">
+		<jstl:out value="${title }"></jstl:out>
+	</jstl:forEach>
+	</display:column> --%>
+		
 
 	
 </display:table>

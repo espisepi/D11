@@ -9,10 +9,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.VolumeRepository;
-import domain.Newspaper;
 import domain.User;
 import domain.Volume;
 
@@ -41,25 +41,34 @@ public class VolumeService {
 	public Volume create() {
 		final Volume result;
 		User userPrincipal;
-		Collection<Newspaper> newspaper;
-
+		Collection<Volume> newspaper;
 		userPrincipal = this.userService.findByPrincipal();
-		newspaper = new ArrayList<Newspaper>();
-
+		newspaper = new ArrayList<Volume>();
 		result = new Volume();
-		userPrincipal.getVolumes().add(result);
+		return result;
+	}
 
+	public Volume findOne(int volumeId) {
+		Volume result;
+		result = this.volumeRepository.findOne(volumeId);
+		return result;
+	}
+
+	public Collection<Volume> findAll() {
+		Collection<Volume> result;
+		result = this.volumeRepository.findAll();
 		return result;
 	}
 
 	//SAVE
 	public Volume save(final Volume volume) {
 		Volume result;
-
+		User userPrincipal;
 		Assert.notNull(volume);
-
+		userPrincipal = this.userService.findByPrincipal();
 		result = this.volumeRepository.save(volume);
-
+		if (volume.getId() == 0)
+			userPrincipal.getVolumes().add(result);
 		return result;
 	}
 
@@ -88,5 +97,20 @@ public class VolumeService {
 
 		return result;
 
+	}
+
+	public Volume reconstruct(final Volume volume, final BindingResult bindingResult) {
+		Volume result;
+		Volume volumeBD;
+		if (volume.getId() == 0)
+			result = volume;
+		else {
+			volumeBD = this.volumeRepository.findOne(volume.getId());
+			volume.setId(volumeBD.getId());
+			volume.setVersion(volumeBD.getVersion());
+			result = volume;
+		}
+		this.validator.validate(result, bindingResult);
+		return result;
 	}
 }

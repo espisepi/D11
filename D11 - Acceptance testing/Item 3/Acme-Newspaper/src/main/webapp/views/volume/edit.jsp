@@ -20,57 +20,24 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<form:form action="volume/user/edit.do" modelAttribute="volume">
 
-<form:form action="user/edit.do" modelAttribute="userForm">
+	<form:hidden path="id" />
+	<form:hidden path="version" />
 
-	<form:hidden path="user.id" />
-	
-	<jstl:choose>
-			<jstl:when test="${userForm.user.id != 0}">
-				<acme:textbox path="user.userAccount.username"
-					code="user.username" readonly="true" /><br/>
-			</jstl:when>
-			<jstl:otherwise>
-				<acme:textbox path="user.userAccount.username"
-					code="user.username" /><br/>
-			</jstl:otherwise>
-		</jstl:choose>
-		<jstl:choose>
-			<jstl:when test="${userForm.user.id==0}">
-				<acme:password code="user.password"
-					path="user.userAccount.password" /><br/>
-				<acme:password code="user.password" path="passwordCheck" /><br/>
-			</jstl:when>
-			<jstl:otherwise></jstl:otherwise>
-		</jstl:choose>	
-	
-	<acme:textbox code="user.name" path="user.name"/>
+	<acme:textbox code="volume.title" path="title"/>
 	<br />
-	<acme:textbox code="user.surname" path="user.surname"/>
+ 	<acme:textbox code="volume.description" path="description"/>
+	<br /> 
+	<acme:textbox code="volume.year" path="year" placeHolder="http://"/>
 	<br />
-	<acme:textbox code="user.postalAddress" path="user.postalAddress"/>
+	<acme:select items="${newspapers}" itemLabel="title" code="volume.newspaper" path="newspapers"/>
 	<br />
-	<acme:textbox code="user.phoneNumber" path="user.phone" />
-	
-	<br />
-	<acme:textbox code="user.emailAddress" path="user.email"/>
-	<br />
-	
-	<acme:submit name="save" code="user.save"/>
-	<acme:cancel url="welcome/index.do" code="user.cancel"/>
-	<br />
-	<br/>
-	<jstl:if test="${userForm.user.id == 0}">
-   		<form:label path="conditions">
-		<spring:message code="actor.legal.accept"/> - <a href="welcome/legal.do"><spring:message code="actor.legal.moreinfo"/></a>
-		</form:label>
-		<form:checkbox id="conditions" path="conditions"/>
-		<form:errors cssClass="error" path="conditions"/>
-   </jstl:if>
- <br/>
-	</form:form>
-	
-	
-		
-	
+<!-- BOTONES -->
 
+	<input type="submit" name="save" value="<spring:message code="newspaper.save" />" />&nbsp; 
+
+	<acme:cancel
+		url="volume/user/mylist.do?d-16544-p=1"
+		code="chirp.cancel" />
+</form:form>
