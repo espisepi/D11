@@ -2,7 +2,11 @@
 package services;
 
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -31,6 +35,12 @@ public class AdvertisementService {
 
 	@Autowired
 	NewspaperService		newspaperService;
+
+	@Autowired
+	AdminService			adminService;
+
+	@Autowired
+	TabooWordService		tabooWordService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -103,6 +113,33 @@ public class AdvertisementService {
 
 	public void flush() {
 		this.advertisementRepository.flush();
+	}
+
+	public Collection<Advertisement> findAdvertisementWithTabooWord(final String tabooWord) {
+
+		Collection<Advertisement> result;
+
+		result = this.advertisementRepository.findAdvertisementWithTabooWord(tabooWord);
+
+		return result;
+	}
+
+	public Set<Advertisement> advertisementWithTabooWord() {
+
+		this.adminService.checkPrincipal();
+
+		Set<Advertisement> result;
+		Collection<String> tabooWords;
+		Iterator<String> it;
+
+		result = new HashSet<>();
+		tabooWords = this.tabooWordService.findTabooWordByName();
+		it = tabooWords.iterator();
+		while (it.hasNext())
+			result.addAll(this.findAdvertisementWithTabooWord(it.next()));
+
+		return result;
+
 	}
 
 }
