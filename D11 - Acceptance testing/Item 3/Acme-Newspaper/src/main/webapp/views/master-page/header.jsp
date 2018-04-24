@@ -184,6 +184,7 @@
 					<li class="arrow"></li>
 					<li><a href="newspaper/agent/list.do?d-16544-p=1"><spring:message code="master.page.create.advertisement" /></a></li>
 					<li><a href="newspaper/agent/listNewspapersWithAdvertisement.do?d-16544-p=1"><spring:message code="master.page.newspaper.advertisement" /></a></li>
+					<li><a href="newspaper/agent/listNewspapersWithCeroAdvertisement.do?d-16544-p=1"><spring:message code="master.page.newspaper.NOadvertisement" /></a></li>
 				</ul>
 				</li>
 		</security:authorize>

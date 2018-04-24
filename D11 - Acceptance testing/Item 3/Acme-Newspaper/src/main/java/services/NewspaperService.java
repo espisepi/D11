@@ -372,4 +372,12 @@ public class NewspaperService {
 		return result;
 	}
 
+	public Collection<Newspaper> findAllNewspaperHavingCeroAdvertisement() {
+		Collection<Newspaper> result;
+
+		result = this.newspaperRepository.findAllNewspaperHavingCeroAdvertisement();
+
+		return result;
+	}
+
 }

@@ -81,4 +81,8 @@ public interface NewspaperRepository extends JpaRepository<Newspaper, Integer> {
 	//Me devuelve aquellos periódicos los cuales tienes al menos un aviso
 	@Query("select n from Newspaper n where n.advertisements.size>=1")
 	Collection<Newspaper> findAllNewspaperHavingAtLeastOneAdvertisement();
+
+	//Me devuelve aquellos periódicos los cuales no tienen avisos
+	@Query("select n from Newspaper n where n.advertisements.size=0 and n.open=true")
+	Collection<Newspaper> findAllNewspaperHavingCeroAdvertisement();
 }

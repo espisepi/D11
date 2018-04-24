@@ -61,4 +61,20 @@ public class NewspaperAgentController extends AbstractController {
 		return result;
 	}
 
+	//Lista de los periodicos que no tienen ningún aviso
+	@RequestMapping(value = "/listNewspapersWithCeroAdvertisement", method = RequestMethod.GET)
+	public ModelAndView listNewspapersWithCeroAdvertisement() {
+
+		ModelAndView result;
+		Collection<Newspaper> newspapers;
+
+		newspapers = this.newspaperService.findAllNewspaperHavingCeroAdvertisement();
+
+		result = new ModelAndView("newspaper/listForAdvertisement");
+		result.addObject("newspapers", newspapers);
+		result.addObject("showDelete", true);
+		result.addObject("requestURI", "newspaper/agent/listNewspapersWithCeroAdvertisement.do?d-16544-p=1");
+		return result;
+	}
+
 }
