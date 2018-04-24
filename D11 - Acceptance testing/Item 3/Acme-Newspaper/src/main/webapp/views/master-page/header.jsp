@@ -65,6 +65,12 @@
 				</ul>
 			</li>
 			
+			<li><a class="fNiv"><spring:message code="master.page.advertisement"/></a>
+				<ul>
+					<li><a href="advertisement/admin/listAdvertisementWithTabooWord.do?d-16544-p=1"><spring:message code="master.page.advertisement.listAdvertisementWithTabooWord" /></a></li>
+				</ul>
+			</li>
+			
 			
 		</security:authorize>
 		
