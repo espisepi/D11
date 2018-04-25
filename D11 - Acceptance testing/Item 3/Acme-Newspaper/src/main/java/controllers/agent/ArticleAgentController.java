@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AdvertisementService;
 import services.ArticleService;
 import services.FollowUpService;
 import services.UserService;
@@ -26,13 +27,16 @@ public class ArticleAgentController extends AbstractController {
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private ArticleService	articleService;
+	private ArticleService			articleService;
 
 	@Autowired
-	private FollowUpService	followUpService;
+	private FollowUpService			followUpService;
 
 	@Autowired
-	private UserService		userService;
+	private UserService				userService;
+
+	@Autowired
+	private AdvertisementService	advertisementService;
 
 
 	//Mostrar el resumen del artículo
@@ -61,8 +65,12 @@ public class ArticleAgentController extends AbstractController {
 		final ModelAndView result;
 		Article article = new Article();
 		Collection<FollowUp> followsUp;
+		String url;
+
 		article = this.articleService.findOne(articleId);
 		followsUp = this.followUpService.findFollowUpsByArticle(articleId);
+
+		url = this.advertisementService.randomAdvertisement(article.getNewspaper());
 
 		//El periódico debe de ser público
 		Assert.isTrue(article.getNewspaper().isOpen() == true, "cannot commit this operation");
@@ -73,6 +81,7 @@ public class ArticleAgentController extends AbstractController {
 		result = new ModelAndView("article/display");
 		result.addObject("article", article);
 		result.addObject("followsUp", followsUp);
+		result.addObject("advertisementrandom", url);
 		result.addObject("requestURI", "article/agent/display.do");
 
 		return result;
