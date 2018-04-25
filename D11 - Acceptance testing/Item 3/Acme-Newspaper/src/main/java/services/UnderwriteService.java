@@ -15,19 +15,18 @@ import org.springframework.validation.Validator;
 import repositories.UnderwriteRepository;
 import domain.CreditCard;
 import domain.Customer;
-import domain.Newspaper;
-import domain.Subscription;
 import domain.Underwrite;
+import domain.Volume;
 
 @Service
 @Transactional
-public class UnderwordService {
+public class UnderwriteService {
 
 	@Autowired
 	UnderwriteRepository	underwriteRepository;
 
 	@Autowired
-	NewspaperService		newspaperService;
+	VolumeService			volumeService;
 
 	@Autowired
 	CustomerService			customerService;
@@ -36,22 +35,18 @@ public class UnderwordService {
 	private Validator		validator;
 
 
-	public UnderwordService() {
+	public UnderwriteService() {
 	}
 	// Simple CRUD methods ----------------------------------------------------
 
 	//CREATE
-	public Subscription create(final int newspaperId) {
-		Subscription result;
-		Customer customerPrincipal;
-		Newspaper newspaper;
+	public Underwrite create(final int volumeId) {
+		Underwrite result;
+		Volume volume;
 
-		newspaper = this.newspaperService.findOne(newspaperId);
-		Assert.isTrue(!newspaper.isOpen(), "the newspaper must be private");
-		customerPrincipal = this.customerService.findByPrincipal();
-		result = new Subscription();
-		result.setCustomer(customerPrincipal);
-		result.setNewspaper(newspaper);
+		volume = this.volumeService.findOne(volumeId);
+		result = new Underwrite();
+		result.setVolume(volume);
 
 		return result;
 	}
@@ -68,18 +63,15 @@ public class UnderwordService {
 		//TODO subscribirse a un volumen significa subscribirsea todos sus periodicos.
 		Assert.isTrue(this.checkCreditCard(underwrite.getCreditCard()), "Invalid credit card");
 		result = this.underwriteRepository.save(underwrite);
+		customerPrincipal.getUnderwrites().add(result);
 		return result;
 	}
 
 	public Underwrite reconstruct(final Underwrite underwrite, final BindingResult binding) {
 		Underwrite result;
-		final Customer customerPrincipal;
-		if (underwrite.getId() == 0) {
-
-			customerPrincipal = this.customerService.findByPrincipal();
-			customerPrincipal.getUnderwrites().add(underwrite);
+		if (underwrite.getId() == 0)
 			result = underwrite;
-		} else {
+		else {
 			Assert.notNull(null, "a subscription can not be modified");
 			result = underwrite;
 		}

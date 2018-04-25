@@ -76,7 +76,8 @@
 		<security:intercept-url pattern="/newspaper/customer/**" access="hasRole('CUSTOMER')"/>
 		<security:intercept-url pattern="/article/customer/**" access="hasRole('CUSTOMER')"/>
 		<security:intercept-url pattern="/chirp/customer/**" access="hasRole('CUSTOMER')"/>
-			<security:intercept-url pattern="/volume/customer/**" access="hasRole('CUSTOMER')"/>
+		<security:intercept-url pattern="/volume/customer/**" access="hasRole('CUSTOMER')"/>
+		<security:intercept-url pattern="/underwrite/customer/**" access="hasRole('CUSTOMER')"/>
 		
 		<security:intercept-url pattern="/profile/agent/**" access="hasRole('AGENT')"/>
 		<security:intercept-url pattern="/agent/**" access="permitAll"/>

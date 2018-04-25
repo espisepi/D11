@@ -37,6 +37,11 @@
 		<value>/views/agent/tiles.xml</value>
 		<value>/views/volume/tiles.xml</value>
 		<value>/views/advertisement/tiles.xml</value>
+		<value>/views/underwrite/tiles.xml</value>
+		
+		
+		
+		
 	</util:list>
 
 </beans>

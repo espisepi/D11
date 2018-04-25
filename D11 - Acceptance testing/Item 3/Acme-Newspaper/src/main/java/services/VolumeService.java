@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.VolumeRepository;
+import domain.Customer;
 import domain.Newspaper;
 import domain.User;
 import domain.Volume;
@@ -26,6 +27,9 @@ public class VolumeService {
 
 	@Autowired
 	NewspaperService	newspaperService;
+
+	@Autowired
+	CustomerService		customerService;
 
 	@Autowired
 	UserService			userService;
@@ -105,7 +109,13 @@ public class VolumeService {
 		result = this.volumeRepository.volumesNewspaper(volId);
 		return result;
 	}
-
+	public Collection<Volume> volumesWithUnderwriteOneCustomer() {
+		Collection<Volume> result;
+		Customer principal;
+		principal = this.customerService.findByPrincipal();
+		result = this.volumeRepository.volumesWithUnderwriteOneCustomer(principal.getId());
+		return result;
+	}
 	public Volume reconstruct(final Volume volume, final BindingResult bindingResult) {
 		Volume result;
 		Volume volumeBD;

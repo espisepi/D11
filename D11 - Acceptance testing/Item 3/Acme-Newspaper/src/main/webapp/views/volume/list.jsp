@@ -28,12 +28,12 @@
 	
 		<spring:message code="volume.edit" var="Edit" />
 		<display:column title="${Edit}" sortable="true">
-<%-- 			<jstl:if test="${row.publicationDate==null}">
- --%>				<spring:url value="underwrite/customer/edit.do" var="editURL">
+		<jstl:if test="${!volumeSubscribed.contains(row)}">
+ 			<spring:url value="underwrite/customer/create.do" var="editURL">
 					<spring:param name="volumeId" value="${row.id}" />
 				</spring:url>
 				<a href="${editURL}"><spring:message code="volume.underwrite" /></a>
-	<%-- 		</jstl:if> --%>
+		</jstl:if> 
 		</display:column>
 		
 		

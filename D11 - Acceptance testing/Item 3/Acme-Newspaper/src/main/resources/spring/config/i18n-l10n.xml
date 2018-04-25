@@ -37,6 +37,8 @@
 		<value>/views/agent/messages</value>
 		<value>/views/volume/messages</value>
 		<value>/views/advertisement/messages</value>
+		<value>/views/underwrite/messages</value>
+		
 		
 	</util:list>
 
