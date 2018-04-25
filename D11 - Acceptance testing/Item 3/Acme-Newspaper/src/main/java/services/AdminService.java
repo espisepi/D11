@@ -69,7 +69,7 @@ public class AdminService {
 		return result;
 	}
 
-	public Admin findOne(int adminId) {
+	public Admin findOne(final int adminId) {
 		Assert.isTrue(adminId != 0);
 		Admin result;
 		result = this.adminRepository.findOne(adminId);
@@ -84,7 +84,7 @@ public class AdminService {
 		String passwordHash;
 
 		if (admin.getId() == 0) {
-			String password = admin.getUserAccount().getPassword();
+			final String password = admin.getUserAccount().getPassword();
 			encoder = new Md5PasswordEncoder();
 			passwordHash = encoder.encodePassword(password, null);
 			admin.getUserAccount().setPassword(passwordHash);
@@ -194,8 +194,8 @@ public class AdminService {
 	public Double avgNumberOfFollowUpsPerArticleAfterOneWeek() {
 		this.checkPrincipal();
 		Double result;
-		long sevenDays = TimeUnit.DAYS.toMillis(7);
-		Date since = new Date(System.currentTimeMillis() - sevenDays);
+		final long sevenDays = TimeUnit.DAYS.toMillis(7);
+		final Date since = new Date(System.currentTimeMillis() - sevenDays);
 		result = this.adminRepository.avgNumberOfFollowUpsPerArticleAfterOneWeek(since);
 		return result;
 	}
@@ -203,14 +203,14 @@ public class AdminService {
 	public Double avgNumberOfFollowUpsPerArticleAfterTwoWeek() {
 		this.checkPrincipal();
 		Double result;
-		long foorteenDays = TimeUnit.DAYS.toMillis(14);
-		Date since = new Date(System.currentTimeMillis() - foorteenDays);
+		final long foorteenDays = TimeUnit.DAYS.toMillis(14);
+		final Date since = new Date(System.currentTimeMillis() - foorteenDays);
 		result = this.adminRepository.avgNumberOfFollowUpsPerArticleAfterTwoWeek(since);
 		return result;
 	}
 	//B4
 	public Double[] avgAndStddevOfNumberOfChirpPerUser() {
-		
+
 		this.checkPrincipal();
 		Double[] result;
 		result = this.adminRepository.avgAndStddevOfNumberOfChirpPerUser();
@@ -285,6 +285,34 @@ public class AdminService {
 
 	public void flush() {
 		this.adminRepository.flush();
+	}
+
+	//Acme-Newspaper 2.0
+	//C1: The ratio of newspapers that have at least one advertisement versus the newspapers that havent any.
+	public Double theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement() {
+		this.checkPrincipal();
+		Double result;
+		result = this.adminRepository.theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement();
+		return result;
+	}
+
+	//C2: The ratio of advertisements that have taboo words.
+
+	//B1: The average number of newspapers per volume.
+	public Double theAverageNumberOfNewspaperPerVolume() {
+		this.checkPrincipal();
+		Double result;
+		result = this.adminRepository.theAverageNumberOfNewspaperPerVolume();
+		return result;
+	}
+
+	//B2: The ratio of subscriptions to volumes versus subscriptions to newspapers.
+	public Double theRatioOfSubcrptionsToVolumesVersusSubcriptionsToNewspapers() {
+		this.checkPrincipal();
+		Double result;
+		result = this.adminRepository.theRatioOfSubcrptionsToVolumesVersusSubcriptionsToNewspapers();
+		return result;
+
 	}
 
 }

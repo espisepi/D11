@@ -47,6 +47,10 @@ public class AdministratorDashboardController extends AbstractController {
 		Double avgArticlesPerNewspapersPublic;
 		Double ratioOfSubscribersWhenNewspaperPrivatePerNumberCustomer;
 		Double theAverageRatioOfPrivateVersusPublicNewspaperPerPublished;
+		Double theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement;
+		//TODO: FALTA LA QUERY C2
+		Double theAverageNumberOfNewspaperPerVolume;
+		Double theRatioOfSubcrptionsToVolumesVersusSubcriptionsToNewspapers;
 
 		theAvgAndStddevOfNewspapersForUser = this.adminService.theAvgAndStddevOfNewspapersForUser();
 		theAvgAndStddevOfArticlesPerWriter = this.adminService.theAvgAndStddevOfArticlesPerWriter();
@@ -65,6 +69,9 @@ public class AdministratorDashboardController extends AbstractController {
 		avgArticlesPerNewspapersPublic = this.adminService.avgArticlesPerNewspapersPublic();
 		ratioOfSubscribersWhenNewspaperPrivatePerNumberCustomer = this.adminService.ratioOfSubscribersWhenNewspaperPrivatePerNumberCustomer();
 		theAverageRatioOfPrivateVersusPublicNewspaperPerPublished = this.adminService.theAverageRatioOfPrivateVersusPublicNewspaperPerPublished();
+		theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement = this.adminService.theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement();
+		theAverageNumberOfNewspaperPerVolume = this.adminService.theAverageNumberOfNewspaperPerVolume();
+		theRatioOfSubcrptionsToVolumesVersusSubcriptionsToNewspapers = this.adminService.theRatioOfSubcrptionsToVolumesVersusSubcriptionsToNewspapers();
 
 		result.addObject("theAvgAndStddevOfNewspapersForUser", theAvgAndStddevOfNewspapersForUser);
 		result.addObject("theAvgAndStddevOfArticlesPerWriter", theAvgAndStddevOfArticlesPerWriter);
@@ -83,6 +90,9 @@ public class AdministratorDashboardController extends AbstractController {
 		result.addObject("avgArticlesPerNewspapersPublic", avgArticlesPerNewspapersPublic);
 		result.addObject("ratioOfSubscribersWhenNewspaperPrivatePerNumberCustomer", ratioOfSubscribersWhenNewspaperPrivatePerNumberCustomer);
 		result.addObject("theAverageRatioOfPrivateVersusPublicNewspaperPerPublished", theAverageRatioOfPrivateVersusPublicNewspaperPerPublished);
+		result.addObject("theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement", theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement);
+		result.addObject("theAverageNumberOfNewspaperPerVolume", theAverageNumberOfNewspaperPerVolume);
+		result.addObject("theRatioOfSubcrptionsToVolumesVersusSubcriptionsToNewspapers", theRatioOfSubcrptionsToVolumesVersusSubcriptionsToNewspapers);
 
 		return result;
 

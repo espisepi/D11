@@ -277,5 +277,57 @@
 	</tr>
 </table>
 
+<table>
+<!-- C1 2.0 -->
+	<caption class="caption">
+		<spring:message
+			code="dashboard.theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement" />
+	</caption>
+
+	<tr>
+		<td><jstl:out
+				value="${theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement}"></jstl:out></td>
+	</tr>
+</table>
+<table>
+<!-- C2 2.0 -->
+	<caption class="caption">
+		<spring:message
+			code="dashboard.theAverageRatioOfPrivateVersusPublicNewspaperPerPublished" />
+	</caption>
+
+	<tr>
+		<td><jstl:out
+				value="${theAverageRatioOfPrivateVersusPublicNewspaperPerPublished}"></jstl:out></td>
+	</tr>
+</table>
+
+<table>
+<!-- B1 2.0 -->
+	<caption class="caption">
+		<spring:message
+			code="dashboard.theAverageNumberOfNewspaperPerVolume" />
+	</caption>
+
+	<tr>
+		<td><jstl:out
+				value="${theAverageNumberOfNewspaperPerVolume}"></jstl:out></td>
+	</tr>
+</table>
+
+<table>
+<!-- B2 2.0 -->
+	<caption class="caption">
+		<spring:message
+			code="dashboard.theRatioOfSubcrptionsToVolumesVersusSubcriptionsToNewspapers" />
+	</caption>
+
+	<tr>
+		<td><jstl:out
+				value="${theRatioOfSubcrptionsToVolumesVersusSubcriptionsToNewspapers}"></jstl:out></td>
+	</tr>
+</table>
+
+
 
 
