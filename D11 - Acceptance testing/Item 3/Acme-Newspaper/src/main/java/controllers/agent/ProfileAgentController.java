@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,21 +37,23 @@ public class ProfileAgentController extends AbstractController {
 	public ModelAndView edit() {
 		ModelAndView result;
 		Agent agent;
+		AgentForm agentForm;
 
 		agent = this.agentService.findByPrincipal();
-		AgentForm agentForm;
+		Assert.notNull(agent);
 		agentForm = new AgentForm(agent);
-		result = new ModelAndView("agent/edit");
-		result.addObject("agentForm", agentForm);
+
+		result = this.createEditModelAndView(agentForm);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView saveAgent(AgentForm agentForm, final BindingResult bindingResult) {
+	public ModelAndView saveAgent(@ModelAttribute("agentForm") AgentForm agentForm, final BindingResult bindingResult) {
 		ModelAndView result;
 
 		agentForm = this.agentService.reconstruct(agentForm, bindingResult);
+
 		if (bindingResult.hasErrors())
 			result = this.createEditModelAndView(agentForm);
 		else
@@ -77,8 +80,8 @@ public class ProfileAgentController extends AbstractController {
 	// Ancillary methods ------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(final AgentForm agentForm) {
-
 		ModelAndView result;
+
 		result = this.createEditModelAndView(agentForm, null);
 		return result;
 	}
@@ -89,6 +92,7 @@ public class ProfileAgentController extends AbstractController {
 		result = new ModelAndView("agent/edit");
 		result.addObject("agentForm", agentForm);
 		result.addObject("message", message);
+		result.addObject("RequestURI", "agent/edit.do");
 
 		return result;
 

@@ -29,10 +29,11 @@
 	<br />
  	<acme:textbox code="volume.description" path="description"/>
 	<br /> 
-	<acme:textbox code="volume.year" path="year" placeHolder="http://"/>
+	<acme:textbox code="volume.year" path="year" placeHolder="XXXX"/>
 	<br />
 	<acme:selectmultiple items="${newspapers}" itemLabel="title" code="volume.newspaper" path="newspapers"/>
 	<br />
+	
 <!-- BOTONES -->
 
 	<input type="submit" name="save" value="<spring:message code="newspaper.save" />" />&nbsp; 

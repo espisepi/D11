@@ -56,7 +56,7 @@ public class NewspaperAgentController extends AbstractController {
 		return result;
 	}
 
-	//Lista de los periodicos que tienen un aviso hecho por el agente logueado
+	//4.3) Lista de los periodicos que tienen un aviso hecho por el agente logueado
 	@RequestMapping(value = "/listNewspapersWithAdvertisement", method = RequestMethod.GET)
 	public ModelAndView listNewspapersWithAdvertisement() {
 
@@ -72,7 +72,7 @@ public class NewspaperAgentController extends AbstractController {
 		return result;
 	}
 
-	//Cogemos todos los periódicos a los que se les puede crear un aviso
+	//4.4) Cogemos todos los periódicos a los que se les puede crear un aviso
 	//y le restamos los que ya tienen un aviso hecho por el agente.
 	@RequestMapping(value = "/listNewspapersWithCeroAdvertisement", method = RequestMethod.GET)
 	public ModelAndView listNewspapersWithCeroAdvertisement() {
