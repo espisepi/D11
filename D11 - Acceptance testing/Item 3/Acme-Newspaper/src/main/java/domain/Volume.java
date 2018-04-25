@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -41,6 +42,7 @@ public class Volume extends DomainEntity {
 		this.description = description;
 	}
 
+	@Range(min = 1000, max = 3000)
 	public int getYear() {
 		return this.year;
 	}
