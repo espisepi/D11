@@ -44,7 +44,16 @@
 	
 	<!-- Attributes -->
 
-	<acme:column code="messageFolder.name" property="name"/>
+	<acme:column code="messageFolder.messages" property="name"/>
+	
+	<spring:message code="messageFolder.messages" var="Messages" />
+		
+		<display:column title="${Messages}" sortable="true">
+			<spring:url value="message/user/list.do" var="messagesURL">
+					<spring:param name="messageFolderId" value="${row.id}" />
+				</spring:url>
+			<a href="${messagesURL}"><spring:message code="messageFolder.messages" /></a>
+		</display:column>
 
 
 </display:table>
