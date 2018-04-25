@@ -131,6 +131,7 @@ public class AdvertisementService {
 				res = false;
 		return res;
 	}
+
 	public void flush() {
 		this.advertisementRepository.flush();
 	}

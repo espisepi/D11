@@ -84,16 +84,21 @@ public class UnderwriteService {
 		boolean res;
 		Calendar calendar;
 		int actualYear;
+		int actualMonth;
 
 		res = false;
 		calendar = new GregorianCalendar();
 		actualYear = calendar.get(Calendar.YEAR);
+		actualMonth = (calendar.get(Calendar.MONTH) + 1);
 		actualYear = actualYear % 100;
+		actualMonth = actualMonth % 100;
 		if (creditCard.getExpirationYear() != null)
 			if (Integer.parseInt(creditCard.getExpirationYear()) > actualYear)
 				res = true;
-			else if (Integer.parseInt(creditCard.getExpirationYear()) == actualYear && Integer.parseInt(creditCard.getExpirationMonth()) >= calendar.get(Calendar.MONTH))
+			else if (Integer.parseInt(creditCard.getExpirationYear()) == actualYear && Integer.parseInt(creditCard.getExpirationMonth()) > calendar.get(Calendar.MONTH) + 1)
 				res = true;
+			else if (Integer.parseInt(creditCard.getExpirationYear()) == actualYear && Integer.parseInt(creditCard.getExpirationMonth()) == actualMonth)
+				res = false;
 		return res;
 	}
 }
