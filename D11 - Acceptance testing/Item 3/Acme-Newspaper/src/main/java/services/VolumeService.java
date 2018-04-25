@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.VolumeRepository;
+import domain.Newspaper;
 import domain.User;
 import domain.Volume;
 
@@ -97,6 +98,12 @@ public class VolumeService {
 
 		return result;
 
+	}
+
+	public Collection<Newspaper> volumesNewspaper(int volId) {
+		Collection<Newspaper> result;
+		result = this.volumeRepository.volumesNewspaper(volId);
+		return result;
 	}
 
 	public Volume reconstruct(final Volume volume, final BindingResult bindingResult) {

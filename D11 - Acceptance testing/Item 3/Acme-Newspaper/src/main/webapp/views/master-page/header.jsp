@@ -110,6 +110,13 @@
 				</ul>
 			</li>
 			
+			<li><a class="fNiv"><spring:message code="master.page.volume" /></a>
+				<ul>
+					<li class="arrow"></li>		
+					<li><a href="volume/customer/list.do?d-16544-p=1"><spring:message code="master.page.volume.list" /></a></li>
+				</ul>
+			</li>
+			
 			
 		</security:authorize>
 		
