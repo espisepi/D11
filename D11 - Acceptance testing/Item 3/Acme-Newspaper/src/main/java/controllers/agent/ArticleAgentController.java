@@ -13,9 +13,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ArticleService;
 import services.FollowUpService;
+import services.UserService;
 import controllers.AbstractController;
 import domain.Article;
 import domain.FollowUp;
+import domain.User;
 
 @Controller
 @RequestMapping("/article/agent")
@@ -28,6 +30,9 @@ public class ArticleAgentController extends AbstractController {
 
 	@Autowired
 	private FollowUpService	followUpService;
+
+	@Autowired
+	private UserService		userService;
 
 
 	//Mostrar el resumen del artículo
@@ -71,5 +76,41 @@ public class ArticleAgentController extends AbstractController {
 		result.addObject("requestURI", "article/agent/display.do");
 
 		return result;
+	}
+
+	//Mostrar el perfil del usuario que ha escrito ese artículo para el agent
+
+	@RequestMapping(value = "/displayUser", method = RequestMethod.GET)
+	public ModelAndView displayUser(@RequestParam final int userId) {
+		ModelAndView result;
+		User user;
+
+		user = this.userService.findOne(userId);
+
+		result = new ModelAndView("user/display");
+		result.addObject("user", user);
+		result.addObject("requestURI", "article/agent/displayUser.do");
+		result.addObject("requestArticlesURL", "article/listb.do");
+		result.addObject("requestChirpsURL", "chirp/listb.do");
+
+		return result;
+	}
+
+	//Mostrar todos los artículos dado un usuario
+
+	// List ---------------------------------------------------------
+	@RequestMapping(value = "/listb", method = RequestMethod.GET)
+	public ModelAndView listArticlesByUser(@RequestParam final int userId) {
+
+		ModelAndView result;
+		final Collection<Article> articles;
+
+		articles = this.articleService.findArticlesFinalModeByWriter(userId);
+		result = new ModelAndView("article/list");
+		result.addObject("articles", articles);
+		result.addObject("requestURI", "article/agent/listb.do");
+
+		return result;
+
 	}
 }

@@ -98,6 +98,18 @@
 			<a href="${articlesURL}"><spring:message code ="user.articles"/></a>
 		
 	</p></security:authorize>
+	
+	<security:authorize access="hasRole('AGENT')">
+	<p>
+	
+	<spring:message code="user.articles1" var="articlesHeader" />
+	<B><jstl:out value ="${articlesHeader }:"></jstl:out></B>
+			<spring:url value="article/agent/listb.do" var="articlesURL">
+				<spring:param name="userId" value="${row.id }" />
+			</spring:url>
+			<a href="${articlesURL}"><spring:message code ="user.articles"/></a>
+		
+	</p></security:authorize>
 
 		<p>
 		<B><spring:message code="user.chirps1" />:</B>
