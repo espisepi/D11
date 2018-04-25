@@ -127,6 +127,19 @@
 </display:column>
 </display:table>
 
+<h2><spring:message code="advertisement.banner" /></h2>
+<display:table name="advertisementrandom" id="row" class="displaytag">
+		<jstl:if test="${row!='nothing to show'}">
+<spring:message code="advertisement.banner" var="bannerURLHeader" />
+		 <display:column >
+		 <div
+  style="position: relative; width: 500px; height: 300px; margin-left: auto; margin-right: auto;">
+  			
+		  <img src="${row}"width= "500" height="300">
+		  </div>
+		 </display:column> 
+	</jstl:if>
+</display:table>
 	
 </display:column>
 

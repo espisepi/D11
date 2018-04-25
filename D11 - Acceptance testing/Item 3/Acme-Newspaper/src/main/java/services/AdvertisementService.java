@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import javax.transaction.Transactional;
@@ -159,7 +160,6 @@ public class AdvertisementService {
 	}
 
 	public Collection<Advertisement> findAdvertisementWithTabooWord(final String tabooWord) {
-
 		Collection<Advertisement> result;
 
 		result = this.advertisementRepository.findAdvertisementWithTabooWord(tabooWord);
@@ -183,6 +183,33 @@ public class AdvertisementService {
 
 		return result;
 
+	}
+
+	public List<Advertisement> findAdvertisementsByNewspaper(final int newspaperId) {
+		List<Advertisement> result;
+
+		result = this.advertisementRepository.findAdvertisementsByNewspaper(newspaperId);
+
+		return result;
+	}
+
+	public String randomAdvertisement(final Newspaper newspaper) {
+		List<Advertisement> advertisements;
+		Integer size;
+		String url;
+
+		url = "nothing to show";
+
+		//Encontrar todos los advertisements que tiene un periódico
+		advertisements = this.findAdvertisementsByNewspaper(newspaper.getId());
+		size = advertisements.size();
+
+		if (size != 0) {
+			final int rand = (int) (Math.random() * size);
+			url = advertisements.get(rand).getBanner();
+		}
+
+		return url;
 	}
 
 }
