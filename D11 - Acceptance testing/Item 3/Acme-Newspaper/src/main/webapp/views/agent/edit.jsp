@@ -23,26 +23,17 @@
 
 <form:form action="agent/edit.do" modelAttribute="agentForm">
 	
-
+<form:hidden path="agent.id" />
 	
-<jstl:choose>
-			<jstl:when test="${agentForm.agent.id != 0}">
-				<acme:textbox path="agent.userAccount.username"
-					code="agent.username" readonly="true" /><br/>
-			</jstl:when>
-			<jstl:otherwise>
-				<acme:textbox path="agent.userAccount.username"
-					code="agent.username" /><br/>
-			</jstl:otherwise>
-		</jstl:choose>
-		<jstl:choose>
-			<jstl:when test="${agentForm.agent.id==0}">
-				<acme:password code="agent.password"
-					path="agent.userAccount.password" /><br/>
-				<acme:password code="agent.password" path="passwordCheck" /><br/>
-			</jstl:when>
-			<jstl:otherwise></jstl:otherwise>
-		</jstl:choose>	
+	
+<jstl:if test="${agentForm.agent.id == 0}">
+			<acme:textbox code="agent.username"
+				path="agent.userAccount.username" /><br />
+			<acme:password code="agent.password"
+				path="agent.userAccount.password" /><br />
+			<acme:password code="agent.password" path="passwordCheck" />
+			<br />
+		</jstl:if>	
 	
 	<acme:textbox code="agent.name" path="agent.name"/>
 	<br />
