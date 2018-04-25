@@ -482,6 +482,7 @@
 			<list>
 				<ref bean="advertisement4" />
 				<ref bean="advertisement5" />
+				<ref bean="advertisement7" />
 			</list>
 		</property>
 	</bean>
@@ -496,6 +497,7 @@
 		<property name="advertisements">
 			<list>
 				<ref bean="advertisement6" />
+				<ref bean="advertisement8" />
 			</list>
 		</property>
 	</bean>
@@ -692,6 +694,8 @@
 		<property name="advertisements">
 			<list>
 			<ref bean="advertisement3"/>
+			<ref bean="advertisement7"/>
+			<ref bean="advertisement8"/>
 			</list>
 		</property>
 	</bean>
@@ -1197,8 +1201,8 @@
 	
 	<bean id="advertisement1" class="domain.Advertisement">
 		<property name="title" value="title 1 Agent1" />
-		<property name="targetPage" value="https://sumedico.com/wp-content/uploads/2017/12/por-qu%C3%A9-adoptar-un-gato.jpg" />
-		<property name="banner" value="https://sumedico.com/wp-content/uploads/2017/12/por-qu%C3%A9-adoptar-un-gato.jpg" />
+		<property name="targetPage" value="https://sumedico.com/wp-content/uploads/2016/06/C%C3%B3mo_saber_si_tu_gato_te_quiere.jpg" />
+		<property name="banner" value="https://sumedico.com/wp-content/uploads/2016/06/C%C3%B3mo_saber_si_tu_gato_te_quiere.jpg" />
 		<property name="creditCard" ref="creditCard5" />
 		<property name="agent" ref="agent1" />
 	</bean>
@@ -1239,6 +1243,22 @@
 		<property name="title" value="title 6 Agent3 viagra" />
 		<property name="targetPage" value="https://img.bekiamascotas.com/articulos/portada/51000/51644-h2.jpg" />
 		<property name="banner" value="https://img.bekiamascotas.com/articulos/portada/51000/51644-h2.jpg" />
+		<property name="creditCard" ref="creditCard5" />
+		<property name="agent" ref="agent3" />
+	</bean>
+	
+	<bean id="advertisement7" class="domain.Advertisement">
+		<property name="title" value="title 7 Agent2 cialis" />
+		<property name="targetPage" value="https://sumedico.com/wp-content/uploads/2017/12/por-qu%C3%A9-adoptar-un-gato.jpg" />
+		<property name="banner" value="https://sumedico.com/wp-content/uploads/2017/12/por-qu%C3%A9-adoptar-un-gato.jpg" />
+		<property name="creditCard" ref="creditCard5" />
+		<property name="agent" ref="agent2" />
+	</bean>
+	
+		<bean id="advertisement8" class="domain.Advertisement">
+		<property name="title" value="title 8 Agent3" />
+		<property name="targetPage" value="https://t2.ea.ltmcdn.com/es/images/3/4/8/img_como_ensenar_a_un_gato_a_sentarse_20843_600.jpg" />
+		<property name="banner" value="https://t2.ea.ltmcdn.com/es/images/3/4/8/img_como_ensenar_a_un_gato_a_sentarse_20843_600.jpg" />
 		<property name="creditCard" ref="creditCard5" />
 		<property name="agent" ref="agent3" />
 	</bean>
