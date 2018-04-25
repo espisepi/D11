@@ -1,6 +1,8 @@
 
 package services;
 
+import java.util.Collection;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -11,10 +13,13 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 import security.UserAccount;
 import utilities.AbstractTest;
+import domain.Advertisement;
 import domain.Agent;
+import domain.Newspaper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -25,13 +30,16 @@ public class AgentServiceTest extends AbstractTest {
 
 	// Supporting services ----------------------------------------------------
 	@Autowired
-	private AgentService		agentService;
+	private AgentService			agentService;
 
 	@Autowired
-	private NewspaperService	newspaperService;
+	private NewspaperService		newspaperService;
+
+	@Autowired
+	private AdvertisementService	advertisementService;
 
 	@PersistenceContext
-	EntityManager				entityManager;
+	EntityManager					entityManager;
 
 
 	//Loguearte en el sistema como agente
@@ -187,4 +195,56 @@ public class AgentServiceTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 
+	//Test para el caso de uso 4.3)List the newspapers in which they have placed and advertisement
+	@Test
+	public void driverListNewspaperWithAnAdvertisement() {
+		final Object testingData[][] = {
+			{
+				//El agente 1 lista correctamente todos periódicos sobre los que el ha escrito un aviso
+				//El 5 está entre ellos el cual contiene el aviso 3
+				"agent1", "newspaper5", "advertisement3", null
+
+			}, {
+				//El agente 1 lista incorrectamente el periódico 6 ya que no ha escrito
+				//ningún aviso sobre el
+				"agent1", "newspaper6", "advertisement2", java.lang.IllegalArgumentException.class
+			}, {
+				//El agente 1 lista el periódico 3 sobre el cual ha escrito el aviso 
+				//número2 no el aviso4
+				"agent1", "newspaper3", "advertisement4", java.lang.IllegalArgumentException.class
+			}, {
+				//El agente 1 lista el periódico 3 sobre el cual ha escrito el aviso 
+				//número2 
+				"agent1", "newspaper3", "advertisement2", null
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.templateListNewspaperWithAnAdvertisement(super.getEntityId((String) testingData[i][0]), super.getEntityId((String) testingData[i][1]), super.getEntityId((String) testingData[i][2]), (Class<?>) testingData[i][3]);
+	}
+
+	private void templateListNewspaperWithAnAdvertisement(final int usernameIdLogin, final int newspaperId, final int advertisementId, final Class<?> expected) {
+		Class<?> caught;
+		Agent agentLogin;
+		Collection<Newspaper> newspapers;
+		Advertisement advertisement;
+		Newspaper newspaper;
+
+		agentLogin = this.agentService.findOne(usernameIdLogin);
+
+		caught = null;
+		try {
+			super.authenticate(agentLogin.getUserAccount().getUsername());
+			//Periódicos en los que el agente ha escrito un aviso
+			newspapers = this.newspaperService.findAllNewspaperHavingAtLeastOneAdvertisement();
+			advertisement = this.advertisementService.findOne(advertisementId);
+			newspaper = this.newspaperService.findOne(newspaperId);
+			Assert.isTrue(advertisement.getAgent().equals(agentLogin));
+			Assert.isTrue(newspapers.contains(newspaper));
+			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+			this.entityManager.clear();
+		}
+		this.checkExceptions(expected, caught);
+	}
 }
