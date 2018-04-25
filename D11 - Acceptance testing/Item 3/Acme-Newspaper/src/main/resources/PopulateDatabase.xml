@@ -150,6 +150,30 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccountAgent3" class="security.UserAccount">
+		<property name="username" value="agent3" />
+		<property name="password" value="6f097a447415dd5030d579a9051165f0" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AGENT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccountAgent4" class="security.UserAccount">
+		<property name="username" value="agent4" />
+		<property name="password" value="0d7745d57a8ae3fcacdd9fe6e54cac8a" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AGENT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 		<!-- Admin -->
 		
 		<bean id="admin" class="domain.Admin">
@@ -429,6 +453,9 @@
 		<property name="phone" value="+34652582643" />
 		<property name="advertisements">
 			<list>
+				<ref bean="advertisement1" />
+				<ref bean="advertisement2" />
+				<ref bean="advertisement3" />
 			</list>
 		</property>
 	</bean>
@@ -440,6 +467,35 @@
 		<property name="postalAddress" value="postal Adress agent 2" />
 		<property name="email" value="agent2@acmenewspaper.com" />
 		<property name="phone" value="+34652582643" />
+		<property name="advertisements">
+			<list>
+				<ref bean="advertisement4" />
+				<ref bean="advertisement5" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="agent3" class="domain.Agent">
+		<property name="userAccount" ref="userAccountAgent3" />
+		<property name="name" value="agent 3" />
+		<property name="surname" value="surname agent 3" />
+		<property name="postalAddress" value="postal Adress agent 3" />
+		<property name="email" value="agent3@acmenewspaper.com" />
+		<property name="phone" value="+34352582643" />
+		<property name="advertisements">
+			<list>
+				<ref bean="advertisement6" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="agent4" class="domain.Agent">
+		<property name="userAccount" ref="userAccountAgent4" />
+		<property name="name" value="agent 4" />
+		<property name="surname" value="surname agent 4" />
+		<property name="postalAddress" value="postal Adress agent 4" />
+		<property name="email" value="agent4@acmenewspaper.com" />
+		<property name="phone" value="+34654582643" />
 		<property name="advertisements">
 			<list>
 			</list>
@@ -565,6 +621,7 @@
 			<list>
 				<ref bean="advertisement1"/>
 				<ref bean="advertisement4"/>
+				<ref bean="advertisement6"/>
 			</list>
 		</property>
 	</bean>
@@ -585,6 +642,7 @@
 		<property name="advertisements">
 			<list>
 			<ref bean="advertisement2"/>
+			<ref bean="advertisement5"/>
 			</list>
 		</property>
 	</bean>
@@ -1128,34 +1186,50 @@
 	
 	<bean id="advertisement1" class="domain.Advertisement">
 		<property name="title" value="title 1 Agent1" />
-		<property name="targetPage" value="https://sumedico.com/por-que-adoptar-un-gato/" />
-		<property name="banner" value="https://sumedico.com/por-que-adoptar-un-gato/" />
+		<property name="targetPage" value="https://sumedico.com/wp-content/uploads/2017/12/por-qu%C3%A9-adoptar-un-gato.jpg" />
+		<property name="banner" value="https://sumedico.com/wp-content/uploads/2017/12/por-qu%C3%A9-adoptar-un-gato.jpg" />
 		<property name="creditCard" ref="creditCard5" />
 		<property name="agent" ref="agent1" />
 	</bean>
 	
 	<bean id="advertisement2" class="domain.Advertisement">
 		<property name="title" value="title 2 Agent1" />
-		<property name="targetPage" value="https://sumedico.com/por-que-adoptar-un-gato/" />
-		<property name="banner" value="https://sumedico.com/por-que-adoptar-un-gato/" />
+		<property name="targetPage" value="https://www.petdarling.com/articulos/wp-content/uploads/2014/11/eliminar-pis-de-gato.jpg" />
+		<property name="banner" value="https://www.petdarling.com/articulos/wp-content/uploads/2014/11/eliminar-pis-de-gato.jpg" />
 		<property name="creditCard" ref="creditCard5" />
 		<property name="agent" ref="agent1" />
 	</bean>
 	
 	<bean id="advertisement3" class="domain.Advertisement">
 		<property name="title" value="title 3 Agent1" />
-		<property name="targetPage" value="https://sumedico.com/por-que-adoptar-un-gato/" />
-		<property name="banner" value="https://sumedico.com/por-que-adoptar-un-gato/" />
+		<property name="targetPage" value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWHlWg-bUOzO10ILqRtdH_xY9gLwxRUUDFIKJHUTEqbQq3_Cg" />
+		<property name="banner" value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWHlWg-bUOzO10ILqRtdH_xY9gLwxRUUDFIKJHUTEqbQq3_Cg" />
 		<property name="creditCard" ref="creditCard5" />
 		<property name="agent" ref="agent1" />
 	</bean>
 	
 	<bean id="advertisement4" class="domain.Advertisement">
 		<property name="title" value="title 4 Agent2" />
-		<property name="targetPage" value="https://sumedico.com/por-que-adoptar-un-gato/" />
-		<property name="banner" value="https://sumedico.com/por-que-adoptar-un-gato/" />
+		<property name="targetPage" value="https://t2.uc.ltmcdn.com/images/5/0/6/img_como_saber_si_un_gato_es_macho_o_hembra_con_fotos_10605_600.jpg" />
+		<property name="banner" value="https://t2.uc.ltmcdn.com/images/5/0/6/img_como_saber_si_un_gato_es_macho_o_hembra_con_fotos_10605_600.jpg" />
 		<property name="creditCard" ref="creditCard5" />
 		<property name="agent" ref="agent2" />
+	</bean>
+	
+	<bean id="advertisement5" class="domain.Advertisement">
+		<property name="title" value="title 5 Agent2 sexo" />
+		<property name="targetPage" value="https://cdn3.computerhoy.com/sites/computerhoy.com/files/styles/fullcontent/public/novedades/entender-gato.jpg?itok=GQSe1IVJ" />
+		<property name="banner" value="https://cdn3.computerhoy.com/sites/computerhoy.com/files/styles/fullcontent/public/novedades/entender-gato.jpg?itok=GQSe1IVJ" />
+		<property name="creditCard" ref="creditCard5" />
+		<property name="agent" ref="agent2" />
+	</bean>
+	
+	<bean id="advertisement6" class="domain.Advertisement">
+		<property name="title" value="title 6 Agent3 viagra" />
+		<property name="targetPage" value="https://img.bekiamascotas.com/articulos/portada/51000/51644-h2.jpg" />
+		<property name="banner" value="https://img.bekiamascotas.com/articulos/portada/51000/51644-h2.jpg" />
+		<property name="creditCard" ref="creditCard5" />
+		<property name="agent" ref="agent3" />
 	</bean>
 	
 	<!-- Volumes -->
