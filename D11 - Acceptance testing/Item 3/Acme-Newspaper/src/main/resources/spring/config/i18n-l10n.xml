@@ -37,13 +37,13 @@
 		<value>/views/agent/messages</value>
 		<value>/views/volume/messages</value>
 		<value>/views/advertisement/messages</value>
-<<<<<<< HEAD
+
 		<value>/views/underwrite/messages</value>
 		
-=======
+
 		<value>/views/messageFolder/messages</value>
 		<value>/views/message/messages</value>
->>>>>>> master
+
 		
 	</util:list>
 

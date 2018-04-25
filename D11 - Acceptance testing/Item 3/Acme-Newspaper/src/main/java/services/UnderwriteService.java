@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.GregorianCalendar;
 
 import javax.transaction.Transactional;
@@ -15,6 +16,8 @@ import org.springframework.validation.Validator;
 import repositories.UnderwriteRepository;
 import domain.CreditCard;
 import domain.Customer;
+import domain.Newspaper;
+import domain.Subscription;
 import domain.Underwrite;
 import domain.Volume;
 
@@ -30,6 +33,12 @@ public class UnderwriteService {
 
 	@Autowired
 	CustomerService			customerService;
+
+	@Autowired
+	SubscriptionService		subscriptionService;
+
+	@Autowired
+	NewspaperService		newspaperService;
 
 	@Autowired
 	private Validator		validator;
@@ -52,21 +61,36 @@ public class UnderwriteService {
 	}
 
 	//SAVE
-	public Underwrite save(final Underwrite underwrite) {
+	public Underwrite save(final Underwrite underwrite, BindingResult binding) {
 		Customer customerPrincipal;
 		Underwrite result;
-
+		Subscription subcripcion;
 		Assert.notNull(underwrite);
 		customerPrincipal = this.customerService.findByPrincipal();
-		//TODO comprobar que el cliente esta subscrito o no al volumen 
-		//TODO el customer asignar al unedrwirte??
+		Assert.isTrue(!this.volumeService.volumesWithUnderwriteOneCustomer().contains(underwrite.getVolume()), "this subcription al ready exits");
+
+		//newspapaer a las que ahi que susbcribirse
+		Collection<Newspaper> newspapersnewsupcription;
+		newspapersnewsupcription = underwrite.getVolume().getNewspapers();
+		//newspapaer a las que ya estoy subscrito
+		Collection<Newspaper> newspapersubcripto;
+		newspapersubcripto = this.newspaperService.findNewspapersSubscribedByCustomerId(customerPrincipal.getId());
 		//TODO subscribirse a un volumen significa subscribirsea todos sus periodicos.
+		newspapersnewsupcription.removeAll(newspapersubcripto);
+
 		Assert.isTrue(this.checkCreditCard(underwrite.getCreditCard()), "Invalid credit card");
 		result = this.underwriteRepository.save(underwrite);
 		customerPrincipal.getUnderwrites().add(result);
+		//Me subscribo a los periodicos
+		for (Newspaper n : newspapersnewsupcription) {
+			subcripcion = this.subscriptionService.create(n.getId());
+			subcripcion.setCreditCard(underwrite.getCreditCard());
+			subcripcion.setCustomer(customerPrincipal);
+			this.subscriptionService.reconstruct(subcripcion, binding);
+			this.subscriptionService.save(subcripcion);
+		}
 		return result;
 	}
-
 	public Underwrite reconstruct(final Underwrite underwrite, final BindingResult binding) {
 		Underwrite result;
 		if (underwrite.getId() == 0)
