@@ -410,6 +410,9 @@
 		</property>
 		<property name="underwrites">
 			<list>
+				<ref bean="underwrite5"/>
+				<ref bean="underwrite6"/>
+				<ref bean="underwrite7"/>
 			</list>
 		</property>
 	</bean>
@@ -1332,6 +1335,21 @@
 	<bean id="underwrite4" class="domain.Underwrite">
 		<property name="creditCard" ref="creditCard1" />
 		<property name="volume" ref="volume5" />
+	</bean>
+	
+	<bean id="underwrite5" class="domain.Underwrite">
+		<property name="creditCard" ref="creditCard2" />
+		<property name="volume" ref="volume1" />
+	</bean>
+	
+	<bean id="underwrite6" class="domain.Underwrite">
+		<property name="creditCard" ref="creditCard2" />
+		<property name="volume" ref="volume3" />
+	</bean>
+	
+	<bean id="underwrite7" class="domain.Underwrite">
+		<property name="creditCard" ref="creditCard2" />
+		<property name="volume" ref="volume4" />
 	</bean>
 	
 	<!-- Default folder of agent -->
