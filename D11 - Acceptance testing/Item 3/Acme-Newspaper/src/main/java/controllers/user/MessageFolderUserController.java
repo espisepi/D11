@@ -84,6 +84,7 @@ public class MessageFolderUserController extends AbstractController{
 
 		messageFolder = this.messageFolderService.findOne(messageFolderId);
 		Assert.notNull(messageFolder);
+		Assert.isTrue(messageFolder.isModifiable()==true);
 		result = this.createEditModelAndView(messageFolder);
 
 		return result;
