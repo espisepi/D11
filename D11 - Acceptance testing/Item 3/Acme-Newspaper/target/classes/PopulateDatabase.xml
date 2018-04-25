@@ -1750,4 +1750,66 @@
 		<property name="actor" ref="user4" />
 	</bean>
 	
+	<!-- Messages -->
+	
+	<bean id="message1" class="domain.Message">
+		<property name="moment" value="2017/09/21" />
+		<property name="subject" value="subject1" />
+		<property name="body" value="body1" />
+		<property name="priority" value="HIGH" />
+		<property name="messageFolder" ref="InBoxAgent1" />
+		<property name="sender" ref="admin" />
+		<property name="recipient" ref="agent1" />
+	</bean>
+	
+	<bean id="message4" class="domain.Message">
+		<property name="moment" value="2017/09/21" />
+		<property name="subject" value="subject1" />
+		<property name="body" value="body1" />
+		<property name="priority" value="HIGH" />
+		<property name="messageFolder" ref="OutBoxAdmin" />
+		<property name="sender" ref="admin" />
+		<property name="recipient" ref="agent1" />
+	</bean>
+	
+	<bean id="message2" class="domain.Message">
+		<property name="moment" value="2016/09/21" />
+		<property name="subject" value="subject2" />
+		<property name="body" value="body2" />
+		<property name="priority" value="NEUTRAL" />
+		<property name="messageFolder" ref="InBoxAgent1" />
+		<property name="sender" ref="customer1" />
+		<property name="recipient" ref="agent1" />
+	</bean>
+	
+	<bean id="message5" class="domain.Message">
+		<property name="moment" value="2016/09/21" />
+		<property name="subject" value="subject2" />
+		<property name="body" value="body2" />
+		<property name="priority" value="NEUTRAL" />
+		<property name="messageFolder" ref="OutBoxCustomer1" />
+		<property name="sender" ref="customer1" />
+		<property name="recipient" ref="agent1" />
+	</bean>
+	
+	<bean id="message3" class="domain.Message">
+		<property name="moment" value="2018/01/01" />
+		<property name="subject" value="subject3" />
+		<property name="body" value="body3" />
+		<property name="priority" value="LOW" />
+		<property name="messageFolder" ref="InBoxAgent1" />
+		<property name="sender" ref="user1" />
+		<property name="recipient" ref="agent1" />
+	</bean>
+	
+	<bean id="message6" class="domain.Message">
+		<property name="moment" value="2018/01/01" />
+		<property name="subject" value="subject3" />
+		<property name="body" value="body3" />
+		<property name="priority" value="LOW" />
+		<property name="messageFolder" ref="OutBoxUser1" />
+		<property name="sender" ref="user1" />
+		<property name="recipient" ref="agent1" />
+	</bean>
+	
 </beans>
