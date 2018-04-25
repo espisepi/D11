@@ -335,6 +335,14 @@ public class ArticleService {
 		result = this.articleRepository.findArticlesFinalMode();
 
 		return result;
+	}
+
+	public Collection<Article> findArticlesFinalModeByNewspaper(final int newspaperId) {
+		Collection<Article> result;
+
+		result = this.articleRepository.findArticlesFinalModeByNewspaper(newspaperId);
+
+		return result;
 
 	}
 }

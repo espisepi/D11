@@ -5,12 +5,16 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ArticleService;
 import services.NewspaperService;
 import controllers.AbstractController;
+import domain.Article;
 import domain.Newspaper;
 
 @Controller
@@ -21,6 +25,9 @@ public class NewspaperAgentController extends AbstractController {
 
 	@Autowired
 	private NewspaperService	newspaperService;
+
+	@Autowired
+	private ArticleService		articleService;
 
 
 	//Constructor--------------------------------------------------------
@@ -81,6 +88,28 @@ public class NewspaperAgentController extends AbstractController {
 		result.addObject("newspapers", newspapers);
 		result.addObject("showDelete", true);
 		result.addObject("requestURI", "newspaper/agent/listNewspapersWithCeroAdvertisement.do?d-16544-p=1");
+		return result;
+	}
+
+	// Display ----------------------------------------------------------------
+
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int newspaperId) {
+		final ModelAndView result;
+		Newspaper newspaper = new Newspaper();
+		final Collection<Article> articles;
+
+		newspaper = this.newspaperService.findOne(newspaperId);
+		Assert.isTrue(newspaper.isOpen() == true, "The newspaper must be public");
+		//TODOS LOS ARTÍCULOS DE UN PERIÓDICO
+		articles = this.articleService.findArticlesFinalModeByNewspaper(newspaperId);
+
+		result = new ModelAndView("newspaper/display");
+		result.addObject("newspaper", newspaper);
+		result.addObject("articles", articles);
+
+		result.addObject("requestURI", "newspaper/agent/display.do");
+
 		return result;
 	}
 

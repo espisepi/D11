@@ -232,3 +232,72 @@
 
 	</display:table>
 </security:authorize>
+
+
+
+<security:authorize access="hasRole('AGENT')">
+	<h2>
+		<spring:message code="newspaper.articles" />
+	</h2>
+	<display:table name="articles" id="row" class="displaytag">
+
+		<!-- Columna de Summary -->
+
+		<jstl:if test="${!hideAttributes}">
+			<spring:message code="newspaper.article.summary" var="summary" />
+			<display:column title="${summary}" sortable="true">
+				<spring:url value="article/agent/listSummary.do" var="articleURL">
+					<spring:param name="articleId" value="${row.id}" />
+				</spring:url>
+				<a href="${articleURL}"><B><jstl:out
+							value="${row.preSummary}"></jstl:out></B></a>
+			</display:column>
+		</jstl:if>
+
+		<jstl:if test="${hideAttributes}">
+			<spring:message code="article.summary" var="summaryHeader" />
+			<display:column property="summary" title="${summaryHeader}"
+				sortable="true" />
+		</jstl:if>
+
+		<!-- Columna de Article -->
+
+		<jstl:if test="${!hideAttributes}">
+			<spring:message code="newspaper.articles" var="writer" />
+			<display:column title="${writer}" sortable="true">
+				<spring:url value="article/agent/display.do" var="renURL">
+					<spring:param name="articleId" value="${row.id}" />
+				</spring:url>
+				<a href="${renURL}"><jstl:out value="${row.title}"></jstl:out></a>
+			</display:column>
+		</jstl:if>
+
+		<jstl:if test="${hideAttributes}">
+			<spring:message code="article.title" var="titleHeader" />
+			<display:column property="title" title="${titleHeader}"
+				sortable="true" />
+		</jstl:if>
+
+		<!-- Columna de Writer -->
+		<!-- CUANDO ESTÉ EL DISPLAY DE PROFILE LO PONGO AQUÍ -->
+		<jstl:if test="${!hideAttributes}">
+			<spring:message code="newspaper.article.writer" var="writer" />
+			<display:column title="${writer}" sortable="true">
+				<spring:url value="article/agent/displayUser.do" var="renURL">
+					<spring:param name="userId" value="${row.writer.id}" />
+				</spring:url>
+				<a href="${renURL}"><jstl:out value="${row.writer.name}" /></a>
+			</display:column>
+		</jstl:if>
+
+		<jstl:if test="${hideAttributes}">
+			<spring:message code="newspaper.article.writer" var="writerHeader" />
+			<display:column property="writer.name" title="${writerHeader}"
+				sortable="true" />
+		</jstl:if>
+
+
+	</display:table>
+</security:authorize>
+
+

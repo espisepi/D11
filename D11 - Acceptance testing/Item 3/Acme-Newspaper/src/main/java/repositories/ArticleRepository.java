@@ -65,4 +65,8 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
 	@Query("select a from Article a where a.draftMode = false")
 	Collection<Article> findArticlesFinalMode();
 
+	//Encontrar los artículos en modo final dado un periódico
+	@Query("select a from Article a where a.newspaper.id=?1 and a.draftMode = false")
+	Collection<Article> findArticlesFinalModeByNewspaper(int newspaperId);
+
 }

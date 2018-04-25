@@ -25,7 +25,19 @@
 	
 	
 
+	<!-- DISPLAY -->
 	
+	<security:authorize access="hasRole('AGENT')">
+	<spring:message code="newspaper.display" var="Create" />
+	<display:column title="${Create}" sortable="true">
+
+		<spring:url value="newspaper/agent/display.do" var="createURL">
+			<spring:param name="newspaperId" value="${row.id}" />
+		</spring:url>
+		<a href="${createURL}"><spring:message code="newspaper.display" /></a>
+
+	</display:column>
+</security:authorize>
 	
 
 	<!-- ATRIBUTOS -->
