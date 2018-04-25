@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AdvertisementService;
 import services.ArticleService;
 import services.CustomerService;
 import services.NewspaperService;
@@ -29,16 +30,19 @@ public class ArticleCustomerController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 	@Autowired
-	private ArticleService		articleService;
+	private ArticleService			articleService;
 
 	@Autowired
-	private NewspaperService	newspaperService;
+	private NewspaperService		newspaperService;
 
 	@Autowired
-	private CustomerService		customerService;
+	private CustomerService			customerService;
 
 	@Autowired
-	private UserService			userService;
+	private UserService				userService;
+
+	@Autowired
+	private AdvertisementService	advertisementService;
 
 
 	//Search -----------------------------------------------------------
@@ -95,8 +99,10 @@ public class ArticleCustomerController extends AbstractController {
 		final ModelAndView result;
 		Article article;
 		Collection<Newspaper> myNewspapersSubscription;
+		String url;
 
 		article = this.articleService.findOne(articleId);
+		url = this.advertisementService.randomAdvertisement(article.getNewspaper());
 		if (!article.getNewspaper().isOpen()) {
 			myNewspapersSubscription = this.newspaperService.findNewspapersSubscribedByCustomerId(this.customerService.findByPrincipal().getId());
 			Assert.isTrue(myNewspapersSubscription.contains(article.getNewspaper()), "you are not subscribed to the newspaper of this article");
@@ -104,6 +110,7 @@ public class ArticleCustomerController extends AbstractController {
 
 		result = new ModelAndView("article/display");
 		result.addObject("article", article);
+		result.addObject("advertisementrandom", url);
 		result.addObject("requestURI", "article/customer/display.do");
 
 		return result;

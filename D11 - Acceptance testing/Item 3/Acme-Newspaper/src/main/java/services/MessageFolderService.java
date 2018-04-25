@@ -88,20 +88,29 @@ public class MessageFolderService {
 	public void save(MessageFolder messageFolder){
 		
 		Assert.notNull(messageFolder);
+			
+		this.messageFolderRepository.save(messageFolder);
+	
 		
-		Iterator<MessageFolder> it;
+	}
+	
+	public void saveToPrincipal(MessageFolder messageFolder){
+		
+		Assert.notNull(messageFolder);
+		
+		Collection<String> messageFolders;
 		Actor principal = null;
 		
-		it = this.findAll().iterator();
+		principal = this.actorService.findPrincipal();
+		messageFolders = this.findMessageFolderNameByActor(principal.getId());
 		
 		
-		while (it.hasNext())
-			Assert.isTrue(messageFolder.getName() != it.next().getName());
+		Assert.isTrue(!messageFolders.contains(messageFolder.getName()), "This folder exits");
 		
-//		if(messageFolder.getId() != 0 && principal == null)
-//			principal = this.actorService.findPrincipal();
-//			Assert.isTrue(messageFolder.isModifiable() == true, "This message folder doesn't edit");
-//			Assert.isTrue(messageFolder.getActor() == principal);
+		if(messageFolder.getId() != 0)
+				
+			Assert.isTrue(messageFolder.isModifiable() == true, "This message folder doesn't edit");
+			Assert.isTrue(messageFolder.getActor() == principal);
 			
 			
 		this.messageFolderRepository.save(messageFolder);
@@ -109,16 +118,18 @@ public class MessageFolderService {
 		
 	}
 	
+	
+	
 	public void delete(MessageFolder messageFolder){
 		
 		Actor principal;
 		
 		principal = this.actorService.findPrincipal();
 		
-		Assert.isNull(messageFolder);
+		Assert.notNull(messageFolder);
 		Assert.isTrue(messageFolder.getId() != 0);
 		Assert.isTrue(messageFolder.isModifiable() == true, "This is a default folder so it can not be deleted");
-		Assert.isTrue(messageFolder.getActor().equals(principal));
+		Assert.isTrue(messageFolder.getActor().equals(principal));		
 		
 		this.messageFolderRepository.delete(messageFolder);
 	}
@@ -167,11 +178,11 @@ public class MessageFolderService {
 		notificationBox.setModifiable(false);
 		
 				
-//		this.save(inBox);
-//		this.save(outBox);
-//		this.save(trashBox);
-//		this.save(spamBox);
-//		this.save(notificationBox);
+		this.save(inBox);
+		this.save(outBox);
+		this.save(trashBox);
+		this.save(spamBox);
+		this.save(notificationBox);
 		
 		result.add(inBox);
 		result.add(outBox);
@@ -199,6 +210,16 @@ public class MessageFolderService {
 		MessageFolder result;
 		
 		result = this.messageFolderRepository.findMessageFolderByNameAndActor(name, actorId);
+		
+		return result;
+		
+	}
+	
+	public Collection<String> findMessageFolderNameByActor(int actorId){
+		
+		Collection<String> result;
+		
+		result = this.messageFolderRepository.findMessageFolderNameByActor(actorId);
 		
 		return result;
 		

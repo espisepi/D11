@@ -32,6 +32,10 @@ public class UserService {
 
 	@Autowired
 	UserRepository	userRepository;
+	
+	@Autowired
+	MessageFolderService messageFolderService;
+	
 
 
 	// Supporting services ----------------------------------------------------
@@ -88,6 +92,9 @@ public class UserService {
 		}
 		result = this.userRepository.save(user);
 		Assert.notNull(result);
+		
+		this.messageFolderService.createDefaultMessageFolder(result);
+		
 		return result;
 	}
 

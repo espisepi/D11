@@ -127,6 +127,16 @@
 					<li><a href="profile/user/edit.do"><spring:message code="master.page.users.edit" /></a></li>
 					
 				</ul>
+			
+			<li><a class="fNiv"><spring:message code="master.page.user.messageFolder"/></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="messageFolder/user/list.do?d-16544-p=1"><spring:message code="master.page.user.messageFolder.list" /></a></li>
+					<li><a href="messageFolder/user/create.do"><spring:message code="master.page.user.messageFolder.create" /></a></li>
+					
+				</ul>
+			
+				
 			<li><a class="fNiv"><spring:message	code="master.page.chirp" /></a>
 				<ul>
 					<li class="arrow"></li>

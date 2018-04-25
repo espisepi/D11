@@ -18,6 +18,10 @@ public interface MessageFolderRepository extends JpaRepository<MessageFolder, In
 	@Query("select m from MessageFolder m where m.name=?1 and m.actor.id = ?2")
 	MessageFolder findMessageFolderByNameAndActor(String name, int actorId);
 	
+	@Query("select m.name from MessageFolder m where m.actor.id = ?1")
+	Collection<String> findMessageFolderNameByActor(int actorId);
+	
+	
 	
 
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AdvertisementService;
 import services.ArticleService;
 import services.FollowUpService;
 import services.NewspaperService;
@@ -24,13 +25,16 @@ public class ArticleController extends AbstractController {
 
 	// Services---------------------------------------------------------
 	@Autowired
-	private ArticleService		articleService;
+	private ArticleService			articleService;
 
 	@Autowired
-	private FollowUpService		followUpService;
+	private FollowUpService			followUpService;
 
 	@Autowired
-	private NewspaperService	newspaperService;
+	private NewspaperService		newspaperService;
+
+	@Autowired
+	private AdvertisementService	advertisementService;
 
 
 	//Search -----------------------------------------------------------
@@ -98,8 +102,10 @@ public class ArticleController extends AbstractController {
 		final ModelAndView result;
 		Article article = new Article();
 		Collection<FollowUp> followsUp;
+		String url;
 
 		article = this.articleService.findOne(articleId);
+		url = this.advertisementService.randomAdvertisement(article.getNewspaper());
 		Assert.isTrue(article.getNewspaper().isOpen() == true, "the article belong to a private newspaper");
 		Assert.isTrue(!article.isDraftMode(), "The article is in DraftMode");
 		Assert.isTrue(article.getNewspaper().getPublicationDate() != null, "Cannot display a not publicated newspaper ");
@@ -107,6 +113,7 @@ public class ArticleController extends AbstractController {
 		result = new ModelAndView("article/display");
 		result.addObject("article", article);
 		result.addObject("followsUp", followsUp);
+		result.addObject("advertisementrandom", url);
 		result.addObject("requestURI", "article/display.do");
 
 		return result;
