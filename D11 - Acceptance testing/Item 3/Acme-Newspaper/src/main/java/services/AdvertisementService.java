@@ -195,23 +195,23 @@ public class AdvertisementService {
 		return result;
 	}
 
-	public String randomAdvertisement(final Newspaper newspaper) {
+	public Advertisement randomAdvertisement(final Newspaper newspaper) {
 		List<Advertisement> advertisements;
 		Integer size;
-		String url;
+		Advertisement advertisement;
 
-		url = "nothing to show";
-
+		advertisement = new Advertisement();
 		//Encontrar todos los advertisements que tiene un periódico
 		advertisements = this.findAdvertisementsByNewspaper(newspaper.getId());
 		size = advertisements.size();
 
 		if (size != 0) {
 			final int rand = (int) (Math.random() * size);
-			url = advertisements.get(rand).getBanner();
-		}
+			advertisement = advertisements.get(rand);
+		} else
+			advertisement = null;
+		return advertisement;
 
-		return url;
 	}
 
 }

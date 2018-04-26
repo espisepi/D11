@@ -127,17 +127,28 @@
 </display:column>
 </display:table>
 
-<h2><spring:message code="advertisement.banner" /></h2>
+
+<h2><spring:message code="advertisement.random" /></h2>
 <display:table name="advertisementrandom" id="row" class="displaytag">
-		<jstl:if test="${row!='nothing to show'}">
-<spring:message code="advertisement.banner" var="bannerURLHeader" />
-		 <display:column >
-		 <div
-  style="position: relative; width: 500px; height: 300px; margin-left: auto; margin-right: auto;">
-  			
-		  <img src="${row}"width= "500" height="300">
-		  </div>
-		 </display:column> 
+<jstl:if test="${row!=adnull}">
+		<display:column>
+
+	<a href="${row.targetPage}"><spring:message code = "advertisement.targetPage"></spring:message></a>
+	
+	<p>		
+		<a href="${row.banner}"><spring:message code="advertisement.banner"/></a>
+	</p>
+	
+	<p>
+		<B><spring:message code="advertisement.title" /></B>
+		<jstl:out value="${row.title}"></jstl:out>
+	</p>
+	
+	<p>
+		<B><spring:message code="advertisement.agent" /></B>
+		<jstl:out value="${row.agent.name}"></jstl:out>
+	</p>
+	</display:column>
 	</jstl:if>
 </display:table>
 	

@@ -15,6 +15,7 @@ import services.AdvertisementService;
 import services.ArticleService;
 import services.FollowUpService;
 import services.NewspaperService;
+import domain.Advertisement;
 import domain.Article;
 import domain.FollowUp;
 import domain.Newspaper;
@@ -102,10 +103,10 @@ public class ArticleController extends AbstractController {
 		final ModelAndView result;
 		Article article = new Article();
 		Collection<FollowUp> followsUp;
-		String url;
+		Advertisement advertisement;
 
 		article = this.articleService.findOne(articleId);
-		url = this.advertisementService.randomAdvertisement(article.getNewspaper());
+		advertisement = this.advertisementService.randomAdvertisement(article.getNewspaper());
 		Assert.isTrue(article.getNewspaper().isOpen() == true, "the article belong to a private newspaper");
 		Assert.isTrue(!article.isDraftMode(), "The article is in DraftMode");
 		Assert.isTrue(article.getNewspaper().getPublicationDate() != null, "Cannot display a not publicated newspaper ");
@@ -113,7 +114,8 @@ public class ArticleController extends AbstractController {
 		result = new ModelAndView("article/display");
 		result.addObject("article", article);
 		result.addObject("followsUp", followsUp);
-		result.addObject("advertisementrandom", url);
+		result.addObject("advertisementrandom", advertisement);
+
 		result.addObject("requestURI", "article/display.do");
 
 		return result;

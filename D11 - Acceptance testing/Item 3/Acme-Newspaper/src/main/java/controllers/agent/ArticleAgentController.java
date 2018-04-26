@@ -65,12 +65,9 @@ public class ArticleAgentController extends AbstractController {
 		final ModelAndView result;
 		Article article = new Article();
 		Collection<FollowUp> followsUp;
-		String url;
 
 		article = this.articleService.findOne(articleId);
 		followsUp = this.followUpService.findFollowUpsByArticle(articleId);
-
-		url = this.advertisementService.randomAdvertisement(article.getNewspaper());
 
 		//El periódico debe de ser público
 		Assert.isTrue(article.getNewspaper().isOpen() == true, "cannot commit this operation");
@@ -81,7 +78,7 @@ public class ArticleAgentController extends AbstractController {
 		result = new ModelAndView("article/display");
 		result.addObject("article", article);
 		result.addObject("followsUp", followsUp);
-		result.addObject("advertisementrandom", url);
+
 		result.addObject("requestURI", "article/agent/display.do");
 
 		return result;

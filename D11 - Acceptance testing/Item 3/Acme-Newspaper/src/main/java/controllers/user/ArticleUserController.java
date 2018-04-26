@@ -255,11 +255,9 @@ public class ArticleUserController extends AbstractController {
 		final ModelAndView result;
 		Article article = new Article();
 		Collection<FollowUp> followsUp;
-		String url;
 
 		article = this.articleService.findOne(articleId);
 		followsUp = this.followUpService.findFollowUpsByArticle(articleId);
-		url = this.advertisementService.randomAdvertisement(article.getNewspaper());
 
 		if (!article.getNewspaper().isOpen())
 			Assert.isTrue(this.userService.findByPrincipal().getArticles().contains(article), "This article belongs to a private newspaper that is not yours");
@@ -267,7 +265,7 @@ public class ArticleUserController extends AbstractController {
 		result = new ModelAndView("article/display");
 		result.addObject("article", article);
 		result.addObject("followsUp", followsUp);
-		result.addObject("advertisementrandom", url);
+
 		result.addObject("requestURI", "article/user/display.do");
 
 		return result;

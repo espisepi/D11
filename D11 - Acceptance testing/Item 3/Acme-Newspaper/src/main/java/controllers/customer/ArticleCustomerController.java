@@ -99,10 +99,9 @@ public class ArticleCustomerController extends AbstractController {
 		final ModelAndView result;
 		Article article;
 		Collection<Newspaper> myNewspapersSubscription;
-		String url;
 
 		article = this.articleService.findOne(articleId);
-		url = this.advertisementService.randomAdvertisement(article.getNewspaper());
+
 		if (!article.getNewspaper().isOpen()) {
 			myNewspapersSubscription = this.newspaperService.findNewspapersSubscribedByCustomerId(this.customerService.findByPrincipal().getId());
 			Assert.isTrue(myNewspapersSubscription.contains(article.getNewspaper()), "you are not subscribed to the newspaper of this article");
@@ -110,7 +109,7 @@ public class ArticleCustomerController extends AbstractController {
 
 		result = new ModelAndView("article/display");
 		result.addObject("article", article);
-		result.addObject("advertisementrandom", url);
+
 		result.addObject("requestURI", "article/customer/display.do");
 
 		return result;
