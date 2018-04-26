@@ -115,7 +115,6 @@ public class ArticleController extends AbstractController {
 		result.addObject("article", article);
 		result.addObject("followsUp", followsUp);
 		result.addObject("advertisementrandom", advertisement);
-
 		result.addObject("requestURI", "article/display.do");
 
 		return result;

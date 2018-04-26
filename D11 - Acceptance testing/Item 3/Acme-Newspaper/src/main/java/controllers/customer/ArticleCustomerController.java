@@ -19,6 +19,7 @@ import services.CustomerService;
 import services.NewspaperService;
 import services.UserService;
 import controllers.AbstractController;
+import domain.Advertisement;
 import domain.Article;
 import domain.Customer;
 import domain.Newspaper;
@@ -99,8 +100,10 @@ public class ArticleCustomerController extends AbstractController {
 		final ModelAndView result;
 		Article article;
 		Collection<Newspaper> myNewspapersSubscription;
+		Advertisement advertisement;
 
 		article = this.articleService.findOne(articleId);
+		advertisement = this.advertisementService.randomAdvertisement(article.getNewspaper());
 
 		if (!article.getNewspaper().isOpen()) {
 			myNewspapersSubscription = this.newspaperService.findNewspapersSubscribedByCustomerId(this.customerService.findByPrincipal().getId());
@@ -109,7 +112,7 @@ public class ArticleCustomerController extends AbstractController {
 
 		result = new ModelAndView("article/display");
 		result.addObject("article", article);
-
+		result.addObject("advertisementrandom", advertisement);
 		result.addObject("requestURI", "article/customer/display.do");
 
 		return result;

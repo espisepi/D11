@@ -18,6 +18,7 @@ import services.FollowUpService;
 import services.NewspaperService;
 import services.UserService;
 import controllers.AbstractController;
+import domain.Advertisement;
 import domain.Article;
 import domain.FollowUp;
 import domain.Newspaper;
@@ -255,9 +256,11 @@ public class ArticleUserController extends AbstractController {
 		final ModelAndView result;
 		Article article = new Article();
 		Collection<FollowUp> followsUp;
+		Advertisement advertisement;
 
 		article = this.articleService.findOne(articleId);
 		followsUp = this.followUpService.findFollowUpsByArticle(articleId);
+		advertisement = this.advertisementService.randomAdvertisement(article.getNewspaper());
 
 		if (!article.getNewspaper().isOpen())
 			Assert.isTrue(this.userService.findByPrincipal().getArticles().contains(article), "This article belongs to a private newspaper that is not yours");
@@ -265,7 +268,7 @@ public class ArticleUserController extends AbstractController {
 		result = new ModelAndView("article/display");
 		result.addObject("article", article);
 		result.addObject("followsUp", followsUp);
-
+		result.addObject("advertisementrandom", advertisement);
 		result.addObject("requestURI", "article/user/display.do");
 
 		return result;
