@@ -42,23 +42,23 @@
 	name="newspapers" requestURI="${requestURI}" id="row">
 <spring:message code="newspaper.display" var="display" />
 		<display:column title="${display}" sortable="true" >
+			<jstl:if test="${row.publicationDate!=null}">
 				<spring:url value="newspaper/customer/display.do" var="displayURL">
 					<spring:param name="newspaperId" value="${row.id }" />
 				</spring:url>
 				<a href="${displayURL}"><spring:message
 						code="newspaper.display" /></a>
+						</jstl:if>
 		</display:column>
 		
 		
 	<spring:message code="newspaper.title" var="titleHeader" />
 	<display:column property="title" title="${titleHeader}" sortable="true" />
-
-	<spring:message code="newspaper.format.publicationDate" var="pattern"></spring:message>
+<%-- 	<jstl:if test="${publicationDate}==null">
+ --%>	<spring:message code="newspaper.format.publicationDate" var="pattern"></spring:message>
 	<spring:message code="newspaper.publicationDate" var="postedHeader" />
 	<display:column property="publicationDate" title="${postedHeader}"
 		sortable="true" format="${pattern}" />
-		
-		
 		
 	</display:table>
 	
