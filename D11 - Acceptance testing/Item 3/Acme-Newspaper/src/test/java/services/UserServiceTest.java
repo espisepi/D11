@@ -423,7 +423,7 @@ public class UserServiceTest extends AbstractTest {
 				//El user 1 va a dejar de seguir al user 3 que es su seguidor
 				"user1", "user3", null
 			}, {
-				//El user 3 va a dejar de seguir al user3 que no lo seguia anteriormente
+				//El user 4 va a dejar de seguir al user3 que no lo seguia anteriormente
 				"user4", "user3", IllegalArgumentException.class
 			}
 		};
@@ -489,28 +489,30 @@ public class UserServiceTest extends AbstractTest {
 	public void driverListFollowers() {
 		final Object testingData[][] = {
 			{
-				//El user 1 es seguido por 2 usuarios.
-				"user1", 2, null
+				//El user 1 es seguido por el user 3 usuarios.
+				"user4", "user1", null
 			}, {
-				//El user 4 no es seguido por 2 usuarios por tanto debe ser error
-				"user4", 2, IllegalArgumentException.class
+				//El user 4 no es seguido por el user 2
+				"user1", "user4", IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
-			this.templateListFollowers(super.getEntityId((String) testingData[i][0]), (int) testingData[i][1], (Class<?>) testingData[i][2]);
+			this.templateListFollowers(super.getEntityId((String) testingData[i][0]), super.getEntityId((String) testingData[i][1]), (Class<?>) testingData[i][2]);
 	}
 
-	private void templateListFollowers(final int usernameId, final int size, final Class<?> expected) {
+	private void templateListFollowers(final int usernameId, final int username1, final Class<?> expected) {
 		Class<?> caught;
 		User user;
+		User user1;
 		Collection<User> followers;
 
 		user = this.userService.findOne(usernameId);
+		user1 = this.userService.findOne(username1);
 		caught = null;
 		try {
 			super.authenticate(user.getUserAccount().getUsername());
 			followers = user.getFollowers();
-			Assert.isTrue(followers.size() == size);
+			Assert.isTrue(followers.contains(user1));
 			this.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
