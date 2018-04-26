@@ -22,7 +22,6 @@ import controllers.AbstractController;
 import domain.Actor;
 import domain.Message;
 import domain.MessageFolder;
-import domain.Newspaper;
 
 @Controller
 @RequestMapping("/message/user")

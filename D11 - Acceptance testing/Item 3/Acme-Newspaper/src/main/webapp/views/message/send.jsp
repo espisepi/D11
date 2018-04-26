@@ -11,7 +11,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 <div class="col-md-6 col-centered">
 	<div class="well bs-component">
-		<form:form action="${requestURI }" modelAttribute="m">
+		<form:form action="${requestURI}" modelAttribute="m">
 
 			<form:hidden path="id" />
 			<form:hidden path="version" />
@@ -21,21 +21,18 @@
 
 
 			<jstl:if test="${m.recipient == null}">
-
 				<acme:select code="message.sendTo" path="recipient"
 					items="${actors}" itemLabel="userAccount.username" />
-
 				<br />
-
 			</jstl:if>
-			<form:label path="priority">
+			
+ 			<form:label path="priority">
 				<spring:message code="message.priority" />:
 			</form:label>
 			
 			<form:select path="priority">
 				<form:options items="${priorities}" />
-			</form:select>
-
+			</form:select>			
 			<br />
 			<br />	
 					
@@ -52,9 +49,6 @@
 			<acme:submit name="send" code="message.send.link"/>
 			<acme:cancel url="welcome/index.do" code="message.cancel.link"/>
 
-			<security:authorize access="hasRole('ADMINISTRATOR')">
-				<acme:submit name="broadcast" code="message.send.broadcast.link"/>
-			</security:authorize>
 
 <br />  
 		</form:form>

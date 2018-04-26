@@ -33,28 +33,12 @@
 	<form:hidden path="body"/>
 	<form:hidden path="priority"/>
 
-
-	<form:label path="subject">
-		<spring:message code="message.subject" />:
-	</form:label>
-	<form:input path="subject" readonly="true"/>
-	<form:errors cssClass="error" path="subject" />
+	<acme:textbox code="message.subject" path="subject" readonly="true"/>
+	<br/>
+	<br/>
+	<acme:select items="${folders}" itemLabel="name" code="message.messageFolder" path="messageFolder"/>
 	<br />
 	<br/>
-
-
-	<form:label path="messageFolder">
-		<spring:message code="message.messageFolder" />:
-	</form:label>
-	<form:select id="folders" path="messageFolder">
-		<form:options items="${folders}" itemValue="id"
-			itemLabel="name" />
-	</form:select>
-	<form:errors cssClass="error" path="messageFolder" />
-	<br />
-	<br/>
-
-	
 
 	<!-- Botones -->
 	<acme:submit name="change" code="message.changefolder.link"/>

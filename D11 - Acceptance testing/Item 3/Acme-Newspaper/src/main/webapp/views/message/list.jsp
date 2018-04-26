@@ -36,18 +36,12 @@
 
 
 	<!-- Attributes -->
-
-	<spring:message code="message.format.date" var="pattern"></spring:message>
-	<spring:message code="message.moment" var="momentHeader" />
-	<display:column property="moment" title="${momentHeader}"
-		format="${pattern }" />
-
-	<spring:message code="message.subject" var="subjectHeader" />
-	<display:column property="subject" title="${subjectHeader}" />
+		
+	<acme:column code="message.moment" property="moment"/>
 	
-	<spring:message code="message.sender" var="senderHeader" />
-	<display:column property="sender.name" title="${senderHeader}" />
-
+	<acme:column code="message.subject" property="subject"/>
+	
+	<acme:column code="message.sender" property="sender.name"/>
 	
 	<spring:message code="message.delete.link" var="deleteHeader" />
 		<display:column title="${deleteHeader}" sortable="true">
@@ -55,10 +49,10 @@
 				value="<spring:message code="message.delete.link" />"
 				onclick="confirmDelete(${row.id});" />
 		</display:column>
+	
 
 	<spring:message code="message.changefolder.link" var="Move" />	
 	<display:column title="${Move}" sortable="true">
-
 		<spring:url value="message/user/changeFolder.do" var="changeURL">
 			<spring:param name="messageId" value="${row.id}" />
 		</spring:url>

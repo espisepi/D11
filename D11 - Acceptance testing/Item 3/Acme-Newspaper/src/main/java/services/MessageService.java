@@ -1,7 +1,9 @@
 package services;
 
+import java.text.BreakIterator;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.transaction.Transactional;
 
@@ -31,6 +33,9 @@ public class MessageService {
 	
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private TabooWordService tabooWordService;
 	
 	@Autowired
 	private Validator	validator;
@@ -112,8 +117,13 @@ public class MessageService {
 		messageSaved = this.messageRepository.save(message);
 		messageRecipient = this.messageRepository.save(message);
 		
+		if(this.checkSpamMessage(messageRecipient)==true)
+			this.saveMessageInFolder(recipient, "Spam box", messageRecipient);
+		else
+			this.saveMessageInFolder(recipient, "In box", messageRecipient);
+		
 		this.saveMessageInFolder(sender, "Out box", messageSaved);
-		this.saveMessageInFolder(recipient, "In box", messageRecipient);
+		
 		
 		Assert.notNull(messageSaved);
 		
@@ -187,5 +197,34 @@ public class MessageService {
 		
 	}
 	
+	public Message findMessageWithTabooWord(String tabooWord, int messageId){
+		
+		Message result;
+		
+		result = this.messageRepository.findMessageWithTabooWord(tabooWord, messageId);
+		
+		return result;
+		
+	}
+	
+	public boolean checkSpamMessage(Message message){
+		
+		boolean result;
+		Collection<String> tabooWords;
+		Iterator<String> it;
+		
+		result = false;
+		tabooWords = this.tabooWordService.findTabooWordByName();
+		it = tabooWords.iterator();
+		
+		while (it.hasNext())
+			if(this.findMessageWithTabooWord(it.next(), message.getId()) != null){
 
+				result = true;
+				break;
+			}
+		
+		return result;
+		
+	}
 }
