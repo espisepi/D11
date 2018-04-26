@@ -90,6 +90,7 @@ public class AdvertisementService {
 	}
 
 	public void delete(final Advertisement advertisement) {
+		this.adminService.checkPrincipal();
 		Assert.notNull(advertisement);
 
 		Newspaper newspaper;
