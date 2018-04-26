@@ -2,6 +2,8 @@
 package controllers.agent;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,12 +63,11 @@ public class NewspaperAgentController extends AbstractController {
 	public ModelAndView listNewspapersWithAdvertisement() {
 
 		ModelAndView result;
-		Collection<Newspaper> newspapers;
 
-		newspapers = this.newspaperService.findAllNewspaperHavingAtLeastOneAdvertisement();
+		final Set<Newspaper> cjsp = new HashSet<Newspaper>((this.newspaperService.findAllNewspaperHavingAtLeastOneAdvertisement()));
 
 		result = new ModelAndView("newspaper/listForAdvertisement");
-		result.addObject("newspapers", newspapers);
+		result.addObject("newspapers", cjsp);
 		result.addObject("showDelete", true);
 		result.addObject("requestURI", "newspaper/agent/listNewspapersWithAdvertisement.do?d-16544-p=1");
 		return result;
