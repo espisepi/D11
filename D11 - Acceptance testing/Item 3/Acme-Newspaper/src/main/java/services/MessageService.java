@@ -139,15 +139,13 @@ public class MessageService {
 		Actor sender;
 		Actor recipient;
 		Collection<MessageFolder> messageFolders;
-		MessageFolder messageFolder;
 		
 		principal = this.actorService.findPrincipal();
 		messageFolders = this.messageFolderService.findMessageFolderByActor(principal.getId());
 		sender = message.getSender();
 		recipient = message.getRecipient();
-		messageFolder = this.messageFolderService.findMessageFolderByNameAndActor("Trash box", principal.getId());
 		
-		Assert.isTrue((principal.equals(sender) || principal.equals(recipient)) && messageFolders.equals(message.getMessageFolder()));
+		Assert.isTrue((principal.equals(sender) || principal.equals(recipient)) && messageFolders.contains(message.getMessageFolder()));
 		
 		if(message.getMessageFolder().getName().equals("Trash box"))
 			
@@ -155,7 +153,7 @@ public class MessageService {
 		
 		else
 		
-			message.setMessageFolder(messageFolder);
+			this.saveMessageInFolder(principal, "Trash box", message);
 			
 	}
 	

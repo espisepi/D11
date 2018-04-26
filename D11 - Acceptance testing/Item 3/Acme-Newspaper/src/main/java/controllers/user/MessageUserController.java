@@ -22,6 +22,7 @@ import controllers.AbstractController;
 import domain.Actor;
 import domain.Message;
 import domain.MessageFolder;
+import domain.Newspaper;
 
 @Controller
 @RequestMapping("/message/user")
@@ -151,6 +152,25 @@ public class MessageUserController extends AbstractController{
 		return result;
 	}
 	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(final int messageId) {
+		ModelAndView result;
+		Message message;
+		MessageFolder messageFolder;
+
+		message = this.messageService.findOne(messageId);
+		messageFolder = message.getMessageFolder();
+		Assert.notNull(message);
+		try {
+			this.messageService.delete(message);
+			result = new ModelAndView("redirect:list.do?messageFolderId=" + messageFolder.getId());
+		} catch (final Throwable oops) {
+			
+			result = this.listWithMessage(message.getMessageFolder().getId() ,"newspaper.commit.error");
+		}
+
+		return result;
+	}
 	
 	
 	// Ancillary methods ------------------------------------------------------
@@ -207,6 +227,30 @@ public class MessageUserController extends AbstractController{
 		result.addObject("folders", messageFolders);
 		result.addObject("msg", message);
 		return result;
+	}
+	
+	//ancially methods---------------------------------------------------------------------------
+
+	protected ModelAndView listWithMessage( @RequestParam int messageFolderId, final String message) {
+		ModelAndView result;
+		Collection<Message> messages;
+		Integer messageFolderId1 = messageFolderId;
+		Actor actor;
+		Collection<MessageFolder> messageFolders;
+
+		actor = this.actorService.findPrincipal();
+		messageFolders = this.messageFolderService.findMessageFolderByActor(actor.getId());
+		Assert.isTrue(messageFolders.contains(this.messageFolderService.findOne(messageFolderId)));
+
+		messages = this.messageService.findMessagesByMessageFolder(messageFolderId);
+
+		result = new ModelAndView("message/list");
+		result.addObject("messages", messages);
+		result.addObject("messageFolderId1", messageFolderId1);
+		result.addObject("requestURI", "message/user/list.do");
+		result.addObject("message", message);
+		return result;
+
 	}
 
 

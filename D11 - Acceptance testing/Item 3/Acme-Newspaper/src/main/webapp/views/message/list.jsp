@@ -19,6 +19,17 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+
+<script type="text/javascript">
+	function confirmDelete(messageId) {
+		confirm=confirm('<spring:message code="message.confirm.delete"/>');
+		if (confirm)
+		  window.location.href ="message/user/delete.do?messageId=" + messageId;
+		  else
+			  window.location.href ="message/user/list.do";
+	}
+</script>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="messages" requestURI="${requestURI }" id="row">
@@ -36,6 +47,14 @@
 	
 	<spring:message code="message.sender" var="senderHeader" />
 	<display:column property="sender.name" title="${senderHeader}" />
+
+	
+	<spring:message code="message.delete.link" var="deleteHeader" />
+		<display:column title="${deleteHeader}" sortable="true">
+			<input type="button" name="delete"
+				value="<spring:message code="message.delete.link" />"
+				onclick="confirmDelete(${row.id});" />
+		</display:column>
 
 
 </display:table>
