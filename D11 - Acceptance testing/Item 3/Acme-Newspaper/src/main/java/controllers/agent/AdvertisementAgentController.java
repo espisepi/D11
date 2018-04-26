@@ -1,8 +1,6 @@
 
 package controllers.agent;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -44,18 +42,11 @@ public class AdvertisementAgentController extends AbstractController {
 		ModelAndView result;
 		final Advertisement advertisement;
 		Newspaper newspaper;
-		Collection<Newspaper> newspapers;
 
 		newspaper = this.newspaperService.findOne(newspaperId);
 
 		//El periódico sobre el cual se esta creando el aviso debe de estar en modo abierto
 		Assert.isTrue(newspaper.isOpen() == true, "Cannot commit this operation");
-
-		newspapers = this.newspaperService.findAllNewspaperHavingAtLeastOneAdvertisement();
-
-		//Saltara cuando intentes crear un advertisement sobre un periodico que ya tiene uno
-		//escrito por ti
-		Assert.isTrue(!newspapers.contains(newspaper), "NOOOO");
 
 		advertisement = this.advertisementService.create();
 

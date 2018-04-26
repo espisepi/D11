@@ -328,12 +328,12 @@
 	<spring:message code="newspaper.advertisement" var="Create" />
 	<display:column title="${Create}" sortable="true">
 	
-	<jstl:if test="${!newspapersHavingAnAdvertisement.contains(row)}">
+
 		<spring:url value="advertisement/agent/create.do" var="createURL">
 			<spring:param name="newspaperId" value="${row.id}" />
 		</spring:url>
 		<a href="${createURL}"><spring:message code="newspaper.advertisement.create" /></a>
-	</jstl:if>
+	
 	</display:column>
 </security:authorize>
 	
