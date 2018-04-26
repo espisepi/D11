@@ -104,6 +104,55 @@ public class MessageUserController extends AbstractController{
 		return result;
 	}
 	
+	//Change folder message
+	@RequestMapping(value = "/changeFolder", method = RequestMethod.GET)
+	public ModelAndView changeFolderMessage(@RequestParam int messageId) {
+
+		ModelAndView result;
+		Message message;
+		Collection<MessageFolder> messageFolders;
+		Actor principal;
+		
+		message = this.messageService.findOne(messageId);
+		principal = this.actorService.findPrincipal();
+		messageFolders = this.messageFolderService.findMessageFolderByActor(principal.getId());
+		messageFolders.remove(message.getMessageFolder());
+		
+		Assert.notNull(message);
+
+		result = new ModelAndView("message/changeFolder");
+		result.addObject("folders", messageFolders);
+		result.addObject("msg", message);
+		
+		return result;
+
+	}
+	
+	@RequestMapping(value = "/changeFolder", method = RequestMethod.POST, params = "change")
+	public ModelAndView send(@Valid Message m, BindingResult binding, @RequestParam int messageId) {
+		ModelAndView result;
+		Message message;
+		Actor principal;
+		
+		message = this.messageService.findOne(messageId);
+		principal = this.actorService.findPrincipal();
+		
+		if (binding.hasErrors())
+			result = this.createNewModelAndViewChange(m);
+		else
+			try {
+				this.messageService.saveMessageInFolder(principal, m.getMessageFolder().getName(), message);
+				result = new ModelAndView("redirect:/messageFolder/user/list.do");
+			} catch (Throwable oops) {
+
+				result = this.createNewModelAndViewChange(m, "message.commit.error");
+
+			}
+		return result;
+	}
+	
+	
+	
 	// Ancillary methods ------------------------------------------------------
 
 	protected ModelAndView createNewModelAndView(Message m) {
@@ -133,6 +182,30 @@ public class MessageUserController extends AbstractController{
 		result.addObject("message", message);
 		result.addObject("priorities", priorities);
 		result.addObject("m", m);
+		return result;
+	}
+	
+	protected ModelAndView createNewModelAndViewChange(Message m) {
+		ModelAndView result;
+		result = this.createNewModelAndView(m, null);
+		return result;
+	}
+
+	protected ModelAndView createNewModelAndViewChange(Message m, String message) {
+		ModelAndView result;
+		
+		Collection<MessageFolder> messageFolders;
+		Actor principal;
+		
+		principal = this.actorService.findPrincipal();
+		messageFolders = this.messageFolderService.findMessageFolderByActor(principal.getId());
+		messageFolders.remove(m.getMessageFolder());
+		
+		Assert.notNull(message);
+
+		result = new ModelAndView("message/changeFolder");
+		result.addObject("folders", messageFolders);
+		result.addObject("msg", message);
 		return result;
 	}
 

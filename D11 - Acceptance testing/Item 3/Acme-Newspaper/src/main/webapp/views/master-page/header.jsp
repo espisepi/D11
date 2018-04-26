@@ -135,6 +135,9 @@
 					<li><a href="messageFolder/user/create.do"><spring:message code="master.page.user.messageFolder.create" /></a></li>
 					
 				</ul>
+				
+			<li><a class="fNiv" href="message/user/send.do"><spring:message code="master.page.user.sendMessage"/></a>
+				
 			
 				
 			<li><a class="fNiv"><spring:message	code="master.page.chirp" /></a>

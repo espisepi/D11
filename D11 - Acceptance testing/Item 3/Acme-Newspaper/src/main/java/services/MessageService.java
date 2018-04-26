@@ -83,7 +83,7 @@ public class MessageService {
 		recipient = result.getRecipient();
 		
 		
-		Assert.isTrue((principal.equals(sender) || principal.equals(recipient)) && messageFolders.equals(result.getMessageFolder()));
+		Assert.isTrue((principal.equals(sender) || principal.equals(recipient)) && messageFolders.contains(result.getMessageFolder()));
 		
 		return result;
 		
@@ -118,6 +118,14 @@ public class MessageService {
 		Assert.notNull(messageSaved);
 		
 		
+		
+	}
+	
+	public void save(Message message) {
+		
+		Assert.notNull(message);
+		
+		this.messageRepository.save(message);
 		
 	}
 	
@@ -173,7 +181,6 @@ public class MessageService {
 		message.setMessageFolder(messageFolder);
 		
 	}
-	
 	
 
 }
