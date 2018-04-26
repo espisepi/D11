@@ -247,4 +247,47 @@ public class AgentServiceTest extends AbstractTest {
 		}
 		this.checkExceptions(expected, caught);
 	}
+
+	//Test para el caso de uso 4.3)List the newspapers in which they have placed and advertisement
+	@Test
+	public void driverListNewspaperWithCeroAdvertisement() {
+		final Object testingData[][] = {
+			{
+				//El agente 1 lista correctamente todos periódicos sobre los que no ha escrito un aviso
+				//El periódico 6 está entre ellos el cual no tiene el aviso2
+				"agent1", "newspaper6", "advertisement2", null
+			}, {
+				//El agente 1 lista incorrectamente el periódico 2 ya que éste sí contiene
+				//un aviso escrito por el agente
+				"agent1", "newspaper5", "advertisement3", java.lang.IllegalArgumentException.class
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.templateListNewspaperWithCeroAdvertisement(super.getEntityId((String) testingData[i][0]), super.getEntityId((String) testingData[i][1]), super.getEntityId((String) testingData[i][2]), (Class<?>) testingData[i][3]);
+	}
+
+	private void templateListNewspaperWithCeroAdvertisement(final int usernameIdLogin, final int newspaperId, final int advertisementId, final Class<?> expected) {
+		Class<?> caught;
+		Agent agentLogin;
+		Collection<Newspaper> newspapers;
+		Newspaper newspaper;
+		Advertisement advertisement;
+
+		agentLogin = this.agentService.findOne(usernameIdLogin);
+
+		caught = null;
+		try {
+			super.authenticate(agentLogin.getUserAccount().getUsername());
+			newspaper = this.newspaperService.findOne(newspaperId);
+			newspapers = this.newspaperService.findAllNewspaperToWriteAnAdvertisement();
+			newspapers.removeAll(this.newspaperService.findAllNewspaperHavingAtLeastOneAdvertisement());
+			advertisement = this.advertisementService.findOne(advertisementId);
+			Assert.isTrue(!newspaper.getAdvertisements().contains(advertisement));
+			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+			this.entityManager.clear();
+		}
+		this.checkExceptions(expected, caught);
+	}
 }
