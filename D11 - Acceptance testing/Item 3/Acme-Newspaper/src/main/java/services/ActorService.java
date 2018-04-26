@@ -1,6 +1,8 @@
 
 package services;
 
+import java.util.Collection;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,17 @@ public class ActorService {
 		return result;
 
 	}
+	
+	public Collection<Actor> findAll(){
+		
+		Collection<Actor> result;
+		
+		result = this.actorRepository.findAll();
+		
+		return result;
+		
+	}
+	
 	// Other business methods -------------------------------------------------
 
 	public boolean isAuthenticated() {

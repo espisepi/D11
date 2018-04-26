@@ -50,7 +50,7 @@ public class MessageService {
 		
 		sender = this.actorService.findPrincipal();
 		result = new Message();
-		result.setMoment(new Date());
+		result.setMoment(new Date(System.currentTimeMillis() - 1000));
 		result.setSender(sender);
 		messageFolder = this.messageFolderService.findMessageFolderByNameAndActor("Out box", sender.getId());
 		result.setMessageFolder(messageFolder);
@@ -89,6 +89,39 @@ public class MessageService {
 		
 		
 	}
+	
+	//Send-----------------------------------------------------
+	
+	public void send(Message message) {
+		
+		Assert.notNull(message);
+		
+		Date moment;
+		Actor sender;
+		Actor recipient;
+		Message messageSaved;
+		Message messageRecipient;
+		
+		moment = new Date(System.currentTimeMillis() - 1000);
+		sender = message.getSender();
+		recipient = message.getRecipient();
+		
+		message.setMoment(moment);
+		
+		
+		messageSaved = this.messageRepository.save(message);
+		messageRecipient = this.messageRepository.save(message);
+		
+		this.saveMessageInFolder(sender, "Out box", messageSaved);
+		this.saveMessageInFolder(recipient, "In box", messageRecipient);
+		
+		Assert.notNull(messageSaved);
+		
+		
+		
+	}
+	
+	//Delete----------------------------------------------------
 	
 	public void delete(Message message){
 		Assert.notNull(message);
@@ -129,6 +162,16 @@ public class MessageService {
 		result = this.messageRepository.findMessagesByMessageFolder(messageFolderId);
 		
 		return result;
+	}
+	
+	public void saveMessageInFolder(Actor actor, String folderName, Message message){
+		
+		MessageFolder messageFolder;
+		
+		messageFolder = this.messageFolderService.findMessageFolderByNameAndActor(folderName, actor.getId());
+		
+		message.setMessageFolder(messageFolder);
+		
 	}
 	
 	
