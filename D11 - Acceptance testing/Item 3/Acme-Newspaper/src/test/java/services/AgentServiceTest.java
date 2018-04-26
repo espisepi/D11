@@ -248,7 +248,7 @@ public class AgentServiceTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 
-	//Test para el caso de uso 4.3)List the newspapers in which they have placed and advertisement
+	//Test para el caso de uso 4.4)List the newspapers in which they have not placed and advertisement
 	@Test
 	public void driverListNewspaperWithCeroAdvertisement() {
 		final Object testingData[][] = {
