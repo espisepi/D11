@@ -56,6 +56,16 @@
 				onclick="confirmDelete(${row.id});" />
 		</display:column>
 
+	<spring:message code="message.changefolder.link" var="Move" />	
+	<display:column title="${Move}" sortable="true">
+
+		<spring:url value="message/user/changeFolder.do" var="changeURL">
+			<spring:param name="messageId" value="${row.id}" />
+		</spring:url>
+		<a href="${changeURL}"><spring:message code="message.changefolder.link" /></a>
+		
+		</display:column>
+
 
 </display:table>
 

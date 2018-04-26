@@ -157,6 +157,13 @@ public class MessageService {
 			
 	}
 	
+	public void deleteAll(Collection<Message> messages){
+		Assert.notNull(messages);
+		
+		this.messageRepository.delete(messages);
+			
+	}
+	
 	
 	
 	//Other method-------------------------------------------------------------

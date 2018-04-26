@@ -123,13 +123,17 @@ public class MessageFolderService {
 	public void delete(MessageFolder messageFolder){
 		
 		Actor principal;
+		Collection<Message> messages;
 		
 		principal = this.actorService.findPrincipal();
+		messages = this.messageService.findMessagesByMessageFolder(messageFolder.getId());
 		
 		Assert.notNull(messageFolder);
 		Assert.isTrue(messageFolder.getId() != 0);
 		Assert.isTrue(messageFolder.isModifiable() == true, "This is a default folder so it can not be deleted");
 		Assert.isTrue(messageFolder.getActor().equals(principal));		
+		
+		this.messageService.deleteAll(messages);
 		
 		this.messageFolderRepository.delete(messageFolder);
 	}

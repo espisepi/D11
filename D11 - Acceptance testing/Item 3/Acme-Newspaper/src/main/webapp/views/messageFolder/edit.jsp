@@ -40,7 +40,9 @@
 	<acme:submit name="save" code="tabooWord.save"/>
 	
 	<jstl:if test="${messageFolder.id != 0 }">
-	 	<acme:submit name="delete" code="messageFolder.delete" />
+	 	<input type="submit" name="delete"
+			value="<spring:message code="messageFolder.delete" />"
+			onclick="javascript: return confirm('<spring:message code="messageFolder.confirm.delete" />')" />&nbsp;
 	</jstl:if>
 	
 	<acme:cancel url="welcome/index.do" code="tabooWord.cancel"/>
