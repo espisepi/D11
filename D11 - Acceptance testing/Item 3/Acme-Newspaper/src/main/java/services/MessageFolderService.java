@@ -133,7 +133,9 @@ public class MessageFolderService {
 		Assert.isTrue(messageFolder.isModifiable() == true, "This is a default folder so it can not be deleted");
 		Assert.isTrue(messageFolder.getActor().equals(principal));		
 		
-		this.messageService.deleteAll(messages);
+		if(messages.size() > 0)
+			for(Message m: messages)
+				this.messageService.delete(m);
 		
 		this.messageFolderRepository.delete(messageFolder);
 	}

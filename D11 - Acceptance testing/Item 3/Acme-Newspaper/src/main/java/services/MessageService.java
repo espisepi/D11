@@ -1,6 +1,5 @@
 package services;
 
-import java.text.BreakIterator;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
@@ -164,13 +163,6 @@ public class MessageService {
 		else
 		
 			this.saveMessageInFolder(principal, "Trash box", message);
-			
-	}
-	
-	public void deleteAll(Collection<Message> messages){
-		Assert.notNull(messages);
-		
-		this.messageRepository.delete(messages);
 			
 	}
 	
