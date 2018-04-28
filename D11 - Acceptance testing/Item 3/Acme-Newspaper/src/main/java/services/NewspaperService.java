@@ -395,4 +395,12 @@ public class NewspaperService {
 		return result;
 	}
 
+	public Collection<Newspaper> findAllNewspapersPublicByVolumeId(final int volumeId) {
+		Collection<Newspaper> result;
+
+		result = this.newspaperRepository.findAllNewspapersPublicByVolumeId(volumeId);
+
+		return result;
+	}
+
 }

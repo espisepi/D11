@@ -21,11 +21,10 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-
-
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="volumes" requestURI="${requestURI}" id="row">
 	
+	<security:authorize access="hasRole('CUSTOMER')">
 		<spring:message code="volume.edit" var="Edit" />
 		<display:column title="${Edit}" sortable="true">
 		<jstl:if test="${!volumeSubscribed.contains(row)}">
@@ -35,7 +34,7 @@
 				<a href="${editURL}"><spring:message code="volume.underwrite" /></a>
 		</jstl:if> 
 		</display:column>
-		
+	</security:authorize>
 		
 	<spring:message code="volume.title" var="titleHeader" />
 	<display:column property="title" title="${titleHeader}" sortable="true" />
@@ -46,6 +45,7 @@
 	<spring:message code="volume.year" var="titleHeader" />
 	<display:column property="year" title="${titleHeader}" sortable="true" />
 			
+		<security:authorize access="hasRole('CUSTOMER')">
 		<spring:message code="volume.display" var="Edit" />
 		<display:column title="${Edit}" sortable="true">
 <%-- 			<jstl:if test="${row.publicationDate==null}">
@@ -54,6 +54,17 @@
 				</spring:url>
 				<a href="${editURL}"><spring:message code="volume.display" /></a>
 	<%-- 		</jstl:if> --%>
+		</display:column>
+	</security:authorize>
+	
+		<spring:message code="volume.display" var="Edit" />
+		<display:column title="${Edit}" sortable="true">
+
+ 			<spring:url value="volume/display.do" var="editURL">
+					<spring:param name="volumeId" value="${row.id}" />
+				</spring:url>
+				<a href="${editURL}"><spring:message code="volume.display" /></a>
+	
 		</display:column>
 	
 </display:table>

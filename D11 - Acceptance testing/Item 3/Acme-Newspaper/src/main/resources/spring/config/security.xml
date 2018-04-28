@@ -46,6 +46,8 @@
 		<security:intercept-url pattern="/article/list.do" access="permitAll"/>
 		<security:intercept-url pattern="/article/listb.do" access="permitAll"/>
 		<security:intercept-url pattern="/article/display.do" access="permitAll"/>
+		<security:intercept-url pattern="/volume/list.do" access="permitAll"/>
+		<security:intercept-url pattern="/volume/display.do" access="permitAll"/>
 
 		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
