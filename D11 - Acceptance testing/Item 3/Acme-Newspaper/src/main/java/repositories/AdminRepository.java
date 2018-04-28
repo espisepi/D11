@@ -82,7 +82,10 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
 	//C1: The ratio of newspapers that have at least one advertisement versus the newspapers that haven’t any.
 	@Query("select (select count(n) from Newspaper n where n.advertisements.size>1)*1.0/count(ne) from Newspaper ne where ne.advertisements.size=0")
 	Double theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement();
-	//C2: The ratio of advertisements that have taboo words.
+
+	//C2: The ratio of advertisements that have taboo words. Se ha realizado entre la query siguiente y un metodo en el servicio.
+	@Query("select count(a) from Advertisement a")
+	Double sizeOfTheListAdvertisement();
 
 	//B1: The average number of newspapers per volume.
 	@Query("select avg(a.newspapers.size) from Volume a")

@@ -48,7 +48,7 @@ public class AdministratorDashboardController extends AbstractController {
 		Double ratioOfSubscribersWhenNewspaperPrivatePerNumberCustomer;
 		Double theAverageRatioOfPrivateVersusPublicNewspaperPerPublished;
 		Double theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement;
-		//TODO: FALTA LA QUERY C2
+		Double theRatioOfAdvertisementsThatHaveTabooWords;
 		Double theAverageNumberOfNewspaperPerVolume;
 		Double theRatioOfSubcrptionsToVolumesVersusSubcriptionsToNewspapers;
 
@@ -72,6 +72,7 @@ public class AdministratorDashboardController extends AbstractController {
 		theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement = this.adminService.theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement();
 		theAverageNumberOfNewspaperPerVolume = this.adminService.theAverageNumberOfNewspaperPerVolume();
 		theRatioOfSubcrptionsToVolumesVersusSubcriptionsToNewspapers = this.adminService.theRatioOfSubcrptionsToVolumesVersusSubcriptionsToNewspapers();
+		theRatioOfAdvertisementsThatHaveTabooWords = this.adminService.theRatioOfAdvertisementsThatHaveTabooWords();
 
 		result.addObject("theAvgAndStddevOfNewspapersForUser", theAvgAndStddevOfNewspapersForUser);
 		result.addObject("theAvgAndStddevOfArticlesPerWriter", theAvgAndStddevOfArticlesPerWriter);
@@ -93,6 +94,7 @@ public class AdministratorDashboardController extends AbstractController {
 		result.addObject("theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement", theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement);
 		result.addObject("theAverageNumberOfNewspaperPerVolume", theAverageNumberOfNewspaperPerVolume);
 		result.addObject("theRatioOfSubcrptionsToVolumesVersusSubcriptionsToNewspapers", theRatioOfSubcrptionsToVolumesVersusSubcriptionsToNewspapers);
+		result.addObject("theRatioOfAdvertisementsThatHaveTabooWords", theRatioOfAdvertisementsThatHaveTabooWords);
 
 		return result;
 

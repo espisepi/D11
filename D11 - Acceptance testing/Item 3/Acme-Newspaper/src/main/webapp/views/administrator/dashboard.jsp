@@ -293,12 +293,12 @@
 <!-- C2 2.0 -->
 	<caption class="caption">
 		<spring:message
-			code="dashboard.theAverageRatioOfPrivateVersusPublicNewspaperPerPublished" />
+			code="dashboard.theRatioOfAdvertisementsThatHaveTabooWords" />
 	</caption>
 
 	<tr>
 		<td><jstl:out
-				value="${theAverageRatioOfPrivateVersusPublicNewspaperPerPublished}"></jstl:out></td>
+				value="${theRatioOfAdvertisementsThatHaveTabooWords}"></jstl:out></td>
 	</tr>
 </table>
 

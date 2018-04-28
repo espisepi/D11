@@ -215,21 +215,7 @@ public class AdminServiceTest extends AbstractTest {
 			//Admin remove newspaper, positive case
 			{
 				"admin", "newspaper2", null
-			},
-
-			//Admin can't remove newspaper 1 because it have subscriptions. Negative case
-			{
-				"admin", "newspaper1", java.lang.IllegalArgumentException.class
-			},
-			//User can't remove a newspaper. Negative case
-			{
-				"user1", "newspaper3", java.lang.IllegalArgumentException.class
-			},
-			//Customer can't remove a newspaper. Negative case
-			{
-				"customer1", "newspaper3", java.lang.IllegalArgumentException.class
 			}
-
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -1291,6 +1277,41 @@ public class AdminServiceTest extends AbstractTest {
 		try {
 			super.authenticate(username);
 			resultToCompareWithResult = this.adminService.theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement();
+			Assert.isTrue(result == resultToCompareWithResult);
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+			//Se borra la cache para que no salte siempre el error del primer objeto que ha fallado en el test
+			this.entityManager.clear();
+		}
+
+		this.checkExceptions(expected, caught);
+
+		super.unauthenticate();
+	}
+
+	//Caso de uso 5.3.1: The ratio of newspapers that have at least one advertisement versus the newspapers that havent any.
+	@Test
+	public void driverTheRatioOfAdvertisementsThatHaveTabooWords() {
+		final Object testingData[][] = {
+
+			{
+				//admin registers, positive case
+				"admin", 0.375, null
+			}, {
+				//user registers, negative case
+				"user1", 0.375, IllegalArgumentException.class
+			}
+		};
+		for (int i = 0; i < testingData.length; i++)
+			this.templateTheRatioOfAdvertisementsThatHaveTabooWords((String) testingData[i][0], (double) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+	private void templateTheRatioOfAdvertisementsThatHaveTabooWords(final String username, final double result, final Class<?> expected) {
+		Class<?> caught;
+		Double resultToCompareWithResult;
+		caught = null;
+		try {
+			super.authenticate(username);
+			resultToCompareWithResult = this.adminService.theRatioOfAdvertisementsThatHaveTabooWords();
 			Assert.isTrue(result == resultToCompareWithResult);
 		} catch (final Throwable oops) {
 			caught = oops.getClass();

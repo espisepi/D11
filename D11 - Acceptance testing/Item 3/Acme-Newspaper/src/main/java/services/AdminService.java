@@ -30,12 +30,15 @@ public class AdminService {
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
-	private AdminRepository	adminRepository;
+	private AdminRepository			adminRepository;
+
+	@Autowired
+	private AdvertisementService	advertisementService;
 
 	// Supporting services ----------------------------------------------------
 
 	@Autowired
-	private Validator		validator;
+	private Validator				validator;
 
 
 	// Constructors -----------------------------------------------------------
@@ -297,6 +300,19 @@ public class AdminService {
 	}
 
 	//C2: The ratio of advertisements that have taboo words.
+	public Double theRatioOfAdvertisementsThatHaveTabooWords() {
+		Double result;
+		Double sizeAdvertisement;
+		Double sizeAdvertisementWithTabooWord;
+
+		sizeAdvertisementWithTabooWord = this.advertisementService.advertisementWithTabooWord().size() * 1.0;
+		sizeAdvertisement = this.adminRepository.sizeOfTheListAdvertisement();
+
+		result = (double) (sizeAdvertisementWithTabooWord / sizeAdvertisement);
+
+		return result;
+
+	}
 
 	//B1: The average number of newspapers per volume.
 	public Double theAverageNumberOfNewspaperPerVolume() {
