@@ -24,6 +24,7 @@ import domain.Customer;
 import domain.Newspaper;
 import domain.Subscription;
 import domain.User;
+import domain.Volume;
 
 @Service
 @Transactional
@@ -306,13 +307,16 @@ public class NewspaperService {
 			User userPrincipal;
 			final Collection<Article> articles;
 			Collection<Advertisement> advertisements;
+			Collection<Volume> volumes;
 
 			userPrincipal = this.userService.findByPrincipal();
 			articles = new ArrayList<Article>();
 			advertisements = new ArrayList<Advertisement>();
+			volumes = new ArrayList<Volume>();
 			newspaper.setArticles(articles);
 			newspaper.setPublisher(userPrincipal);
 			newspaper.setAdvertisements(advertisements);
+			newspaper.setVolumes(volumes);
 			result = newspaper;
 		} else {
 			newspaperBD = this.newspaperRepository.findOne(newspaper.getId());
@@ -320,6 +324,7 @@ public class NewspaperService {
 			newspaper.setVersion(newspaperBD.getVersion());
 			newspaper.setPublicationDate(newspaperBD.getPublicationDate());
 			newspaper.setPublisher(newspaperBD.getPublisher());
+			newspaper.setVolumes(newspaperBD.getVolumes());
 			if (newspaper.getArticles() == null)
 				newspaper.setArticles(new ArrayList<Article>());
 			else
