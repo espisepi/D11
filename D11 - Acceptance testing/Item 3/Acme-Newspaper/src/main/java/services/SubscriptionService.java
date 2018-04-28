@@ -106,6 +106,24 @@ public class SubscriptionService {
 		return result;
 	}
 
+	public Subscription reconstruct(final Subscription subscription) {
+		Subscription result;
+		final Customer customerPrincipal;
+		if (subscription.getId() == 0) {
+
+			Assert.isTrue(!subscription.getNewspaper().isOpen(), "the newspaper must be private");
+			customerPrincipal = this.customerService.findByPrincipal();
+			subscription.setCustomer(customerPrincipal);
+
+			result = subscription;
+		} else {
+			Assert.notNull(null, "a subscription can not be modified");
+			result = subscription;
+		}
+		//recontruct sin validaciones, estas ya las hace underwrite
+		return result;
+	}
+
 	public Collection<Subscription> findSubscriptionByNewspaper(final int newspaperId) {
 
 		Collection<Subscription> result;

@@ -61,7 +61,7 @@ public class UnderwriteService {
 	}
 
 	//SAVE
-	public Underwrite save(final Underwrite underwrite, BindingResult binding) {
+	public Underwrite save(final Underwrite underwrite) {
 		Customer customerPrincipal;
 		Underwrite result;
 		Subscription subcripcion;
@@ -82,13 +82,14 @@ public class UnderwriteService {
 		result = this.underwriteRepository.save(underwrite);
 		customerPrincipal.getUnderwrites().add(result);
 		//Me subscribo a los periodicos
-		for (Newspaper n : newspapersnewsupcription) {
-			subcripcion = this.subscriptionService.create(n.getId());
-			subcripcion.setCreditCard(underwrite.getCreditCard());
-			subcripcion.setCustomer(customerPrincipal);
-			this.subscriptionService.reconstruct(subcripcion, binding);
-			this.subscriptionService.save(subcripcion);
-		}
+		for (Newspaper n : newspapersnewsupcription)
+			if (n.isOpen() == false) {
+				subcripcion = this.subscriptionService.create(n.getId());
+				subcripcion.setCreditCard(underwrite.getCreditCard());
+				subcripcion.setCustomer(customerPrincipal);
+				this.subscriptionService.reconstruct(subcripcion);
+				this.subscriptionService.save(subcripcion);
+			}
 		return result;
 	}
 	public Underwrite reconstruct(final Underwrite underwrite, final BindingResult binding) {
@@ -101,6 +102,10 @@ public class UnderwriteService {
 		}
 		this.validator.validate(result, binding);
 		return result;
+	}
+
+	public void flush() {
+		this.underwriteRepository.flush();
 	}
 	//Other method
 

@@ -47,7 +47,7 @@ public class UnderwriteCustomerController extends AbstractController {
 			result = this.createEditModelAndView(underwrite);
 		else
 			try {
-				this.underwriteService.save(underwrite, bindingResult);
+				this.underwriteService.save(underwrite);
 				result = new ModelAndView("redirect:/volume/customer/list.do?d-16544-p=1");
 			} catch (final Throwable oops) {
 				if (oops.getMessage().equals("el cliente ya esta subscrito a este periodico"))
