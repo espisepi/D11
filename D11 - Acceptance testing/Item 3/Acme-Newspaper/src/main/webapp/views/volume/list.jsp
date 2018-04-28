@@ -57,6 +57,7 @@
 		</display:column>
 	</security:authorize>
 	
+	<security:authorize access="isAnonymous()">
 		<spring:message code="volume.display" var="Edit" />
 		<display:column title="${Edit}" sortable="true">
 
@@ -66,6 +67,6 @@
 				<a href="${editURL}"><spring:message code="volume.display" /></a>
 	
 		</display:column>
-	
+	</security:authorize>
 </display:table>
 
