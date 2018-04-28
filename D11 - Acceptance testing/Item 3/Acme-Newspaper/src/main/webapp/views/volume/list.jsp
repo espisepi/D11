@@ -30,6 +30,7 @@
 		<jstl:if test="${!volumeSubscribed.contains(row)}">
  			<spring:url value="underwrite/customer/create.do" var="editURL">
 					<spring:param name="volumeId" value="${row.id}" />
+					<spring:param name="d-16544-p" value="1" />
 				</spring:url>
 				<a href="${editURL}"><spring:message code="volume.underwrite" /></a>
 		</jstl:if> 
@@ -51,6 +52,7 @@
 <%-- 			<jstl:if test="${row.publicationDate==null}">
  --%>				<spring:url value="volume/customer/display.do" var="editURL">
 					<spring:param name="volumeId" value="${row.id}" />
+					<spring:param name="d-16544-p" value="1" />
 				</spring:url>
 				<a href="${editURL}"><spring:message code="volume.display" /></a>
 	<%-- 		</jstl:if> --%>
@@ -63,6 +65,7 @@
 
  			<spring:url value="volume/display.do" var="editURL">
 					<spring:param name="volumeId" value="${row.id}" />
+					<spring:param name="d-16544-p" value="1" />
 				</spring:url>
 				<a href="${editURL}"><spring:message code="volume.display" /></a>
 	
