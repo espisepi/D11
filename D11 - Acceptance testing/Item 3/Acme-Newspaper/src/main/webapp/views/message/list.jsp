@@ -71,6 +71,15 @@
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="messages" requestURI="${requestURI }" id="row">
+	
+	<spring:message code="message.display" var="display" />	
+	<display:column title="${display}" sortable="true">
+		<spring:url value="${RequestURIDisplay}" var="displayURL">
+			<spring:param name="messageId" value="${row.id}" />
+		</spring:url>
+		<a href="${displayURL}"><spring:message code="message.display" /></a>
+		
+		</display:column>
 
 
 	<!-- Attributes -->

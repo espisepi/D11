@@ -65,7 +65,26 @@ public class MessageUserController extends AbstractController{
 		result.addObject("messages", messages);
 		result.addObject("messageFolderId1", messageFolderId1);
 		result.addObject("RequestURIChange", "message/user/changeFolder.do");
+		result.addObject("RequestURIDisplay", "message/user/display.do");
 		result.addObject("requestURI", "message/user/list.do");
+
+		return result;
+
+	}
+	
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam int messageId) {
+
+		ModelAndView result;
+		
+		Message message;
+
+		message = this.messageService.findOne(messageId);
+
+		result = new ModelAndView("message/display");
+		result.addObject("messageDisplay", message);
+		result.addObject("RequestURIreply", "message/user/reply.do");
+		result.addObject("requestURI", "message/user/display.do");
 
 		return result;
 
@@ -100,6 +119,43 @@ public class MessageUserController extends AbstractController{
 			} catch (Throwable oops) {
 
 				result = this.createNewModelAndView(m, "message.commit.error");
+
+			}
+		return result;
+	}
+	
+	
+	@RequestMapping(value = "/reply", method = RequestMethod.GET)
+	public ModelAndView reply(@RequestParam int messageId) {
+
+		ModelAndView result;
+		Message message;
+		Message reply;
+		
+		message = this.messageService.findOne(messageId);
+		reply = this.messageService.createReply(message);
+
+		result = this.createNewModelAndViewReply(reply);
+		result.addObject("requestURI", "message/user/reply.do");
+
+		return result;
+
+	}
+	
+	@RequestMapping(value = "/reply", method = RequestMethod.POST, params = "send")
+	public ModelAndView reply(@ModelAttribute("m") @Valid Message m, BindingResult binding) {
+		ModelAndView result;
+		if (binding.hasErrors())
+			result = this.createNewModelAndViewReply(m);
+		else
+			try {
+				MessageFolder folderToReturn = m.getMessageFolder();
+
+				this.messageService.send(m);
+				result = new ModelAndView("redirect:list.do?messageFolderId=" + folderToReturn.getId());
+			} catch (Throwable oops) {
+
+				result = this.createNewModelAndViewReply(m, "message.commit.error");
 
 			}
 		return result;
@@ -201,6 +257,7 @@ public class MessageUserController extends AbstractController{
 
 		result.addObject("message", message);
 		result.addObject("priorities", priorities);
+		result.addObject("show", true);
 		result.addObject("m", m);
 		return result;
 	}
@@ -251,6 +308,37 @@ public class MessageUserController extends AbstractController{
 		result.addObject("message", message);
 		return result;
 
+	}
+	
+	protected ModelAndView createNewModelAndViewReply(Message m) {
+		ModelAndView result;
+		result = this.createNewModelAndView(m, null);
+		return result;
+	}
+
+	protected ModelAndView createNewModelAndViewReply(Message m, String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("message/send");
+
+		Actor actor = this.actorService.findPrincipal();
+		Collection<Actor> actors = this.actorService.findAll();
+		actors.remove(actor);
+
+		result.addObject("actors", actors);
+		String low = "LOW";
+		String neutral = "NEUTRAL";
+		String high = "HIGH";
+		Collection<String> priorities = new ArrayList<String>();
+		priorities.add(low);
+		priorities.add(neutral);
+		priorities.add(high);
+
+		result.addObject("message", message);
+		result.addObject("priorities", priorities);
+		result.addObject("show", false);
+		result.addObject("m", m);
+		return result;
 	}
 
 

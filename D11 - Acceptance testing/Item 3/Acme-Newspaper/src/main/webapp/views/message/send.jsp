@@ -19,11 +19,12 @@
 			<form:hidden path="messageFolder" />
 			<form:hidden path="moment" />
 
-
+			<jstl:if test="${show} == true">
 			<jstl:if test="${m.recipient == null}">
 				<acme:select code="message.sendTo" path="recipient"
 					items="${actors}" itemLabel="userAccount.username" />
 				<br />
+			</jstl:if>
 			</jstl:if>
 			
  			<form:label path="priority">

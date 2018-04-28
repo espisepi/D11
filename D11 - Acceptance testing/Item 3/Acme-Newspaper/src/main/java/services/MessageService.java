@@ -130,7 +130,7 @@ public class MessageService {
 		
 	}
 	
-	//Send-----------------------------------------------------
+	//Send broadcast -----------------------------------------------------
 	
 	public void sendBroadcast(Message message) {
 		
@@ -255,4 +255,21 @@ public class MessageService {
 		return result;
 		
 	}
+	
+	public Message createReply(Message message) {
+		Actor sender;
+		Message result;
+		MessageFolder messageFolder;
+		
+		sender = this.actorService.findPrincipal();
+		result = new Message();
+		result.setMoment(new Date(System.currentTimeMillis() - 1000));
+		result.setSender(sender);
+		result.setRecipient(message.getSender());
+		messageFolder = this.messageFolderService.findMessageFolderByNameAndActor("Out box", sender.getId());
+		result.setMessageFolder(messageFolder);
+		
+		return result;
+	}
+
 }
