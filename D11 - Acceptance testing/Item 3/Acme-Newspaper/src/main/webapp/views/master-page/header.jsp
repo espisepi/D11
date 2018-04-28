@@ -29,6 +29,17 @@
 					<li><a href="admin/dashboard.do"><spring:message code="master.page.statistics" /></a>
 				</ul>
 			</li>
+			
+			<li><a class="fNiv"><spring:message code="master.page.user.messageFolder"/></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="messageFolder/admin/list.do?d-16544-p=1"><spring:message code="master.page.user.messageFolder.list" /></a></li>
+					<li><a href="messageFolder/admin/create.do"><spring:message code="master.page.user.messageFolder.create" /></a></li>
+					
+				</ul>
+				
+			<li><a class="fNiv" href="message/admin/send.do"><spring:message code="master.page.user.sendMessage"/></a>
+			
 			<li><a class="fNiv"><spring:message	code="master.page.administrator.configurationSystem" /></a>
 				<ul>
 					<li class="arrow"></li>
@@ -81,6 +92,16 @@
 					<li><a href="profile/customer/edit.do"><spring:message code="master.page.users.edit" /></a></li>
 				</ul>
 			</li>
+			
+			<li><a class="fNiv"><spring:message code="master.page.user.messageFolder"/></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="messageFolder/customer/list.do?d-16544-p=1"><spring:message code="master.page.user.messageFolder.list" /></a></li>
+					<li><a href="messageFolder/customer/create.do"><spring:message code="master.page.user.messageFolder.create" /></a></li>
+					
+				</ul>
+				
+			<li><a class="fNiv" href="message/customer/send.do"><spring:message code="master.page.user.sendMessage"/></a>
 			
 			<li><a class="fNiv"><spring:message	code="master.page.subscription" /></a>
 				<ul>
@@ -198,6 +219,16 @@
 					<li><a href="profile/agent/edit.do"><spring:message code="master.page.users.edit" /></a></li>
 				</ul>
 			</li>
+			<li><a class="fNiv"><spring:message code="master.page.user.messageFolder"/></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="messageFolder/agent/list.do?d-16544-p=1"><spring:message code="master.page.user.messageFolder.list" /></a></li>
+					<li><a href="messageFolder/agent/create.do"><spring:message code="master.page.user.messageFolder.create" /></a></li>
+					
+				</ul>
+				
+			<li><a class="fNiv" href="message/agent/send.do"><spring:message code="master.page.user.sendMessage"/></a>
+		
 			<!-- LISTA DE PERIoDICOS SOBRE LOS QUE CREAR UN AVISO -->
 				<li><a class="fNiv"><spring:message code="master.page.newspapers" /></a>
 				<ul>

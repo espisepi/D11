@@ -1,4 +1,4 @@
-package controllers.user;
+package controllers.admin;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,8 +24,8 @@ import domain.Message;
 import domain.MessageFolder;
 
 @Controller
-@RequestMapping("/message/user")
-public class MessageUserController extends AbstractController{
+@RequestMapping("/message/admin")
+public class MessageAdminController extends AbstractController{
 	
 	//	Services --------------------------------------------------------
 	
@@ -40,7 +40,7 @@ public class MessageUserController extends AbstractController{
 	
 	//	Constructors
 	
-	public MessageUserController(){
+	public MessageAdminController(){
 		super();
 	}
 	
@@ -64,8 +64,8 @@ public class MessageUserController extends AbstractController{
 		result = new ModelAndView("message/list");
 		result.addObject("messages", messages);
 		result.addObject("messageFolderId1", messageFolderId1);
-		result.addObject("RequestURIChange", "message/user/changeFolder.do");
-		result.addObject("requestURI", "message/user/list.do");
+		result.addObject("RequestURIChange", "message/admin/changeFolder.do");
+		result.addObject("requestURI", "message/admin/list.do");
 
 		return result;
 
@@ -80,7 +80,31 @@ public class MessageUserController extends AbstractController{
 		message = this.messageService.create();
 
 		result = this.createNewModelAndView(message);
-		result.addObject("requestURI", "message/user/send.do");
+		result.addObject("requestURI", "message/admin/send.do");
+
+		return result;
+
+	}
+	
+	@RequestMapping(value = "/sendBroadcast", method = RequestMethod.GET)
+	public ModelAndView createBroadcast() {
+
+		ModelAndView result;
+
+		Message message;
+		message = this.messageService.create();
+		
+		Collection<Actor> actors;
+		
+		actors = new ArrayList<>();
+		
+		
+		actors.addAll(this.actorService.findAll());
+		
+		message.setRecipient(actors.iterator().next());
+
+		result = this.createNewModelAndViewBroadcast(message);
+		result.addObject("requestURI", "message/admin/sendBroadcast.do");
 
 		return result;
 
@@ -100,6 +124,25 @@ public class MessageUserController extends AbstractController{
 			} catch (Throwable oops) {
 
 				result = this.createNewModelAndView(m, "message.commit.error");
+
+			}
+		return result;
+	}
+	
+	@RequestMapping(value = "/sendBroadcast", method = RequestMethod.POST, params = "sendBroadcast")
+	public ModelAndView sendBroadcast(@ModelAttribute("m") @Valid Message m, BindingResult binding) {
+		ModelAndView result;
+		
+		if (binding.hasErrors())
+			result = this.createNewModelAndViewBroadcast(m);
+		else
+			try {
+				MessageFolder folderToReturn = m.getMessageFolder();
+				this.messageService.sendBroadcast(m);
+				result = new ModelAndView("redirect:list.do?messageFolderId=" + folderToReturn.getId());
+			} catch (Throwable oops) {
+
+				result = this.createNewModelAndViewBroadcast(m, "message.commit.error");
 
 			}
 		return result;
@@ -143,7 +186,7 @@ public class MessageUserController extends AbstractController{
 		else
 			try {
 				this.messageService.saveMessageInFolder(principal, m.getMessageFolder().getName(), message);
-				result = new ModelAndView("redirect:/messageFolder/user/list.do");
+				result = new ModelAndView("redirect:/messageFolder/admin/list.do");
 			} catch (Throwable oops) {
 
 				result = this.createNewModelAndViewChange(m, "message.commit.error");
@@ -205,9 +248,34 @@ public class MessageUserController extends AbstractController{
 		return result;
 	}
 	
+	protected ModelAndView createNewModelAndViewBroadcast(Message m) {
+		ModelAndView result;
+		result = this.createNewModelAndViewBroadcast(m, null);
+		return result;
+	}
+
+	protected ModelAndView createNewModelAndViewBroadcast(Message m, String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("message/broadcast");
+		
+		String low = "LOW";
+		String neutral = "NEUTRAL";
+		String high = "HIGH";
+		Collection<String> priorities = new ArrayList<String>();
+		priorities.add(low);
+		priorities.add(neutral);
+		priorities.add(high);
+
+		result.addObject("message", message);
+		result.addObject("priorities", priorities);
+		result.addObject("m", m);
+		return result;
+	}
+	
 	protected ModelAndView createNewModelAndViewChange(Message m) {
 		ModelAndView result;
-		result = this.createNewModelAndView(m, null);
+		result = this.createNewModelAndViewChange(m, null);
 		return result;
 	}
 
@@ -247,7 +315,7 @@ public class MessageUserController extends AbstractController{
 		result = new ModelAndView("message/list");
 		result.addObject("messages", messages);
 		result.addObject("messageFolderId1", messageFolderId1);
-		result.addObject("requestURI", "message/user/list.do");
+		result.addObject("requestURI", "message/admin/list.do");
 		result.addObject("message", message);
 		return result;
 

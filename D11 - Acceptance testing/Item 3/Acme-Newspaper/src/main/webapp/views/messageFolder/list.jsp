@@ -31,7 +31,7 @@
 		<display:column title="${Edit}" sortable="true">
 		
 		<jstl:if test="${row.modifiable==true}">
-			<spring:url value="messageFolder/user/edit.do" var="editURL">
+			<spring:url value="${RequestURIedit}" var="editURL">
 				<spring:param name="messageFolderId" value="${row.id}" />
 			</spring:url>
 			<a href="${editURL}"><spring:message code="messageFolder.edit" /></a>
@@ -49,7 +49,7 @@
 	<spring:message code="messageFolder.messages" var="Messages" />
 		
 		<display:column title="${Messages}" sortable="true">
-			<spring:url value="message/user/list.do" var="messagesURL">
+			<spring:url value="${RequestURImessages}" var="messagesURL">
 					<spring:param name="messageFolderId" value="${row.id}" />
 				</spring:url>
 			<a href="${messagesURL}"><spring:message code="messageFolder.messages" /></a>

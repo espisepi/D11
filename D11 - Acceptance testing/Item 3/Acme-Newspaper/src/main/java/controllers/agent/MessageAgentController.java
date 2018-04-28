@@ -1,4 +1,4 @@
-package controllers.user;
+package controllers.agent;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,8 +24,8 @@ import domain.Message;
 import domain.MessageFolder;
 
 @Controller
-@RequestMapping("/message/user")
-public class MessageUserController extends AbstractController{
+@RequestMapping("/message/agent")
+public class MessageAgentController extends AbstractController{
 	
 	//	Services --------------------------------------------------------
 	
@@ -40,7 +40,7 @@ public class MessageUserController extends AbstractController{
 	
 	//	Constructors
 	
-	public MessageUserController(){
+	public MessageAgentController(){
 		super();
 	}
 	
@@ -64,8 +64,8 @@ public class MessageUserController extends AbstractController{
 		result = new ModelAndView("message/list");
 		result.addObject("messages", messages);
 		result.addObject("messageFolderId1", messageFolderId1);
-		result.addObject("RequestURIChange", "message/user/changeFolder.do");
-		result.addObject("requestURI", "message/user/list.do");
+		result.addObject("RequestURIChange", "message/agent/changeFolder.do");
+		result.addObject("requestURI", "message/agent/list.do");
 
 		return result;
 
@@ -80,7 +80,7 @@ public class MessageUserController extends AbstractController{
 		message = this.messageService.create();
 
 		result = this.createNewModelAndView(message);
-		result.addObject("requestURI", "message/user/send.do");
+		result.addObject("requestURI", "message/agent/send.do");
 
 		return result;
 
@@ -143,7 +143,7 @@ public class MessageUserController extends AbstractController{
 		else
 			try {
 				this.messageService.saveMessageInFolder(principal, m.getMessageFolder().getName(), message);
-				result = new ModelAndView("redirect:/messageFolder/user/list.do");
+				result = new ModelAndView("redirect:/messageFolder/agent/list.do");
 			} catch (Throwable oops) {
 
 				result = this.createNewModelAndViewChange(m, "message.commit.error");
@@ -247,7 +247,7 @@ public class MessageUserController extends AbstractController{
 		result = new ModelAndView("message/list");
 		result.addObject("messages", messages);
 		result.addObject("messageFolderId1", messageFolderId1);
-		result.addObject("requestURI", "message/user/list.do");
+		result.addObject("requestURI", "message/agent/list.do");
 		result.addObject("message", message);
 		return result;
 

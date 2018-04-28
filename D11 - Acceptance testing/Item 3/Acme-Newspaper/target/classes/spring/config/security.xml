@@ -65,6 +65,7 @@
 		<security:intercept-url pattern="/messageFolder/user/**" access="hasRole('USER')"/>
 		<security:intercept-url pattern="/message/user/**" access="hasRole('USER')"/>
 		
+		
 		<security:intercept-url pattern="/configurationSystem/admin/**" access="hasRole('ADMIN')"/>
 		<security:intercept-url pattern="/tabooWord/admin/**" access="hasRole('ADMIN')"/>
 		<security:intercept-url pattern="/chirp/admin/**" access="hasRole('ADMIN')"/>
@@ -72,6 +73,8 @@
 		<security:intercept-url pattern="/newspaper/admin/**" access="hasRole('ADMIN')"/>
 		<security:intercept-url pattern="/profile/admin/**" access="hasRole('ADMIN')"/>
 		<security:intercept-url pattern="/advertisement/admin/**" access="hasRole('ADMIN')"/>
+		<security:intercept-url pattern="/messageFolder/admin/**" access="hasRole('ADMIN')"/>
+		<security:intercept-url pattern="/message/admin/**" access="hasRole('ADMIN')"/>
 		
 		<security:intercept-url pattern="/subscription/customer/**" access="hasRole('CUSTOMER')"/>
 		<security:intercept-url pattern="/profile/customer/**" access="hasRole('CUSTOMER')"/>
@@ -80,12 +83,16 @@
 		<security:intercept-url pattern="/chirp/customer/**" access="hasRole('CUSTOMER')"/>
 		<security:intercept-url pattern="/volume/customer/**" access="hasRole('CUSTOMER')"/>
 		<security:intercept-url pattern="/underwrite/customer/**" access="hasRole('CUSTOMER')"/>
+		<security:intercept-url pattern="/messageFolder/customer/**" access="hasRole('CUSTOMER')"/>
+		<security:intercept-url pattern="/message/customer/**" access="hasRole('CUSTOMER')"/>
 		
 		<security:intercept-url pattern="/profile/agent/**" access="hasRole('AGENT')"/>
 		<security:intercept-url pattern="/agent/**" access="permitAll"/>
 		<security:intercept-url pattern="/newspaper/agent/**" access="hasRole('AGENT')"/>
 		<security:intercept-url pattern="/advertisement/agent/**" access="hasRole('AGENT')"/>
 		<security:intercept-url pattern="/article/agent/**" access="hasRole('AGENT')"/>
+		<security:intercept-url pattern="/messageFolder/agent/**" access="hasRole('AGENT')"/>
+		<security:intercept-url pattern="/message/agent/**" access="hasRole('AGENT')"/>
 		
 		
 	

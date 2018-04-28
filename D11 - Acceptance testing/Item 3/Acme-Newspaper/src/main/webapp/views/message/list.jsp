@@ -21,6 +21,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<security:authorize access="hasRole('USER')">
 <script type="text/javascript">
 	function confirmDelete(messageId) {
 		confirm=confirm('<spring:message code="message.confirm.delete"/>');
@@ -30,6 +31,43 @@
 			  window.location.href ="message/user/list.do";
 	}
 </script>
+</security:authorize>
+
+<security:authorize access="hasRole('CUSTOMER')">
+<script type="text/javascript">
+	function confirmDelete(messageId) {
+		confirm=confirm('<spring:message code="message.confirm.delete"/>');
+		if (confirm)
+		  window.location.href ="message/customer/delete.do?messageId=" + messageId;
+		  else
+			  window.location.href ="message/customer/list.do";
+	}
+</script>
+</security:authorize>
+
+<security:authorize access="hasRole('AGENT')">
+<script type="text/javascript">
+	function confirmDelete(messageId) {
+		confirm=confirm('<spring:message code="message.confirm.delete"/>');
+		if (confirm)
+		  window.location.href ="message/agent/delete.do?messageId=" + messageId;
+		  else
+			  window.location.href ="message/agent/list.do";
+	}
+</script>
+</security:authorize>
+
+<security:authorize access="hasRole('ADMIN')">
+<script type="text/javascript">
+	function confirmDelete(messageId) {
+		confirm=confirm('<spring:message code="message.confirm.delete"/>');
+		if (confirm)
+		  window.location.href ="message/admin/delete.do?messageId=" + messageId;
+		  else
+			  window.location.href ="message/admin/list.do";
+	}
+</script>
+</security:authorize>
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="messages" requestURI="${requestURI }" id="row">
@@ -53,7 +91,7 @@
 
 	<spring:message code="message.changefolder.link" var="Move" />	
 	<display:column title="${Move}" sortable="true">
-		<spring:url value="message/user/changeFolder.do" var="changeURL">
+		<spring:url value="${RequestURIChange}" var="changeURL">
 			<spring:param name="messageId" value="${row.id}" />
 		</spring:url>
 		<a href="${changeURL}"><spring:message code="message.changefolder.link" /></a>

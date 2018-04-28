@@ -1,4 +1,4 @@
-package controllers.user;
+package controllers.admin;
 
 import java.util.Collection;
 
@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AdminService;
 import services.MessageFolderService;
 import services.MessageService;
-import services.UserService;
 import controllers.AbstractController;
+import domain.Admin;
 import domain.Message;
 import domain.MessageFolder;
-import domain.User;
 
 @Controller
-@RequestMapping("/messageFolder/user")
-public class MessageFolderUserController extends AbstractController{
+@RequestMapping("/messageFolder/admin")
+public class MessageFolderAdminController extends AbstractController{
 	
 //	Services --------------------------------------------------------
 
@@ -34,12 +34,12 @@ public class MessageFolderUserController extends AbstractController{
 	private MessageService messageService;
 	
 	@Autowired
-	private UserService userService;
+	private AdminService adminService;
 
 
 	//	Constructors
 
-	public MessageFolderUserController() {
+	public MessageFolderAdminController() {
 		super();
 	}
 
@@ -48,16 +48,16 @@ public class MessageFolderUserController extends AbstractController{
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<MessageFolder> messageFolders;
-		User principal;
+		Admin principal;
 		
-		principal = this.userService.findByPrincipal();
+		principal = this.adminService.findByPrincipal();
 		messageFolders = this.messageFolderService.findMessageFolderByActor(principal.getId());
 
 		result = new ModelAndView("messageFolder/list");
 		result.addObject("messageFolders", messageFolders);
-		result.addObject("requestURI", "messageFolder/user/list.do");
-		result.addObject("RequestURIedit", "messageFolder/user/edit.do");
-		result.addObject("RequestURImessages", "message/user/list.do");
+		result.addObject("requestURI", "messageFolder/admin/list.do");
+		result.addObject("RequestURIedit", "messageFolder/admin/edit.do");
+		result.addObject("RequestURImessages", "message/admin/list.do");
 		//result.addObject("modificable", true);
 
 		return result;
@@ -104,7 +104,7 @@ public class MessageFolderUserController extends AbstractController{
 		else
 			try {
 				this.messageFolderService.saveToPrincipal(messageFolder);
-				result = new ModelAndView("redirect:/messageFolder/user/list.do");
+				result = new ModelAndView("redirect:/messageFolder/admin/list.do");
 			} catch (final Throwable oops) {
 
 				if (oops.getMessage().equals("This message folder doesn't edit"))
@@ -151,7 +151,7 @@ public class MessageFolderUserController extends AbstractController{
 			result.addObject("messageFolder", messageFolder);
 			result.addObject("mes", mess);
 			result.addObject("message", messageCode);
-			result.addObject("requestURI", "messageFolder/user/edit.do");
+			result.addObject("requestURI", "messageFolder/admin/edit.do");
 
 			return result;
 

@@ -130,6 +130,42 @@ public class MessageService {
 		
 	}
 	
+	//Send-----------------------------------------------------
+	
+	public void sendBroadcast(Message message) {
+		
+		Assert.notNull(message);
+		
+		Date moment;
+		Actor sender;
+		Collection<Actor> recipients;
+		Message messageSaved;
+		Message messageRecipient;
+		
+		moment = new Date(System.currentTimeMillis() - 1000);
+		sender = message.getSender();
+		recipients = this.actorService.findAll();
+		message.setMoment(moment);
+		
+		for(Actor a: recipients){
+		
+
+			message.setRecipient(a);
+			messageSaved = this.messageRepository.save(message);
+			messageRecipient = this.messageRepository.save(message);
+		
+			if(this.checkSpamMessage(messageRecipient)==true)
+				this.saveMessageInFolder(messageRecipient.getRecipient(), "Spam box", messageRecipient);
+			else
+				this.saveMessageInFolder(messageRecipient.getRecipient(), "In box", messageRecipient);
+		
+			this.saveMessageInFolder(sender, "Out box", messageSaved);
+			
+			Assert.notNull(messageSaved);
+		}
+		
+	}
+	
 	public void save(Message message) {
 		
 		Assert.notNull(message);
