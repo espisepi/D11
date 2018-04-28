@@ -109,7 +109,14 @@ public class VolumeUserController extends AbstractController {
 
 		ModelAndView result;
 		Collection<Newspaper> newspapers;
-		newspapers = this.newspaperService.findNewspapersCreatedByUser();
+
+		if (volume.getId() == 0)
+			//Cuando lo creamos que salgan todos los periódicos del user
+			newspapers = this.newspaperService.findNewspapersCreatedByUser();
+		else
+			//Cuando lo editamos que salgan solo los periódicos publicos 
+			newspapers = this.newspaperService.findAllNewspapersPublicByUser();
+
 		result = new ModelAndView("volume/edit");
 		result.addObject("volume", volume);
 		result.addObject("newspapers", newspapers);

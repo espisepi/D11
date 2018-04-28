@@ -203,6 +203,15 @@ public class NewspaperService {
 		return result;
 	}
 
+	public Collection<Newspaper> findAllNewspapersPublicByUser() {
+		Collection<Newspaper> result;
+		User userPrincipal;
+
+		userPrincipal = this.userService.findByPrincipal();
+		result = this.newspaperRepository.findAllNewspapersPublicByUser(userPrincipal.getId());
+		return result;
+	}
+
 	public Collection<Newspaper> findNewspapersPublishedAndOpen() {
 		Collection<Newspaper> result;
 
@@ -374,6 +383,14 @@ public class NewspaperService {
 
 		agent = this.agentService.findByPrincipal();
 		result = this.newspaperRepository.findAllNewspaperHavingAtLeastOneAdvertisement(agent.getId());
+
+		return result;
+	}
+
+	public Collection<Newspaper> findAllNewspapersPrivateByVolumeId(final int volumeId) {
+		Collection<Newspaper> result;
+
+		result = this.newspaperRepository.findAllNewspapersPrivateByVolumeId(volumeId);
 
 		return result;
 	}

@@ -1,7 +1,6 @@
 
 package services;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.GregorianCalendar;
@@ -47,10 +46,6 @@ public class VolumeService {
 	//CREATE
 	public Volume create() {
 		final Volume result;
-		User userPrincipal;
-		Collection<Volume> newspaper;
-		userPrincipal = this.userService.findByPrincipal();
-		newspaper = new ArrayList<Volume>();
 		result = new Volume();
 		return result;
 	}
@@ -73,9 +68,18 @@ public class VolumeService {
 		User userPrincipal;
 		Assert.notNull(volume);
 
+		Collection<Newspaper> newspapers;
+
 		userPrincipal = this.userService.findByPrincipal();
 
 		Assert.isTrue(this.checkYear(volume), "Año incorrecto");
+
+		// Cuando editamos añadimos los periódicos que tenía el volumen antes de ser editado
+		if (volume.getId() != 0) {
+			newspapers = this.newspaperService.findAllNewspapersPrivateByVolumeId(volume.getId());
+			volume.getNewspapers().addAll(newspapers);
+		}
+
 		result = this.volumeRepository.save(volume);
 		if (volume.getId() == 0)
 			userPrincipal.getVolumes().add(result);
