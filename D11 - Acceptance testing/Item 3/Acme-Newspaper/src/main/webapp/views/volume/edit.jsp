@@ -29,7 +29,7 @@
 	<br />
  	<acme:textbox code="volume.description" path="description"/>
 	<br /> 
-	<acme:textbox code="volume.year" path="year" placeHolder="XXXX"/>
+	<acme:textbox code="volume.year" path="year" placeHolder="XX"/>
 	<br />
 	<acme:selectmultiple items="${newspapers}" itemLabel="title" code="volume.newspaper" path="newspapers"/>
 	<br />

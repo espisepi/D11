@@ -2,7 +2,9 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.GregorianCalendar;
 
 import javax.transaction.Transactional;
 
@@ -53,7 +55,7 @@ public class VolumeService {
 		return result;
 	}
 
-	public Volume findOne(int volumeId) {
+	public Volume findOne(final int volumeId) {
 		Volume result;
 		result = this.volumeRepository.findOne(volumeId);
 		return result;
@@ -70,7 +72,10 @@ public class VolumeService {
 		Volume result;
 		User userPrincipal;
 		Assert.notNull(volume);
+
 		userPrincipal = this.userService.findByPrincipal();
+
+		Assert.isTrue(this.checkYear(volume), "Año incorrecto");
 		result = this.volumeRepository.save(volume);
 		if (volume.getId() == 0)
 			userPrincipal.getVolumes().add(result);
@@ -104,7 +109,7 @@ public class VolumeService {
 
 	}
 
-	public Collection<Newspaper> volumesNewspaper(int volId) {
+	public Collection<Newspaper> volumesNewspaper(final int volId) {
 		Collection<Newspaper> result;
 		result = this.volumeRepository.volumesNewspaper(volId);
 		return result;
@@ -129,5 +134,22 @@ public class VolumeService {
 		}
 		this.validator.validate(result, bindingResult);
 		return result;
+	}
+
+	public boolean checkYear(final Volume volume) {
+		boolean res;
+		Calendar calendar;
+		int actualYear;
+		res = false;
+
+		calendar = new GregorianCalendar();
+		actualYear = calendar.get(Calendar.YEAR);
+		actualYear = actualYear % 100;
+
+		if (volume.getYear() != null)
+			if (Integer.parseInt(volume.getYear()) >= actualYear)
+				res = true;
+
+		return res;
 	}
 }

@@ -9,9 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -21,7 +21,7 @@ public class Volume extends DomainEntity {
 
 	private String	title;
 	private String	description;
-	private int		year;
+	private String	year;
 
 
 	@NotBlank
@@ -42,12 +42,12 @@ public class Volume extends DomainEntity {
 		this.description = description;
 	}
 
-	@Range(min = 1000, max = 3000)
-	public int getYear() {
+	@Pattern(regexp = "^\\d{2}$")
+	public String getYear() {
 		return this.year;
 	}
 
-	public void setYear(final int year) {
+	public void setYear(final String year) {
 		this.year = year;
 	}
 
