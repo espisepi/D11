@@ -188,17 +188,18 @@ public class MessageCustomerController extends AbstractController{
 	}
 	
 	@RequestMapping(value = "/changeFolder", method = RequestMethod.POST, params = "change")
-	public ModelAndView send(@Valid Message m, BindingResult binding, @RequestParam int messageId) {
+	public ModelAndView send(Message m, BindingResult bindingResult, @RequestParam int messageId) {
 		ModelAndView result;
 		Message message;
 		Actor principal;
+
 		
 		message = this.messageService.findOne(messageId);
 		principal = this.actorService.findPrincipal();
 		
-		message = this.messageService.reconstruct(message, binding);
+		message = this.messageService.reconstruct(message, bindingResult);
 		
-		if (binding.hasErrors())
+		if (bindingResult.hasErrors())
 			result = this.createNewModelAndViewChange(m);
 		else
 			try {
@@ -210,8 +211,7 @@ public class MessageCustomerController extends AbstractController{
 
 			}
 		return result;
-	}
-	
+	}	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(final int messageId) {
 		ModelAndView result;
