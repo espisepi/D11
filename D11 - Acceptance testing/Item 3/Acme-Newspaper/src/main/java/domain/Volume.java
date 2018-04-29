@@ -57,7 +57,7 @@ public class Volume extends DomainEntity {
 	private Collection<Newspaper>	newspapers;
 
 
-	@ManyToMany(mappedBy = "volumes")
+	@ManyToMany
 	@Valid
 	@NotNull
 	public Collection<Newspaper> getNewspapers() {

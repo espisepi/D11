@@ -615,11 +615,6 @@
 			<list>
 			</list>
 		</property>
-		<property name="volumes">
-			<list>
-				<ref bean="volume1"/>
-			</list>
-		</property>
 	</bean>
 	
 	<bean id="newspaper2" class="domain.Newspaper">
@@ -639,11 +634,6 @@
 				<ref bean="advertisement1"/>
 				<ref bean="advertisement4"/>
 				<ref bean="advertisement6"/>
-			</list>
-		</property>
-		<property name="volumes">
-			<list>
-				<ref bean="volume1"/>
 			</list>
 		</property>
 	</bean>
@@ -667,12 +657,6 @@
 			<ref bean="advertisement5"/>
 			</list>
 		</property>
-		<property name="volumes">
-			<list>
-				<ref bean="volume1"/>
-				<ref bean="volume2"/>
-			</list>
-		</property>
 	</bean>
 	
 	<bean id="newspaper4" class="domain.Newspaper">
@@ -690,11 +674,6 @@
 		</property>
 		<property name="advertisements">
 			<list>
-			</list>
-		</property>
-		<property name="volumes">
-			<list>
-				<ref bean="volume5"/>
 			</list>
 		</property>
 	</bean>
@@ -718,10 +697,6 @@
 			<ref bean="advertisement8"/>
 			</list>
 		</property>
-		<property name="volumes">
-			<list>
-			</list>
-		</property>
 	</bean>
 	
 	<bean id="newspaper6" class="domain.Newspaper">
@@ -739,11 +714,6 @@
 		</property>
 		<property name="advertisements">
 			<list>
-			</list>
-		</property>
-		<property name="volumes">
-			<list>
-				<ref bean="volume3" />
 			</list>
 		</property>
 	</bean>
@@ -764,12 +734,6 @@
 			<list>
 			</list>
 		</property>
-		<property name="volumes">
-			<list>
-				<ref bean="volume5"/>
-				<ref bean="volume6"/>
-			</list>
-		</property>
 	</bean>
 	
 	<bean id="newspaper8" class="domain.Newspaper">
@@ -788,12 +752,6 @@
 			<list>
 			</list>
 		</property>
-		<property name="volumes">
-			<list>
-				<ref bean="volume3" />
-				<ref bean="volume4" />
-			</list>
-		</property>
 	</bean>
 	
 	<bean id="newspaper9" class="domain.Newspaper">
@@ -809,10 +767,6 @@
 			</list>
 		</property>
 		<property name="advertisements">
-			<list>
-			</list>
-		</property>
-		<property name="volumes">
 			<list>
 			</list>
 		</property>
