@@ -156,4 +156,9 @@ public class VolumeService {
 
 		return res;
 	}
+	public Collection<Volume> findByNewspaperId(final int newspaperId) {
+		Collection<Volume> result;
+		result = this.volumeRepository.findByNewspaperId(newspaperId);
+		return result;
+	}
 }

@@ -24,6 +24,7 @@ import domain.Customer;
 import domain.Newspaper;
 import domain.Subscription;
 import domain.User;
+import domain.Volume;
 
 @Service
 @Transactional
@@ -55,6 +56,9 @@ public class NewspaperService {
 
 	@Autowired
 	AgentService		agentService;
+
+	@Autowired
+	VolumeService		volumeService;
 
 	//Importar la que pertenece a Spring
 	@Autowired
@@ -113,6 +117,7 @@ public class NewspaperService {
 	public void delete(final Newspaper newspaper) {
 
 		Collection<Subscription> subscriptions;
+		Collection<Volume> volumes;
 
 		subscriptions = this.subscriptionService.findSubscriptionByNewspaper(newspaper.getId());
 
@@ -120,6 +125,11 @@ public class NewspaperService {
 		Assert.notNull(this.adminService.findByPrincipal());
 		//Solo se pueden eliminar los newspaper publicos
 		Assert.isTrue(newspaper.isOpen() || (newspaper.isOpen() == false && subscriptions.size() == 0), "Se pueden eliminar los periodicos publicos y privado que aún no tengas suscripciones");
+
+		//Si el newspaper tiene volume hay que quitar de ese volume el newspaper
+		volumes = this.volumeService.findByNewspaperId(newspaper.getId());
+		for (final Volume v : volumes)
+			v.getNewspapers().remove(newspaper);
 
 		this.newspaperRepository.delete(newspaper);
 	}

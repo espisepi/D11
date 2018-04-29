@@ -22,4 +22,7 @@ public interface VolumeRepository extends JpaRepository<Volume, Integer> {
 	@Query("select u.volume from Customer c join c.underwrites u where c.id=?1")
 	Collection<Volume> volumesWithUnderwriteOneCustomer(int customerId);
 
+	@Query("select v from Volume v join v.newspapers n where n.id=?1")
+	Collection<Volume> findByNewspaperId(int newspaperId);
+
 }
