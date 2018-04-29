@@ -12,13 +12,6 @@
 <div class="col-md-6 col-centered">
 	<div class="well bs-component">
 		<form:form action="${requestURI}" modelAttribute="m">
-
-			<form:hidden path="id" />
-			<form:hidden path="version" />
-			<form:hidden path="sender" />
-			<form:hidden path="messageFolder" />
-			<form:hidden path="moment" />
-			<form:hidden path="recipient"/>
 			
 
 			<form:label path="priority">

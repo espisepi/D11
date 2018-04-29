@@ -38,7 +38,12 @@
 					
 				</ul>
 				
-			<li><a class="fNiv" href="message/admin/send.do"><spring:message code="master.page.user.sendMessage"/></a>
+			<li><a class="fNiv"><spring:message code="master.page.user.sendMessage"/></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="message/admin/send.do"><spring:message code="master.page.user.sendMessage"/></a>
+					<li><a href="message/admin/sendBroadcast.do"><spring:message code="master.page.user.sendMessageBroadcast"/></a>
+				</ul>
 			
 			<li><a class="fNiv"><spring:message	code="master.page.administrator.configurationSystem" /></a>
 				<ul>

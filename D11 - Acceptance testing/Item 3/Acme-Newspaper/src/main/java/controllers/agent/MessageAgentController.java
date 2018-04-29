@@ -106,9 +106,11 @@ public class MessageAgentController extends AbstractController{
 	}
 	
 	@RequestMapping(value = "/send", method = RequestMethod.POST, params = "send")
-	public ModelAndView send(@ModelAttribute("m") @Valid Message m, BindingResult binding) {
+	public ModelAndView send(@ModelAttribute("m") Message m, BindingResult bindingResult) {
 		ModelAndView result;
-		if (binding.hasErrors())
+		m = this.messageService.reconstruct(m, bindingResult);
+		
+		if (bindingResult.hasErrors())
 			result = this.createNewModelAndView(m);
 		else
 			try {
@@ -142,9 +144,11 @@ public class MessageAgentController extends AbstractController{
 	}
 	
 	@RequestMapping(value = "/reply", method = RequestMethod.POST, params = "send")
-	public ModelAndView reply(@ModelAttribute("m") @Valid Message m, BindingResult binding) {
+	public ModelAndView reply(@ModelAttribute("m") Message m, BindingResult bindingResult) {
 		ModelAndView result;
-		if (binding.hasErrors())
+		m = this.messageService.reconstruct(m, bindingResult);
+		
+		if (bindingResult.hasErrors())
 			result = this.createNewModelAndViewReply(m);
 		else
 			try {
@@ -185,15 +189,16 @@ public class MessageAgentController extends AbstractController{
 	}
 	
 	@RequestMapping(value = "/changeFolder", method = RequestMethod.POST, params = "change")
-	public ModelAndView send(@Valid Message m, BindingResult binding, @RequestParam int messageId) {
+	public ModelAndView send(@Valid Message m, BindingResult bindingResult, @RequestParam int messageId) {
 		ModelAndView result;
 		Message message;
 		Actor principal;
+
 		
 		message = this.messageService.findOne(messageId);
 		principal = this.actorService.findPrincipal();
 		
-		if (binding.hasErrors())
+		if (bindingResult.hasErrors())
 			result = this.createNewModelAndViewChange(m);
 		else
 			try {
@@ -256,6 +261,7 @@ public class MessageAgentController extends AbstractController{
 
 		result.addObject("message", message);
 		result.addObject("priorities", priorities);
+		result.addObject("show", true);
 		result.addObject("m", m);
 		return result;
 	}

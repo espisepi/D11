@@ -27,11 +27,11 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="sender"/>
+ 	<form:hidden path="sender"/>
 	<form:hidden path="recipient"/>
 	<form:hidden path="moment"/>
 	<form:hidden path="body"/>
-	<form:hidden path="priority"/>
+	<form:hidden path="priority"/> 
 
 	<acme:textbox code="message.subject" path="subject" readonly="true"/>
 	<br/>

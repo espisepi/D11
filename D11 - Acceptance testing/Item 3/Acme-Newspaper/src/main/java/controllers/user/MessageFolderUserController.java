@@ -2,7 +2,6 @@ package controllers.user;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -96,9 +95,11 @@ public class MessageFolderUserController extends AbstractController{
 	//	Save-------------------------------------------------------------------
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid MessageFolder messageFolder, BindingResult bindingResult) {
+	public ModelAndView save(MessageFolder messageFolder, BindingResult bindingResult) {
 		ModelAndView result;
-
+		
+		messageFolder = this.messageFolderService.reconstruct(messageFolder, bindingResult);
+		
 		if (bindingResult.hasErrors())
 			result = this.createEditModelAndView(messageFolder);
 		else
@@ -123,7 +124,7 @@ public class MessageFolderUserController extends AbstractController{
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(MessageFolder messageFolder, BindingResult bindingResult) {
 		ModelAndView result;
-
+		messageFolder = this.messageFolderService.reconstruct(messageFolder, bindingResult);
 		try {
 			this.messageFolderService.delete(messageFolder);
 			result = new ModelAndView("redirect:list.do");

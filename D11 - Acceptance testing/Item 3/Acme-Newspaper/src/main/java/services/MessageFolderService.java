@@ -2,7 +2,6 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 import javax.transaction.Transactional;
 
@@ -235,15 +234,21 @@ public class MessageFolderService {
 	public MessageFolder reconstruct(MessageFolder messageFolder, BindingResult bindingResult){
 		MessageFolder result;
 		MessageFolder messageFolderBD;
+		Actor actor;
+		
+		actor = this.actorService.findPrincipal();
+		
 		if (messageFolder.getId() == 0) {
 			messageFolder.setModifiable(true);
-			
+			messageFolder.setActor(actor);
 			result = messageFolder;
+			
 		} else {
 			messageFolderBD = this.messageFolderRepository.findOne(messageFolder.getId());
 			messageFolder.setId(messageFolderBD.getId());
 			messageFolder.setVersion(messageFolderBD.getVersion());
 			messageFolder.setModifiable(messageFolderBD.isModifiable());
+			messageFolder.setActor(messageFolderBD.getActor());
 		
 			result = messageFolder;
 		}

@@ -12,14 +12,10 @@
 <div class="col-md-6 col-centered">
 	<div class="well bs-component">
 		<form:form action="${requestURI}" modelAttribute="m">
+		
+			
 
-			<form:hidden path="id" />
-			<form:hidden path="version" />
-			<form:hidden path="sender" />
-			<form:hidden path="messageFolder" />
-			<form:hidden path="moment" />
-
-			<jstl:if test="${show} == true">
+			<jstl:if test="${show}">
 			<jstl:if test="${m.recipient == null}">
 				<acme:select code="message.sendTo" path="recipient"
 					items="${actors}" itemLabel="userAccount.username" />

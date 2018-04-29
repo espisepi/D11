@@ -23,48 +23,48 @@
 
 <security:authorize access="hasRole('USER')">
 <script type="text/javascript">
-	function confirmDelete(messageId) {
+	function confirmDelete(messageId, messageFolderId) {
 		confirm=confirm('<spring:message code="message.confirm.delete"/>');
 		if (confirm)
 		  window.location.href ="message/user/delete.do?messageId=" + messageId;
 		  else
-			  window.location.href ="message/user/list.do";
+			  window.location.href ="message/user/list.do?messageFolderId=" + messageFolderId;
 	}
 </script>
 </security:authorize>
 
 <security:authorize access="hasRole('CUSTOMER')">
 <script type="text/javascript">
-	function confirmDelete(messageId) {
+	function confirmDelete(messageId, messageFolderId) {
 		confirm=confirm('<spring:message code="message.confirm.delete"/>');
 		if (confirm)
 		  window.location.href ="message/customer/delete.do?messageId=" + messageId;
 		  else
-			  window.location.href ="message/customer/list.do";
+			  window.location.href ="message/customer/list.do?messageFolderId=" + messageFolderId;
 	}
 </script>
 </security:authorize>
 
 <security:authorize access="hasRole('AGENT')">
 <script type="text/javascript">
-	function confirmDelete(messageId) {
+	function confirmDelete(messageId, messageFolderId) {
 		confirm=confirm('<spring:message code="message.confirm.delete"/>');
 		if (confirm)
 		  window.location.href ="message/agent/delete.do?messageId=" + messageId;
 		  else
-			  window.location.href ="message/agent/list.do";
+			  window.location.href ="message/agent/list.do?messageFolderId=" + messageFolderId;
 	}
 </script>
 </security:authorize>
 
 <security:authorize access="hasRole('ADMIN')">
 <script type="text/javascript">
-	function confirmDelete(messageId) {
+	function confirmDelete(messageId, messageFolderId) {
 		confirm=confirm('<spring:message code="message.confirm.delete"/>');
 		if (confirm)
 		  window.location.href ="message/admin/delete.do?messageId=" + messageId;
 		  else
-			  window.location.href ="message/admin/list.do";
+			  window.location.href ="message/admin/list.do?messageFolderId=" + messageFolderId;
 	}
 </script>
 </security:authorize>
@@ -94,7 +94,7 @@
 		<display:column title="${deleteHeader}" sortable="true">
 			<input type="button" name="delete"
 				value="<spring:message code="message.delete.link" />"
-				onclick="confirmDelete(${row.id});" />
+				onclick="confirmDelete(${row.id}, ${row.messageFolder.id});" />
 		</display:column>
 	
 

@@ -26,9 +26,6 @@
 
 
 	<form:hidden path="id" />
-	<form:hidden path="version" />
-	<form:hidden path="modifiable"/>
-	<form:hidden path="actor"/>
 
 	
 	<B><acme:textbox code="messageFolder.name" path="name"/></B>

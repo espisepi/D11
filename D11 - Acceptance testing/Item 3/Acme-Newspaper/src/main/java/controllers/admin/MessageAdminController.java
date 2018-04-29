@@ -105,6 +105,27 @@ public class MessageAdminController extends AbstractController{
 
 	}
 	
+	@RequestMapping(value = "/send", method = RequestMethod.POST, params = "send")
+	public ModelAndView send(@ModelAttribute("m") Message m, BindingResult bindingResult) {
+		ModelAndView result;
+		m = this.messageService.reconstruct(m, bindingResult);
+		
+		if (bindingResult.hasErrors())
+			result = this.createNewModelAndView(m);
+		else
+			try {
+				MessageFolder folderToReturn = m.getMessageFolder();
+
+				this.messageService.send(m);
+				result = new ModelAndView("redirect:list.do?messageFolderId=" + folderToReturn.getId());
+			} catch (Throwable oops) {
+
+				result = this.createNewModelAndView(m, "message.commit.error");
+
+			}
+		return result;
+	}
+	
 	@RequestMapping(value = "/sendBroadcast", method = RequestMethod.GET)
 	public ModelAndView createBroadcast() {
 
@@ -129,30 +150,15 @@ public class MessageAdminController extends AbstractController{
 
 	}
 	
-	@RequestMapping(value = "/send", method = RequestMethod.POST, params = "send")
-	public ModelAndView send(@ModelAttribute("m") @Valid Message m, BindingResult binding) {
-		ModelAndView result;
-		if (binding.hasErrors())
-			result = this.createNewModelAndView(m);
-		else
-			try {
-				MessageFolder folderToReturn = m.getMessageFolder();
-
-				this.messageService.send(m);
-				result = new ModelAndView("redirect:list.do?messageFolderId=" + folderToReturn.getId());
-			} catch (Throwable oops) {
-
-				result = this.createNewModelAndView(m, "message.commit.error");
-
-			}
-		return result;
-	}
+	
 	
 	@RequestMapping(value = "/sendBroadcast", method = RequestMethod.POST, params = "sendBroadcast")
-	public ModelAndView sendBroadcast(@ModelAttribute("m") @Valid Message m, BindingResult binding) {
+	public ModelAndView sendBroadcast(@ModelAttribute("m") Message m, BindingResult bindingResult) {
 		ModelAndView result;
 		
-		if (binding.hasErrors())
+		m = this.messageService.reconstructBroadcast(m, bindingResult);
+		
+		if (bindingResult.hasErrors())
 			result = this.createNewModelAndViewBroadcast(m);
 		else
 			try {
@@ -186,8 +192,10 @@ public class MessageAdminController extends AbstractController{
 	}
 	
 	@RequestMapping(value = "/reply", method = RequestMethod.POST, params = "send")
-	public ModelAndView reply(@ModelAttribute("m") @Valid Message m, BindingResult binding) {
+	public ModelAndView reply(@ModelAttribute("m") Message m, BindingResult binding) {
 		ModelAndView result;
+		m = this.messageService.reconstruct(m, binding);
+		
 		if (binding.hasErrors())
 			result = this.createNewModelAndViewReply(m);
 		else
@@ -300,6 +308,7 @@ public class MessageAdminController extends AbstractController{
 
 		result.addObject("message", message);
 		result.addObject("priorities", priorities);
+		result.addObject("show", true);
 		result.addObject("m", m);
 		return result;
 	}

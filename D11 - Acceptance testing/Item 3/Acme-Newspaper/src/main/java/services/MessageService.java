@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.MessageRepository;
@@ -271,5 +272,73 @@ public class MessageService {
 		
 		return result;
 	}
+
+	public Message reconstruct(Message message, BindingResult bindingResult){
+		Message result;
+		Message messageBD;
+		Actor sender;
+		MessageFolder messageFolder;
+		
+		if (message.getId() == 0) {
+			
+			sender = this.actorService.findPrincipal();
+			message.setMoment(new Date(System.currentTimeMillis() - 1000));
+			message.setSender(sender);
+			messageFolder = this.messageFolderService.findMessageFolderByNameAndActor("Out box", sender.getId());
+			message.setMessageFolder(messageFolder);
+			
+			result = message;
+		} else {
+			messageBD = this.messageRepository.findOne(message.getId());
+			message.setId(messageBD.getId());
+			message.setVersion(messageBD.getVersion());
+			sender = this.actorService.findPrincipal();
+			message.setMoment(new Date(System.currentTimeMillis() - 1000));
+			message.setSender(sender);
+			messageFolder = this.messageFolderService.findMessageFolderByNameAndActor("Out box", sender.getId());
+			message.setMessageFolder(messageFolder);
+		
+			result = message;
+		}
+		this.validator.validate(result, bindingResult);
+		return result;
+	}
+	
+	public Message reconstructBroadcast(Message message, BindingResult bindingResult){
+		Message result;
+		Message messageBD;
+		Actor sender;
+		MessageFolder messageFolder;
+		Actor recipient;
+		
+		recipient = this.actorService.findAll().iterator().next();
+		
+		if (message.getId() == 0) {
+			
+			sender = this.actorService.findPrincipal();
+			message.setMoment(new Date(System.currentTimeMillis() - 1000));
+			message.setSender(sender);
+			messageFolder = this.messageFolderService.findMessageFolderByNameAndActor("Out box", sender.getId());
+			message.setMessageFolder(messageFolder);
+			message.setRecipient(recipient);
+			
+			result = message;
+		} else {
+			messageBD = this.messageRepository.findOne(message.getId());
+			message.setId(messageBD.getId());
+			message.setVersion(messageBD.getVersion());
+			sender = this.actorService.findPrincipal();
+			message.setMoment(new Date(System.currentTimeMillis() - 1000));
+			message.setSender(sender);
+			messageFolder = this.messageFolderService.findMessageFolderByNameAndActor("Out box", sender.getId());
+			message.setMessageFolder(messageFolder);
+			message.setRecipient(recipient);
+		
+			result = message;
+		}
+		this.validator.validate(result, bindingResult);
+		return result;
+	}
+	
 
 }
