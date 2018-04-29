@@ -196,6 +196,8 @@ public class MessageCustomerController extends AbstractController{
 		message = this.messageService.findOne(messageId);
 		principal = this.actorService.findPrincipal();
 		
+		message = this.messageService.reconstruct(message, binding);
+		
 		if (binding.hasErrors())
 			result = this.createNewModelAndViewChange(m);
 		else

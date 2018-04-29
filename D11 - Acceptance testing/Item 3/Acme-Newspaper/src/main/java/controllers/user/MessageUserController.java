@@ -190,13 +190,15 @@ public class MessageUserController extends AbstractController{
 	}
 	
 	@RequestMapping(value = "/changeFolder", method = RequestMethod.POST, params = "change")
-	public ModelAndView send(@Valid Message m, BindingResult binding, @RequestParam int messageId) {
+	public ModelAndView send(Message m, BindingResult binding, @RequestParam int messageId) {
 		ModelAndView result;
 		Message message;
 		Actor principal;
 		
 		message = this.messageService.findOne(messageId);
 		principal = this.actorService.findPrincipal();
+		
+		message = this.messageService.reconstruct(message, binding);
 		
 		if (binding.hasErrors())
 			result = this.createNewModelAndViewChange(m);

@@ -292,11 +292,11 @@ public class MessageService {
 			messageBD = this.messageRepository.findOne(message.getId());
 			message.setId(messageBD.getId());
 			message.setVersion(messageBD.getVersion());
-			sender = this.actorService.findPrincipal();
-			message.setMoment(new Date(System.currentTimeMillis() - 1000));
-			message.setSender(sender);
-			messageFolder = this.messageFolderService.findMessageFolderByNameAndActor("Out box", sender.getId());
-			message.setMessageFolder(messageFolder);
+			message.setSender(messageBD.getSender());
+			message.setRecipient(messageBD.getRecipient());
+			message.setPriority(messageBD.getPriority());
+			message.setBody(messageBD.getBody());
+			message.setMoment(messageBD.getMoment());
 		
 			result = message;
 		}
