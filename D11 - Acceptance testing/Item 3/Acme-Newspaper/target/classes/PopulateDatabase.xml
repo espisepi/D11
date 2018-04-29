@@ -384,6 +384,8 @@
 		<property name="subcriptions">
 			<list>
 				<ref bean="subcription1"/>
+				<ref bean="subcription6"/>
+				<ref bean="subcription7"/>
 			</list>
 		</property>
 		<property name="underwrites">
@@ -405,6 +407,7 @@
 		<property name="subcriptions">
 			<list>
 				<ref bean="subcription2"/>
+				<ref bean="subcription8"/>
 			</list>
 		</property>
 		<property name="underwrites">
@@ -444,6 +447,7 @@
 		<property name="subcriptions">
 			<list>
 				<ref bean="subcription4"/>
+				<ref bean="subcription5"/>
 			</list>
 		</property>
 		<property name="underwrites">
@@ -596,6 +600,30 @@
 		<property name="creditCard" ref="creditCard4" />
 		<property name="customer" ref="customer4" />
 		<property name="newspaper" ref="newspaper4" />
+	</bean>
+	
+	<bean id="subcription5" class="domain.Subscription">
+		<property name="creditCard" ref="creditCard4" />
+		<property name="customer" ref="customer4" />
+		<property name="newspaper" ref="newspaper1" />
+	</bean>
+	
+	<bean id="subcription6" class="domain.Subscription">
+		<property name="creditCard" ref="creditCard1" />
+		<property name="customer" ref="customer1" />
+		<property name="newspaper" ref="newspaper8" />
+	</bean>
+	
+	<bean id="subcription7" class="domain.Subscription">
+		<property name="creditCard" ref="creditCard1" />
+		<property name="customer" ref="customer1" />
+		<property name="newspaper" ref="newspaper4" />
+	</bean>
+	
+	<bean id="subcription8" class="domain.Subscription">
+		<property name="creditCard" ref="creditCard2" />
+		<property name="customer" ref="customer2" />
+		<property name="newspaper" ref="newspaper8" />
 	</bean>
 		<!-- Newspapers	 -->
 		
