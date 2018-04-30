@@ -182,6 +182,7 @@ public class MessageUserController extends AbstractController{
 
 		result = new ModelAndView("message/changeFolder");
 		result.addObject("folders", messageFolders);
+		result.addObject("requestURICancel", "message/user/list.do?messageFolderId=" + message.getMessageFolder().getId());
 		result.addObject("msg", message);
 		
 		return result;
@@ -289,6 +290,7 @@ public class MessageUserController extends AbstractController{
 		result = new ModelAndView("message/changeFolder");
 		result.addObject("folders", messageFolders);
 		result.addObject("msg", message);
+		result.addObject("requestURICancel", "message/user/list.do?messageFolderId=" + m.getMessageFolder().getId());
 		return result;
 	}
 	
