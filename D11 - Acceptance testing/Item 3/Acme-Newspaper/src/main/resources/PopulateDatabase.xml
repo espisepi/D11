@@ -1228,7 +1228,7 @@
 	
 	<bean id="advertisement1" class="domain.Advertisement">
 		<property name="title" value="title 1 Agent1" />
-		<property name="targetPage" value="https://sumedico.com/wp-content/uploads/2016/06/C%C3%B3mo_saber_si_tu_gato_te_quiere.jpg" />
+		<property name="targetPage" value="http://www.abc.es/espana/abci-cinco-policias-heridos-tras-batalla-campal-contra-clanes-estacion-linares-baeza-201804301112_noticia.html" />
 		<property name="banner" value="https://sumedico.com/wp-content/uploads/2016/06/C%C3%B3mo_saber_si_tu_gato_te_quiere.jpg" />
 		<property name="creditCard" ref="creditCard5" />
 		<property name="agent" ref="agent1" />
@@ -1236,7 +1236,7 @@
 	
 	<bean id="advertisement2" class="domain.Advertisement">
 		<property name="title" value="title 2 Agent1" />
-		<property name="targetPage" value="https://www.petdarling.com/articulos/wp-content/uploads/2014/11/eliminar-pis-de-gato.jpg" />
+		<property name="targetPage" value="http://www.abc.es/espana/castilla-leon/abci-hombre-mata-paliza-expareja-burgos-201804300824_noticia.html" />
 		<property name="banner" value="https://www.petdarling.com/articulos/wp-content/uploads/2014/11/eliminar-pis-de-gato.jpg" />
 		<property name="creditCard" ref="creditCard5" />
 		<property name="agent" ref="agent1" />
@@ -1244,7 +1244,7 @@
 	
 	<bean id="advertisement3" class="domain.Advertisement">
 		<property name="title" value="title 3 Agent1" />
-		<property name="targetPage" value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWHlWg-bUOzO10ILqRtdH_xY9gLwxRUUDFIKJHUTEqbQq3_Cg" />
+		<property name="targetPage" value="http://www.abc.es/espana/abci-juez-pidio-absolver-manada-no-tiene-ningun-expediente-ultimos-cuatro-anos-201804301228_noticia.html" />
 		<property name="banner" value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWHlWg-bUOzO10ILqRtdH_xY9gLwxRUUDFIKJHUTEqbQq3_Cg" />
 		<property name="creditCard" ref="creditCard5" />
 		<property name="agent" ref="agent1" />
@@ -1252,7 +1252,7 @@
 	
 	<bean id="advertisement4" class="domain.Advertisement">
 		<property name="title" value="title 4 Agent2" />
-		<property name="targetPage" value="https://t2.uc.ltmcdn.com/images/5/0/6/img_como_saber_si_un_gato_es_macho_o_hembra_con_fotos_10605_600.jpg" />
+		<property name="targetPage" value="http://www.abc.es/sociedad/abci-tiempo-puente-mayo-primavera-resiste-volver-201804301655_noticia.html" />
 		<property name="banner" value="https://t2.uc.ltmcdn.com/images/5/0/6/img_como_saber_si_un_gato_es_macho_o_hembra_con_fotos_10605_600.jpg" />
 		<property name="creditCard" ref="creditCard5" />
 		<property name="agent" ref="agent2" />
@@ -1260,7 +1260,7 @@
 	
 	<bean id="advertisement5" class="domain.Advertisement">
 		<property name="title" value="title 5 Agent2 sexo" />
-		<property name="targetPage" value="https://cdn3.computerhoy.com/sites/computerhoy.com/files/styles/fullcontent/public/novedades/entender-gato.jpg?itok=GQSe1IVJ" />
+		<property name="targetPage" value="http://www.abc.es/sociedad/abci-tiempo-puente-mayo-primavera-resiste-volver-201804301655_noticia.html" />
 		<property name="banner" value="https://cdn3.computerhoy.com/sites/computerhoy.com/files/styles/fullcontent/public/novedades/entender-gato.jpg?itok=GQSe1IVJ" />
 		<property name="creditCard" ref="creditCard5" />
 		<property name="agent" ref="agent2" />
@@ -1268,7 +1268,7 @@
 	
 	<bean id="advertisement6" class="domain.Advertisement">
 		<property name="title" value="title 6 Agent3 viagra" />
-		<property name="targetPage" value="https://img.bekiamascotas.com/articulos/portada/51000/51644-h2.jpg" />
+		<property name="targetPage" value="http://www.abc.es/sociedad/abci-tiempo-puente-mayo-primavera-resiste-volver-201804301655_noticia.html" />
 		<property name="banner" value="https://img.bekiamascotas.com/articulos/portada/51000/51644-h2.jpg" />
 		<property name="creditCard" ref="creditCard5" />
 		<property name="agent" ref="agent3" />
@@ -1276,7 +1276,7 @@
 	
 	<bean id="advertisement7" class="domain.Advertisement">
 		<property name="title" value="title 7 Agent2 cialis" />
-		<property name="targetPage" value="https://sumedico.com/wp-content/uploads/2017/12/por-qu%C3%A9-adoptar-un-gato.jpg" />
+		<property name="targetPage" value="http://www.abc.es/sociedad/abci-tiempo-puente-mayo-primavera-resiste-volver-201804301655_noticia.html" />
 		<property name="banner" value="https://sumedico.com/wp-content/uploads/2017/12/por-qu%C3%A9-adoptar-un-gato.jpg" />
 		<property name="creditCard" ref="creditCard5" />
 		<property name="agent" ref="agent2" />
@@ -1284,7 +1284,7 @@
 	
 		<bean id="advertisement8" class="domain.Advertisement">
 		<property name="title" value="title 8 Agent3" />
-		<property name="targetPage" value="https://t2.ea.ltmcdn.com/es/images/3/4/8/img_como_ensenar_a_un_gato_a_sentarse_20843_600.jpg" />
+		<property name="targetPage" value="http://www.abc.es/sociedad/abci-tiempo-puente-mayo-primavera-resiste-volver-201804301655_noticia.html" />
 		<property name="banner" value="https://t2.ea.ltmcdn.com/es/images/3/4/8/img_como_ensenar_a_un_gato_a_sentarse_20843_600.jpg" />
 		<property name="creditCard" ref="creditCard5" />
 		<property name="agent" ref="agent3" />
@@ -1295,7 +1295,7 @@
 	<bean id="volume1" class="domain.Volume">
 		<property name="title" value="title volume1 user1" />
 		<property name="description" value="description1" />
-		<property name="year" value="18" />
+		<property name="year" value="2018" />
 		<property name="newspapers">
 			<list>
 				<ref bean="newspaper1"/>
@@ -1308,7 +1308,7 @@
 	<bean id="volume2" class="domain.Volume">
 		<property name="title" value="title volume2 user1" />
 		<property name="description" value="description2" />
-		<property name="year" value="18" />
+		<property name="year" value="2018" />
 		<property name="newspapers">
 			<list>
 				<ref bean="newspaper3"/>
@@ -1319,7 +1319,7 @@
 	<bean id="volume3" class="domain.Volume">
 		<property name="title" value="title volume3 user2" />
 		<property name="description" value="description3" />
-		<property name="year" value="18" />
+		<property name="year" value="2018" />
 		<property name="newspapers">
 			<list>
 				<ref bean="newspaper6"/>
@@ -1331,7 +1331,7 @@
 	<bean id="volume4" class="domain.Volume">
 		<property name="title" value="title volume4 user2" />
 		<property name="description" value="description4" />
-		<property name="year" value="18" />
+		<property name="year" value="2018" />
 		<property name="newspapers">
 			<list>
 				<ref bean="newspaper8"/>
@@ -1342,7 +1342,7 @@
 	<bean id="volume5" class="domain.Volume">
 		<property name="title" value="title volume5 user3" />
 		<property name="description" value="description5" />
-		<property name="year" value="18" />
+		<property name="year" value="2018" />
 		<property name="newspapers">
 			<list>
 				<ref bean="newspaper4"/>
@@ -1354,7 +1354,7 @@
 		<bean id="volume6" class="domain.Volume">
 		<property name="title" value="title volume6 user3" />
 		<property name="description" value="description6" />
-		<property name="year" value="18" />
+		<property name="year" value="2018" />
 		<property name="newspapers">
 			<list>
 				<ref bean="newspaper7"/>

@@ -33,7 +33,7 @@
 			
 
 			<acme:submit name="sendBroadcast" code="message.send.broadcast.link"/>
-			<acme:cancel url="welcome/index.do" code="message.cancel.link"/>
+			<acme:cancel url="messageFolder/admin/list.do" code="message.cancel.link"/>
 
 <br />  
 		</form:form>

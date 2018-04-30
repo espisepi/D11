@@ -33,6 +33,9 @@ public class CustomerService {
 
 
 	// Supporting services ----------------------------------------------------
+	
+	@Autowired
+	MessageFolderService messageFolderService;
 
 	// Constructors -----------------------------------------------------------
 	public CustomerService() {
@@ -76,6 +79,11 @@ public class CustomerService {
 		}
 		result = this.customerRepository.save(customer);
 		Assert.notNull(result);
+		
+		if(customer.getId() == 0)
+			
+			this.messageFolderService.createDefaultMessageFolder(result);
+		
 		return result;
 	}
 
@@ -102,7 +110,11 @@ public class CustomerService {
 	}
 
 	// Other business methods -------------------------------------------------
-
+	public Collection<Customer> customerWithUnderwriteToVolumeId(int volumeId) {
+		Collection<Customer> res;
+		res = this.customerRepository.customerWithUnderwriteToVolumeId(volumeId);
+		return res;
+	}
 	public Customer findByPrincipal() {
 
 		Customer result;

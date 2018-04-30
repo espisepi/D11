@@ -31,6 +31,9 @@ public class AgentService {
 	private AgentRepository	agentRepository;
 
 	// Supporting services ----------------------------------------------------
+	
+	@Autowired 
+	private MessageFolderService messageFolderService;
 
 	@Autowired
 	private Validator		validator;
@@ -91,6 +94,10 @@ public class AgentService {
 		result = this.agentRepository.save(agent);
 
 		Assert.notNull(result);
+		
+		if(agent.getId() == 0)
+			
+			this.messageFolderService.createDefaultMessageFolder(result);
 
 		return result;
 	}

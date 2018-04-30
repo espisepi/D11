@@ -1,9 +1,7 @@
 
 package services;
 
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.GregorianCalendar;
 
 import javax.transaction.Transactional;
 
@@ -14,8 +12,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.VolumeRepository;
+import domain.CreditCard;
 import domain.Customer;
 import domain.Newspaper;
+import domain.Subscription;
 import domain.User;
 import domain.Volume;
 
@@ -34,6 +34,10 @@ public class VolumeService {
 
 	@Autowired
 	UserService			userService;
+	@Autowired
+	SubscriptionService	subscriptionService;
+	@Autowired
+	UnderwriteService	underwriteService;
 
 	@Autowired
 	private Validator	validator;
@@ -72,12 +76,25 @@ public class VolumeService {
 
 		userPrincipal = this.userService.findByPrincipal();
 
-		Assert.isTrue(this.checkYear(volume), "Año incorrecto");
-
 		// Cuando editamos añadimos los periódicos que tenía el volumen antes de ser editado
 		if (volume.getId() != 0) {
+			Collection<Customer> customerSubcriptos;
+			Subscription subcripcion;
 			newspapers = this.newspaperService.findAllNewspapersPrivateByVolumeId(volume.getId());
+			customerSubcriptos = this.customerService.customerWithUnderwriteToVolumeId(volume.getId());
+			for (Newspaper n : volume.getNewspapers())
+				if (n.isOpen() == false)
+					for (Customer customer : customerSubcriptos) {
+						CreditCard credito;
+						credito = this.underwriteService.credictcardByVolumenAndCustomer(volume.getId(), customer.getId());
+						subcripcion = this.subscriptionService.create(n.getId(), customer);
+						subcripcion.setCreditCard(credito);
+						subcripcion.setCustomer(customer);
+						this.subscriptionService.reconstruct(subcripcion, customer);
+						this.subscriptionService.save(subcripcion, customer);
+					}
 			volume.getNewspapers().addAll(newspapers);
+
 		}
 
 		result = this.volumeRepository.save(volume);
@@ -85,7 +102,6 @@ public class VolumeService {
 			userPrincipal.getVolumes().add(result);
 		return result;
 	}
-
 	//DELETE
 	//	public void delete(final Volume volume) {
 	//
@@ -140,22 +156,6 @@ public class VolumeService {
 		return result;
 	}
 
-	public boolean checkYear(final Volume volume) {
-		boolean res;
-		Calendar calendar;
-		int actualYear;
-		res = false;
-
-		calendar = new GregorianCalendar();
-		actualYear = calendar.get(Calendar.YEAR);
-		actualYear = actualYear % 100;
-
-		if (volume.getYear() != null)
-			if (Integer.parseInt(volume.getYear()) >= actualYear)
-				res = true;
-
-		return res;
-	}
 	public Collection<Volume> findByNewspaperId(final int newspaperId) {
 		Collection<Volume> result;
 		result = this.volumeRepository.findByNewspaperId(newspaperId);

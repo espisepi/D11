@@ -68,7 +68,7 @@
 
 		<jstl:if test="${!hideAttributes}">
 			<spring:message code="newspaper.article.summary" var="summary" />
-			<display:column title="${summary}" sortable="true">
+			<display:column title="${summary}" sortable="false">
 				<spring:url value="article/user/listSummary.do" var="articleURL">
 					<spring:param name="articleId" value="${row.id}" />
 				</spring:url>
@@ -87,7 +87,7 @@
 
 		<jstl:if test="${!hideAttributes}">
 			<spring:message code="newspaper.articles" var="writer" />
-			<display:column title="${writer}" sortable="true">
+			<display:column title="${writer}" sortable="false">
 				<spring:url value="article/user/display.do" var="renURL">
 					<spring:param name="articleId" value="${row.id}" />
 				</spring:url>
@@ -105,7 +105,7 @@
 		<!-- CUANDO ESTÉ EL DISPLAY DE PROFILE LO PONGO AQUÍ -->
 		<jstl:if test="${!hideAttributes}">
 			<spring:message code="newspaper.article.writer" var="writer" />
-			<display:column title="${writer}" sortable="true">
+			<display:column title="${writer}" sortable="false">
 				<spring:url value="article/user/displayUser.do" var="renURL">
 					<spring:param name="userId" value="${row.writer.id}" />
 				</spring:url>
@@ -136,7 +136,7 @@
 
 		<jstl:if test="${!hideAttributes}">
 			<spring:message code="newspaper.article.summary" var="summary" />
-			<display:column title="${summary}" sortable="true">
+			<display:column title="${summary}" sortable="false">
 				<spring:url value="article/customer/listSummary.do" var="articleURL">
 					<spring:param name="articleId" value="${row.id}" />
 				</spring:url>
@@ -155,7 +155,7 @@
 
 		<jstl:if test="${!hideAttributes}">
 			<spring:message code="newspaper.articles" var="writer" />
-			<display:column title="${writer}" sortable="true">
+			<display:column title="${writer}" sortable="false">
 				<spring:url value="article/customer/display.do" var="renURL">
 					<spring:param name="articleId" value="${row.id}" />
 				</spring:url>
@@ -173,7 +173,7 @@
 		<!-- CUANDO ESTÉ EL DISPLAY DE PROFILE LO PONGO AQUÍ -->
 		<jstl:if test="${!hideAttributes}">
 			<spring:message code="newspaper.article.writer" var="writer" />
-			<display:column title="${writer}" sortable="true">
+			<display:column title="${writer}" sortable="false">
 				<spring:url value="article/customer/displayUser.do" var="renURL">
 					<spring:param name="userId" value="${row.writer.id}" />
 				</spring:url>
@@ -202,7 +202,7 @@
 		<!-- Columna de Summary -->
 
 		<spring:message code="newspaper.article.summary" var="summary" />
-		<display:column title="${summary}" sortable="true">
+		<display:column title="${summary}" sortable="false">
 			<spring:url value="article/admin/listSummary.do" var="articleURL">
 				<spring:param name="articleId" value="${row.id}" />
 			</spring:url>
@@ -213,7 +213,7 @@
 		<!-- Columna de Article -->
 
 		<spring:message code="newspaper.articles" var="writer" />
-		<display:column title="${writer}" sortable="true">
+		<display:column title="${writer}" sortable="false">
 			<spring:url value="article/admin/display.do" var="renURL">
 				<spring:param name="articleId" value="${row.id}" />
 			</spring:url>
@@ -223,7 +223,7 @@
 		<!-- Columna de Writer -->
 		<!-- CUANDO ESTÉ EL DISPLAY DE PROFILE LO PONGO AQUÍ -->
 		<spring:message code="newspaper.article.writer" var="writer" />
-		<display:column title="${writer}" sortable="true">
+		<display:column title="${writer}" sortable="false">
 			<spring:url value="article/admin/displayUser.do" var="renURL">
 				<spring:param name="userId" value="${row.writer.id}" />
 			</spring:url>
@@ -245,7 +245,7 @@
 
 		<jstl:if test="${!hideAttributes}">
 			<spring:message code="newspaper.article.summary" var="summary" />
-			<display:column title="${summary}" sortable="true">
+			<display:column title="${summary}" sortable="false">
 				<spring:url value="article/agent/listSummary.do" var="articleURL">
 					<spring:param name="articleId" value="${row.id}" />
 				</spring:url>
@@ -264,7 +264,7 @@
 
 		<jstl:if test="${!hideAttributes}">
 			<spring:message code="newspaper.articles" var="writer" />
-			<display:column title="${writer}" sortable="true">
+			<display:column title="${writer}" sortable="false">
 				<spring:url value="article/agent/display.do" var="renURL">
 					<spring:param name="articleId" value="${row.id}" />
 				</spring:url>
@@ -282,7 +282,7 @@
 		<!-- CUANDO ESTÉ EL DISPLAY DE PROFILE LO PONGO AQUÍ -->
 		<jstl:if test="${!hideAttributes}">
 			<spring:message code="newspaper.article.writer" var="writer" />
-			<display:column title="${writer}" sortable="true">
+			<display:column title="${writer}" sortable="false">
 				<spring:url value="article/agent/displayUser.do" var="renURL">
 					<spring:param name="userId" value="${row.writer.id}" />
 				</spring:url>

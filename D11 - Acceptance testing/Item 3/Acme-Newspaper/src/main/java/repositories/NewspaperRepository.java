@@ -86,7 +86,9 @@ public interface NewspaperRepository extends JpaRepository<Newspaper, Integer> {
 	//Me devuele todos los periódicos que son públicos creados por un user en concreto
 	@Query("select n from Newspaper n where n.publisher.id=?1 and n.open=true")
 	Collection<Newspaper> findAllNewspapersPublicByUser(int userId);
-
+	//Me devuelve todos los periodicos privados creados por un user concreto
+	@Query("select n from Newspaper n where n.publisher.id=?1 and n.open=false")
+	Collection<Newspaper> findAllNewspapersPrivateByUser(int userId);
 	//Me devuelve todos los periódicos privados dado un volumen
 	@Query("select n from Volume v join v.newspapers n where n.open = false and v.id=?1")
 	Collection<Newspaper> findAllNewspapersPrivateByVolumeId(int volumeId);

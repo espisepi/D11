@@ -136,7 +136,8 @@
 	<a href="${row.targetPage}"><spring:message code = "advertisement.targetPage"></spring:message></a>
 	
 	<p>		
-		<a href="${row.banner}"><spring:message code="advertisement.banner"/></a>
+	<B><jstl:out value="Banner:"></jstl:out></B>
+		<a href="${row.banner}"><img src="${row.banner}" width="250" height="150" ></a>
 	</p>
 	
 	<p>

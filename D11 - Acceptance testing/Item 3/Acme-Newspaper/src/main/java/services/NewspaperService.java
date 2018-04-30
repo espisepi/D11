@@ -221,6 +221,15 @@ public class NewspaperService {
 		result = this.newspaperRepository.findAllNewspapersPublicByUser(userPrincipal.getId());
 		return result;
 	}
+	public Collection<Newspaper> findAllNewspapersPrivateByUser() {
+		Collection<Newspaper> result;
+		User userPrincipal;
+
+		userPrincipal = this.userService.findByPrincipal();
+		result = this.newspaperRepository.findAllNewspapersPrivateByUser(userPrincipal.getId());
+		return result;
+
+	}
 
 	public Collection<Newspaper> findNewspapersPublishedAndOpen() {
 		Collection<Newspaper> result;

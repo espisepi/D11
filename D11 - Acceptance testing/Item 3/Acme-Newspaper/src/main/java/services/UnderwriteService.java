@@ -108,7 +108,12 @@ public class UnderwriteService {
 		this.underwriteRepository.flush();
 	}
 	//Other method
+	public CreditCard credictcardByVolumenAndCustomer(int volumeId, int customerId) {
+		CreditCard resul;
+		resul = this.underwriteRepository.credictcardByVolumenAndCustomer(volumeId, customerId);
+		return resul;
 
+	}
 	public boolean checkCreditCard(final CreditCard creditCard) {
 		boolean res;
 		Calendar calendar;

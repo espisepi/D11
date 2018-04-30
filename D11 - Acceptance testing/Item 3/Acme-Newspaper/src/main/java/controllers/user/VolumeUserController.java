@@ -89,10 +89,7 @@ public class VolumeUserController extends AbstractController {
 				this.volumeService.save(volume);
 				result = new ModelAndView("redirect:mylist.do");
 			} catch (final Throwable oops) {
-				if (oops.getMessage().equals("Año incorrecto"))
-					result = this.createEditModelAndView(volume, "volume.year.error");
-				else
-					result = this.createEditModelAndView(volume, "volume.commit.error");
+				result = this.createEditModelAndView(volume, "volume.commit.error");
 			}
 		return result;
 	}
@@ -106,17 +103,24 @@ public class VolumeUserController extends AbstractController {
 
 	public ModelAndView createEditModelAndView(final Volume volume, final String messageCode) {
 		assert volume != null;
+		Volume volumeBD;
 
 		ModelAndView result;
 		Collection<Newspaper> newspapers;
+		Collection<Newspaper> newspapersprivate;
 
 		if (volume.getId() == 0)
 			//Cuando lo creamos que salgan todos los periódicos del user
 			newspapers = this.newspaperService.findNewspapersCreatedByUser();
-		else
+		else {
 			//Cuando lo editamos que salgan solo los periódicos publicos 
 			newspapers = this.newspaperService.findAllNewspapersPublicByUser();
-
+			//TODO query que te de tus periodicos los que no 
+			newspapersprivate = this.newspaperService.findAllNewspapersPrivateByUser();
+			volumeBD = this.volumeService.findOne(volume.getId());
+			newspapersprivate.removeAll(volumeBD.getNewspapers());
+			newspapers.addAll(newspapersprivate);
+		}
 		result = new ModelAndView("volume/edit");
 		result.addObject("volume", volume);
 		result.addObject("newspapers", newspapers);

@@ -3,7 +3,6 @@ package controllers.user;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -183,6 +182,7 @@ public class MessageUserController extends AbstractController{
 
 		result = new ModelAndView("message/changeFolder");
 		result.addObject("folders", messageFolders);
+		result.addObject("requestURICancel", "message/user/list.do?messageFolderId=" + message.getMessageFolder().getId());
 		result.addObject("msg", message);
 		
 		return result;
@@ -264,6 +264,7 @@ public class MessageUserController extends AbstractController{
 		result.addObject("message", message);
 		result.addObject("priorities", priorities);
 		result.addObject("show", true);
+		result.addObject("RequestURICancel", "messageFolder/user/list.do");
 		result.addObject("m", m);
 		return result;
 	}
@@ -289,6 +290,7 @@ public class MessageUserController extends AbstractController{
 		result = new ModelAndView("message/changeFolder");
 		result.addObject("folders", messageFolders);
 		result.addObject("msg", message);
+		result.addObject("requestURICancel", "message/user/list.do?messageFolderId=" + m.getMessageFolder().getId());
 		return result;
 	}
 	
@@ -343,6 +345,7 @@ public class MessageUserController extends AbstractController{
 		result.addObject("message", message);
 		result.addObject("priorities", priorities);
 		result.addObject("show", false);
+		result.addObject("RequestURICancel", "messageFolder/user/list.do");
 		result.addObject("m", m);
 		return result;
 	}

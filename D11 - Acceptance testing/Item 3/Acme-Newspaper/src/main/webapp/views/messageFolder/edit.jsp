@@ -40,7 +40,7 @@
 		<acme:submit_with_on_click code2="messageFolder.confirm.delete" name="delete" code="messageFolder.delete"/>
 	</jstl:if>
 	
-	<acme:cancel url="welcome/index.do" code="tabooWord.cancel"/>
+	<acme:cancel url="${RequestURIcancel}" code="tabooWord.cancel"/>
 	<br />
 
 	

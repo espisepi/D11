@@ -65,6 +65,19 @@ public class SubscriptionService {
 		return result;
 	}
 
+	public Subscription create(final int newspaperId, Customer customer) {
+		Subscription result;
+		Newspaper newspaper;
+
+		newspaper = this.newspaperService.findOne(newspaperId);
+		Assert.isTrue(!newspaper.isOpen(), "the newspaper must be private");
+		result = new Subscription();
+		result.setCustomer(customer);
+		result.setNewspaper(newspaper);
+
+		return result;
+	}
+
 	//SAVE
 	public Subscription save(final Subscription subscription) {
 		Customer customerPrincipal;
@@ -74,6 +87,20 @@ public class SubscriptionService {
 		customerPrincipal = this.customerService.findByPrincipal();
 		Assert.isTrue(!customerPrincipal.getSubcriptions().contains(subscription), "el cliente ya esta subscrito a este periodico");
 		Assert.isTrue(subscription.getCustomer().equals(customerPrincipal), "El cliente de la subscripcion debe ser el mismo que el logueado");
+		Assert.isTrue(!subscription.getNewspaper().isOpen(), "solo se pueden subscribir a los periodicos privados");
+		Assert.notNull(subscription.getNewspaper().getPublicationDate(), "solo se pueden subscribir a los periodicos publicados");
+		Assert.isTrue(this.checkCreditCard(subscription.getCreditCard()), "Invalid credit card");
+
+		result = this.subscriptionRepository.save(subscription);
+		return result;
+	}
+
+	public Subscription save(final Subscription subscription, Customer customer) {
+		Subscription result;
+
+		Assert.notNull(subscription);
+		Assert.isTrue(!customer.getSubcriptions().contains(subscription), "el cliente ya esta subscrito a este periodico");
+		Assert.isTrue(subscription.getCustomer().equals(customer), "El cliente de la subscripcion debe ser el mismo que el logueado");
 		Assert.isTrue(!subscription.getNewspaper().isOpen(), "solo se pueden subscribir a los periodicos privados");
 		Assert.notNull(subscription.getNewspaper().getPublicationDate(), "solo se pueden subscribir a los periodicos publicados");
 		Assert.isTrue(this.checkCreditCard(subscription.getCreditCard()), "Invalid credit card");
@@ -114,6 +141,22 @@ public class SubscriptionService {
 			Assert.isTrue(!subscription.getNewspaper().isOpen(), "the newspaper must be private");
 			customerPrincipal = this.customerService.findByPrincipal();
 			subscription.setCustomer(customerPrincipal);
+
+			result = subscription;
+		} else {
+			Assert.notNull(null, "a subscription can not be modified");
+			result = subscription;
+		}
+		//recontruct sin validaciones, estas ya las hace underwrite
+		return result;
+	}
+
+	public Subscription reconstruct(final Subscription subscription, Customer customer) {
+		Subscription result;
+		if (subscription.getId() == 0) {
+
+			Assert.isTrue(!subscription.getNewspaper().isOpen(), "the newspaper must be private");
+			subscription.setCustomer(customer);
 
 			result = subscription;
 		} else {

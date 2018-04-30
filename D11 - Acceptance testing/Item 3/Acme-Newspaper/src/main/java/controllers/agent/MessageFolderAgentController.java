@@ -2,8 +2,6 @@ package controllers.agent;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -153,6 +151,7 @@ public class MessageFolderAgentController extends AbstractController{
 			result.addObject("messageFolder", messageFolder);
 			result.addObject("mes", mess);
 			result.addObject("message", messageCode);
+			result.addObject("RequestURIcancel", "messageFolder/agent/list.do");
 			result.addObject("requestURI", "messageFolder/agent/edit.do");
 
 			return result;

@@ -3,8 +3,6 @@ package controllers.agent;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -182,6 +180,7 @@ public class MessageAgentController extends AbstractController{
 
 		result = new ModelAndView("message/changeFolder");
 		result.addObject("folders", messageFolders);
+		result.addObject("requestURICancel", "message/agent/list.do?messageFolderId=" + message.getMessageFolder().getId());
 		result.addObject("msg", message);
 		
 		return result;
@@ -264,6 +263,7 @@ public class MessageAgentController extends AbstractController{
 		result.addObject("message", message);
 		result.addObject("priorities", priorities);
 		result.addObject("show", true);
+		result.addObject("RequestURICancel", "messageFolder/agent/list.do");
 		result.addObject("m", m);
 		return result;
 	}
@@ -288,6 +288,7 @@ public class MessageAgentController extends AbstractController{
 
 		result = new ModelAndView("message/changeFolder");
 		result.addObject("folders", messageFolders);
+		result.addObject("requestURICancel", "message/agent/list.do?messageFolderId=" + m.getMessageFolder().getId());
 		result.addObject("msg", message);
 		return result;
 	}
@@ -343,6 +344,7 @@ public class MessageAgentController extends AbstractController{
 		result.addObject("message", message);
 		result.addObject("priorities", priorities);
 		result.addObject("show", false);
+		result.addObject("RequestURICancel", "messageFolder/agent/list.do");
 		result.addObject("m", m);
 		return result;
 	}
