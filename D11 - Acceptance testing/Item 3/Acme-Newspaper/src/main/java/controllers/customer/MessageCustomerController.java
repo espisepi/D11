@@ -179,6 +179,7 @@ public class MessageCustomerController extends AbstractController{
 
 		result = new ModelAndView("message/changeFolder");
 		result.addObject("folders", messageFolders);
+		result.addObject("requestURICancel", "message/customer/list.do?messageFolderId=" + message.getMessageFolder().getId());
 		result.addObject("msg", message);
 		
 		return result;
@@ -260,7 +261,7 @@ public class MessageCustomerController extends AbstractController{
 		result.addObject("message", message);
 		result.addObject("priorities", priorities);
 		result.addObject("show", true);
-		result.addObject("RequestURICancel", "message/customer/list.do");
+		result.addObject("RequestURICancel", "messageFolder/customer/list.do");
 		result.addObject("m", m);
 		return result;
 	}
@@ -285,6 +286,7 @@ public class MessageCustomerController extends AbstractController{
 
 		result = new ModelAndView("message/changeFolder");
 		result.addObject("folders", messageFolders);
+		result.addObject("requestURICancel", "message/customer/list.do?messageFolderId=" + m.getMessageFolder().getId());
 		result.addObject("msg", message);
 		return result;
 	}
@@ -340,7 +342,7 @@ public class MessageCustomerController extends AbstractController{
 		result.addObject("message", message);
 		result.addObject("priorities", priorities);
 		result.addObject("show", false);
-		result.addObject("RequestURICancel", "message/customer/list.do");
+		result.addObject("RequestURICancel", "messageFolder/customer/list.do");
 		result.addObject("m", m);
 		return result;
 	}

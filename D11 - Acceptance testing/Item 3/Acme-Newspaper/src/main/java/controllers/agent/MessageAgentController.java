@@ -180,6 +180,7 @@ public class MessageAgentController extends AbstractController{
 
 		result = new ModelAndView("message/changeFolder");
 		result.addObject("folders", messageFolders);
+		result.addObject("requestURICancel", "message/agent/list.do?messageFolderId=" + message.getMessageFolder().getId());
 		result.addObject("msg", message);
 		
 		return result;
@@ -287,6 +288,7 @@ public class MessageAgentController extends AbstractController{
 
 		result = new ModelAndView("message/changeFolder");
 		result.addObject("folders", messageFolders);
+		result.addObject("requestURICancel", "message/agent/list.do?messageFolderId=" + m.getMessageFolder().getId());
 		result.addObject("msg", message);
 		return result;
 	}
