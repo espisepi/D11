@@ -85,6 +85,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 	}
 
 	//Test to edit all administrator attributes
@@ -152,6 +153,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -204,6 +206,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -242,6 +245,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -290,6 +294,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -340,6 +345,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -390,6 +396,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -440,6 +447,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -485,6 +493,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 	//Use case 7.3.2. The average and the standard deviation of articles written by writer
@@ -529,6 +538,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 	//Use case 7.3.3. The average and the standard deviation of articles per newspaper.
@@ -573,6 +583,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -616,6 +627,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -659,6 +671,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -703,6 +716,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -746,6 +760,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -789,6 +804,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -832,6 +848,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -875,6 +892,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -920,6 +938,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -963,6 +982,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -1006,6 +1026,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -1049,6 +1070,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -1092,6 +1114,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -1102,11 +1125,11 @@ public class AdminServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 			//admin registers, positive case
 			{
-				"admin", 1.0, null
+				"admin", 2.0, null
 			},
 			//user registers, negative case
 			{
-				"user1", 1.0, IllegalArgumentException.class
+				"user1", 2.0, IllegalArgumentException.class
 			}
 		};
 
@@ -1135,6 +1158,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 
@@ -1178,6 +1202,7 @@ public class AdminServiceTest extends AbstractTest {
 		}
 
 		this.checkExceptions(expected, caught);
+		super.unauthenticate();
 
 	}
 	//Caso de uso 5.1: List the advertisements that contain taboo words in its title.
@@ -1366,10 +1391,10 @@ public class AdminServiceTest extends AbstractTest {
 
 			{
 				///admin registers, positive case
-				"admin", 1.75, null
+				"admin", 0.875, null
 			}, {
 				//user registers, negative case
-				"user1", 1.75, IllegalArgumentException.class
+				"user1", 0.875, IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)

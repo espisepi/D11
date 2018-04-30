@@ -38,9 +38,10 @@
 	<tr>
 		<jstl:forEach var="medidas"
 			items="${theAvgAndStddevOfNewspapersForUser}">
-			<td><jstl:out value="${ medidas}"></jstl:out></td>
+			<td>
+			<fmt:formatNumber type="number" minFractionDigits="3" maxFractionDigits="3" value="${medidas}" />
+			</td>
 		</jstl:forEach>
-	</tr>
 </table>
 
 <table>
@@ -60,7 +61,7 @@
 	<tr>
 		<jstl:forEach var="medidas"
 			items="${theAvgAndStddevOfArticlesPerWriter}">
-			<td><jstl:out value="${ medidas}"></jstl:out></td>
+			<td><fmt:formatNumber type="number" minFractionDigits="3" maxFractionDigits="3" value="${medidas}" /></td>
 		</jstl:forEach>
 	</tr>
 </table>
@@ -81,7 +82,7 @@
 	<tr>
 		<jstl:forEach var="medidas"
 			items="${theAvgAndStddevOfArticlePerNewspaper}">
-			<td><jstl:out value="${ medidas}"></jstl:out></td>
+			<td><fmt:formatNumber type="number" minFractionDigits="3" maxFractionDigits="3" value="${medidas}" /></td>
 		</jstl:forEach>
 	</tr>
 </table>
@@ -124,8 +125,7 @@
 	</caption>
 
 	<tr>
-		<td><jstl:out
-				value="${theRatioOfUsersWritingNewspaper}"></jstl:out></td>
+		<td><fmt:formatNumber type="number" minFractionDigits="3" maxFractionDigits="3" value="${theRatioOfUsersWritingNewspaper}" /></td>
 	</tr>
 </table>
 <table>
@@ -136,8 +136,7 @@
 	</caption>
 
 	<tr>
-		<td><jstl:out
-				value="${theRatioOfUsersWritingArticle}"></jstl:out></td>
+		<td><fmt:formatNumber type="number" minFractionDigits="3" maxFractionDigits="3" value="${theRatioOfUsersWritingArticle}" /></td>
 	</tr>
 </table>
 
@@ -149,8 +148,7 @@
 	</caption>
 
 	<tr>
-		<td><jstl:out
-				value="${avgFollowupsPerArticle}"></jstl:out></td>
+		<td><fmt:formatNumber type="number" minFractionDigits="3" maxFractionDigits="3" value="${avgFollowupsPerArticle}" /></td>
 	</tr>
 </table>
 <table>
@@ -161,8 +159,7 @@
 	</caption>
 
 	<tr>
-		<td><jstl:out
-				value="${avgNumberOfFollowUpsPerArticleAfterOneWeek}"></jstl:out></td>
+		<td><fmt:formatNumber type="number" minFractionDigits="3" maxFractionDigits="3" value="${avgNumberOfFollowUpsPerArticleAfterOneWeek}" /></td>
 	</tr>
 </table>
 <table>
@@ -173,8 +170,7 @@
 	</caption>
 
 	<tr>
-		<td><jstl:out
-				value="${avgNumberOfFollowUpsPerArticleAfterTwoWeek}"></jstl:out></td>
+		<td><fmt:formatNumber type="number" minFractionDigits="3" maxFractionDigits="3" value="${avgNumberOfFollowUpsPerArticleAfterTwoWeek}" /></td>
 	</tr>
 </table>
 <table>
@@ -194,7 +190,7 @@
 	<tr>
 		<jstl:forEach var="medidas"
 			items="${avgAndStddevOfNumberOfChirpPerUser}">
-			<td><jstl:out value="${ medidas}"></jstl:out></td>
+			<td><fmt:formatNumber type="number" minFractionDigits="3" maxFractionDigits="3" value="${medidas}" /></td>
 		</jstl:forEach>
 	</tr>
 </table>
@@ -223,8 +219,7 @@
 	</caption>
 
 	<tr>
-		<td><jstl:out
-				value="${ratioOfNewspaperPublicPerNespaperProvate}"></jstl:out></td>
+		<td><fmt:formatNumber type="number" minFractionDigits="3" maxFractionDigits="3" value="${ratioOfNewspaperPublicPerNespaperProvate}" /></td>
 	</tr>
 </table>
 <table>
@@ -235,8 +230,7 @@
 	</caption>
 
 	<tr>
-		<td><jstl:out
-				value="${avgArticlePerNewspapersPrivate}"></jstl:out></td>
+		<td><fmt:formatNumber type="number" minFractionDigits="3" maxFractionDigits="3" value="${avgArticlePerNewspapersPrivate}" /></td>
 	</tr>
 </table>
 <table>
@@ -247,8 +241,7 @@
 	</caption>
 
 	<tr>
-		<td><jstl:out
-				value="${avgArticlesPerNewspapersPublic}"></jstl:out></td>
+		<td><fmt:formatNumber type="number" minFractionDigits="3" maxFractionDigits="3" value="${avgArticlesPerNewspapersPublic}" /></td>
 	</tr>
 </table>
 <table>
@@ -259,8 +252,7 @@
 	</caption>
 
 	<tr>
-		<td><jstl:out
-				value="${ratioOfSubscribersWhenNewspaperPrivatePerNumberCustomer}"></jstl:out></td>
+		<td><fmt:formatNumber type="number" minFractionDigits="3" maxFractionDigits="3" value="${ratioOfSubscribersWhenNewspaperPrivatePerNumberCustomer}" /></td>
 	</tr>
 </table>
 
@@ -272,8 +264,7 @@
 	</caption>
 
 	<tr>
-		<td><jstl:out
-				value="${theAverageRatioOfPrivateVersusPublicNewspaperPerPublished}"></jstl:out></td>
+		<td><fmt:formatNumber type="number" minFractionDigits="3" maxFractionDigits="3" value="${theAverageRatioOfPrivateVersusPublicNewspaperPerPublished}" /></td>
 	</tr>
 </table>
 
@@ -285,8 +276,7 @@
 	</caption>
 
 	<tr>
-		<td><jstl:out
-				value="${theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement}"></jstl:out></td>
+		<td><fmt:formatNumber type="number" minFractionDigits="3" maxFractionDigits="3" value="${theRatioOfNewspapersAtLeastOneAdvertisementVersusZeroAdvertisement}" /></td>
 	</tr>
 </table>
 <table>
@@ -297,8 +287,7 @@
 	</caption>
 
 	<tr>
-		<td><jstl:out
-				value="${theRatioOfAdvertisementsThatHaveTabooWords}"></jstl:out></td>
+		<td><fmt:formatNumber type="number" minFractionDigits="3" maxFractionDigits="3" value="${theRatioOfAdvertisementsThatHaveTabooWords}" /></td>
 	</tr>
 </table>
 
@@ -310,8 +299,7 @@
 	</caption>
 
 	<tr>
-		<td><jstl:out
-				value="${theAverageNumberOfNewspaperPerVolume}"></jstl:out></td>
+		<td><fmt:formatNumber type="number" minFractionDigits="3" maxFractionDigits="3" value="${theAverageNumberOfNewspaperPerVolume}" /></td>
 	</tr>
 </table>
 
@@ -323,8 +311,7 @@
 	</caption>
 
 	<tr>
-		<td><jstl:out
-				value="${theRatioOfSubcrptionsToVolumesVersusSubcriptionsToNewspapers}"></jstl:out></td>
+		<td><fmt:formatNumber type="number" minFractionDigits="3" maxFractionDigits="3" value="${theRatioOfSubcrptionsToVolumesVersusSubcriptionsToNewspapers}" /></td>
 	</tr>
 </table>
 
