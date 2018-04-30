@@ -80,7 +80,7 @@
 		<jstl:if test="${hideAttributes}">
 			<spring:message code="article.summary" var="summaryHeader" />
 			<display:column property="summary" title="${summaryHeader}"
-				sortable="true" />
+				sortable="false" />
 		</jstl:if>
 
 		<!-- Columna de Article -->
@@ -98,7 +98,7 @@
 		<jstl:if test="${hideAttributes}">
 			<spring:message code="article.title" var="titleHeader" />
 			<display:column property="title" title="${titleHeader}"
-				sortable="true" />
+				sortable="false" />
 		</jstl:if>
 
 		<!-- Columna de Writer -->
@@ -116,7 +116,7 @@
 		<jstl:if test="${hideAttributes}">
 			<spring:message code="newspaper.article.writer" var="writerHeader" />
 			<display:column property="writer.name" title="${writerHeader}"
-				sortable="true" />
+				sortable="false" />
 		</jstl:if>
 
 
@@ -148,7 +148,7 @@
 		<jstl:if test="${hideAttributes}">
 			<spring:message code="article.summary" var="summaryHeader" />
 			<display:column property="preSummary" title="${summaryHeader}"
-				sortable="true" />
+				sortable="false" />
 		</jstl:if>
 
 		<!-- Columna de Article -->
@@ -166,7 +166,7 @@
 		<jstl:if test="${hideAttributes}">
 			<spring:message code="article.title" var="titleHeader" />
 			<display:column property="title" title="${titleHeader}"
-				sortable="true" />
+				sortable="false" />
 		</jstl:if>
 
 		<!-- Columna de Writer -->
@@ -184,7 +184,7 @@
 		<jstl:if test="${hideAttributes}">
 			<spring:message code="newspaper.article.writer" var="writerHeader" />
 			<display:column property="writer.name" title="${writerHeader}"
-				sortable="true" />
+				sortable="false" />
 		</jstl:if>
 
 
@@ -257,7 +257,7 @@
 		<jstl:if test="${hideAttributes}">
 			<spring:message code="article.summary" var="summaryHeader" />
 			<display:column property="summary" title="${summaryHeader}"
-				sortable="true" />
+				sortable="false" />
 		</jstl:if>
 
 		<!-- Columna de Article -->
@@ -275,7 +275,7 @@
 		<jstl:if test="${hideAttributes}">
 			<spring:message code="article.title" var="titleHeader" />
 			<display:column property="title" title="${titleHeader}"
-				sortable="true" />
+				sortable="false" />
 		</jstl:if>
 
 		<!-- Columna de Writer -->
@@ -293,7 +293,7 @@
 		<jstl:if test="${hideAttributes}">
 			<spring:message code="newspaper.article.writer" var="writerHeader" />
 			<display:column property="writer.name" title="${writerHeader}"
-				sortable="true" />
+				sortable="false" />
 		</jstl:if>
 
 
