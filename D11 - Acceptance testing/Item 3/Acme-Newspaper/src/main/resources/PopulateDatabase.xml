@@ -1295,7 +1295,7 @@
 	<bean id="volume1" class="domain.Volume">
 		<property name="title" value="title volume1 user1" />
 		<property name="description" value="description1" />
-		<property name="year" value="18" />
+		<property name="year" value="2018" />
 		<property name="newspapers">
 			<list>
 				<ref bean="newspaper1"/>
@@ -1308,7 +1308,7 @@
 	<bean id="volume2" class="domain.Volume">
 		<property name="title" value="title volume2 user1" />
 		<property name="description" value="description2" />
-		<property name="year" value="18" />
+		<property name="year" value="2018" />
 		<property name="newspapers">
 			<list>
 				<ref bean="newspaper3"/>
@@ -1319,7 +1319,7 @@
 	<bean id="volume3" class="domain.Volume">
 		<property name="title" value="title volume3 user2" />
 		<property name="description" value="description3" />
-		<property name="year" value="18" />
+		<property name="year" value="2018" />
 		<property name="newspapers">
 			<list>
 				<ref bean="newspaper6"/>
@@ -1331,7 +1331,7 @@
 	<bean id="volume4" class="domain.Volume">
 		<property name="title" value="title volume4 user2" />
 		<property name="description" value="description4" />
-		<property name="year" value="18" />
+		<property name="year" value="2018" />
 		<property name="newspapers">
 			<list>
 				<ref bean="newspaper8"/>
@@ -1342,7 +1342,7 @@
 	<bean id="volume5" class="domain.Volume">
 		<property name="title" value="title volume5 user3" />
 		<property name="description" value="description5" />
-		<property name="year" value="18" />
+		<property name="year" value="2018" />
 		<property name="newspapers">
 			<list>
 				<ref bean="newspaper4"/>
@@ -1354,7 +1354,7 @@
 		<bean id="volume6" class="domain.Volume">
 		<property name="title" value="title volume6 user3" />
 		<property name="description" value="description6" />
-		<property name="year" value="18" />
+		<property name="year" value="2018" />
 		<property name="newspapers">
 			<list>
 				<ref bean="newspaper7"/>

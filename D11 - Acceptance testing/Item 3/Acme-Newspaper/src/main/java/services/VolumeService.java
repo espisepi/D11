@@ -1,9 +1,7 @@
 
 package services;
 
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.GregorianCalendar;
 
 import javax.transaction.Transactional;
 
@@ -72,8 +70,6 @@ public class VolumeService {
 
 		userPrincipal = this.userService.findByPrincipal();
 
-		Assert.isTrue(this.checkYear(volume), "Año incorrecto");
-
 		// Cuando editamos añadimos los periódicos que tenía el volumen antes de ser editado
 		if (volume.getId() != 0) {
 			newspapers = this.newspaperService.findAllNewspapersPrivateByVolumeId(volume.getId());
@@ -140,22 +136,6 @@ public class VolumeService {
 		return result;
 	}
 
-	public boolean checkYear(final Volume volume) {
-		boolean res;
-		Calendar calendar;
-		int actualYear;
-		res = false;
-
-		calendar = new GregorianCalendar();
-		actualYear = calendar.get(Calendar.YEAR);
-		actualYear = actualYear % 100;
-
-		if (volume.getYear() != null)
-			if (Integer.parseInt(volume.getYear()) >= actualYear)
-				res = true;
-
-		return res;
-	}
 	public Collection<Volume> findByNewspaperId(final int newspaperId) {
 		Collection<Volume> result;
 		result = this.volumeRepository.findByNewspaperId(newspaperId);

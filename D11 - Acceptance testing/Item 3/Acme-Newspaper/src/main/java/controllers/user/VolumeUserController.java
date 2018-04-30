@@ -89,10 +89,7 @@ public class VolumeUserController extends AbstractController {
 				this.volumeService.save(volume);
 				result = new ModelAndView("redirect:mylist.do");
 			} catch (final Throwable oops) {
-				if (oops.getMessage().equals("Año incorrecto"))
-					result = this.createEditModelAndView(volume, "volume.year.error");
-				else
-					result = this.createEditModelAndView(volume, "volume.commit.error");
+				result = this.createEditModelAndView(volume, "volume.commit.error");
 			}
 		return result;
 	}
