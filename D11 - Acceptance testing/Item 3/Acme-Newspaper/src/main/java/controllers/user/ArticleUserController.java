@@ -191,7 +191,7 @@ public class ArticleUserController extends AbstractController {
 		else
 			try {
 				this.articleService.save(article);
-				result = this.listMyArticles(article.getNewspaper().getId());
+				result = new ModelAndView("redirect:/article/user/listMyArticles.do?newspaperId=" + article.getNewspaper().getId());
 			} catch (final Throwable oops) {
 				if (oops.getMessage().equals("El articulo a guardar no puede ser nulo"))
 					result = this.createEditModelAndView(article, "article.notNull.error");
