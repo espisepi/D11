@@ -61,26 +61,6 @@ public class Volume extends DomainEntity {
 		return result;
 	}
 
-	@Transient
-	public boolean isAllPublic(final Volume volume) {
-		boolean result;
-		result = true;
-		for (final Newspaper n : volume.getNewspapers())
-			if (n.isOpen() == false)
-				result = false;
-		return result;
-	}
-
-	@Transient
-	public boolean isAllPublic(final Volume volume) {
-		boolean result;
-		result = true;
-		for (final Newspaper n : volume.getNewspapers())
-			if (n.isOpen() == false)
-				result = false;
-		return result;
-	}
-
 
 	//Relationships-------------------------------------------------------------
 
