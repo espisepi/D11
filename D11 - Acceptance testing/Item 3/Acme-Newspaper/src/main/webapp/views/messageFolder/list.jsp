@@ -23,7 +23,7 @@
 
 <!-- Listing messageFodler -->
 <display:table name="messageFolders" id="row" requestURI="${requestURI}"
-	pagesize="10" class="displaytag">
+	pagesize="5" class="displaytag">
 
 		
 		<spring:message code="messageFolder.edit" var="Edit"/>
