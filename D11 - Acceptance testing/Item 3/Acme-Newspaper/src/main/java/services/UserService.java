@@ -93,7 +93,9 @@ public class UserService {
 		result = this.userRepository.save(user);
 		Assert.notNull(result);
 		
-		this.messageFolderService.createDefaultMessageFolder(result);
+		if(user.getId() == 0)
+		
+			this.messageFolderService.createDefaultMessageFolder(result);
 		
 		return result;
 	}

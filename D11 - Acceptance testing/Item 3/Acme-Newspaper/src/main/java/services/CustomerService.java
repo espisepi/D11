@@ -33,6 +33,9 @@ public class CustomerService {
 
 
 	// Supporting services ----------------------------------------------------
+	
+	@Autowired
+	MessageFolderService messageFolderService;
 
 	// Constructors -----------------------------------------------------------
 	public CustomerService() {
@@ -76,6 +79,11 @@ public class CustomerService {
 		}
 		result = this.customerRepository.save(customer);
 		Assert.notNull(result);
+		
+		if(customer.getId() == 0)
+			
+			this.messageFolderService.createDefaultMessageFolder(result);
+		
 		return result;
 	}
 

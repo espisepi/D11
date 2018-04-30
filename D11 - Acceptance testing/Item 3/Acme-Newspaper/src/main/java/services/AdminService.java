@@ -36,6 +36,9 @@ public class AdminService {
 	private AdvertisementService	advertisementService;
 
 	// Supporting services ----------------------------------------------------
+	
+	@Autowired
+	private MessageFolderService messageFolderService;
 
 	@Autowired
 	private Validator				validator;
@@ -95,6 +98,10 @@ public class AdminService {
 		result = this.adminRepository.save(admin);
 
 		Assert.notNull(result);
+		
+		if(admin.getId() == 0)
+			
+			this.messageFolderService.createDefaultMessageFolder(result);
 
 		return result;
 	}
