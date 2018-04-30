@@ -35,6 +35,9 @@ public class MessageService {
 	private ActorService actorService;
 	
 	@Autowired
+	private AdminService adminService;
+	
+	@Autowired
 	private TabooWordService tabooWordService;
 	
 	@Autowired
@@ -137,6 +140,8 @@ public class MessageService {
 		
 		Assert.notNull(message);
 		
+		adminService.findByPrincipal();
+		
 		Date moment;
 		Actor sender;
 		Collection<Actor> recipients;
@@ -146,6 +151,7 @@ public class MessageService {
 		moment = new Date(System.currentTimeMillis() - 1000);
 		sender = message.getSender();
 		recipients = this.actorService.findAll();
+		recipients.remove(sender);
 		message.setMoment(moment);
 		
 		for(Actor a: recipients){
