@@ -213,6 +213,13 @@ public class NewspaperService {
 		return result;
 	}
 
+	public Collection<Newspaper> findNewspapersCreatedByUserAndNotPublished() {
+		Collection<Newspaper> result;
+		User userPrincipal;
+		userPrincipal = this.userService.findByPrincipal();
+		result = this.newspaperRepository.findNewspapersCreatedByUserAndNotPublished(userPrincipal.getId());
+		return result;
+	}
 	public Collection<Newspaper> findAllNewspapersPublicByUser() {
 		Collection<Newspaper> result;
 		User userPrincipal;

@@ -111,11 +111,10 @@ public class VolumeUserController extends AbstractController {
 
 		if (volume.getId() == 0)
 			//Cuando lo creamos que salgan todos los periódicos del user
-			newspapers = this.newspaperService.findNewspapersCreatedByUser();
+			newspapers = this.newspaperService.findNewspapersCreatedByUserAndNotPublished();
 		else {
 			//Cuando lo editamos que salgan solo los periódicos publicos 
 			newspapers = this.newspaperService.findAllNewspapersPublicByUser();
-			//TODO query que te de tus periodicos los que no 
 			newspapersprivate = this.newspaperService.findAllNewspapersPrivateByUser();
 			volumeBD = this.volumeService.findOne(volume.getId());
 			newspapersprivate.removeAll(volumeBD.getNewspapers());
