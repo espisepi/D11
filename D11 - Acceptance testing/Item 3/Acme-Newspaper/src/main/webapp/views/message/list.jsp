@@ -83,8 +83,11 @@
 
 
 	<!-- Attributes -->
-		
-	<acme:column code="message.moment" property="moment"/>
+	
+	<spring:message code="message.format.date" var="pattern"></spring:message>
+	<spring:message code="message.moment" var="postedHeader" />
+	<display:column property="moment" title="${postedHeader}"
+		sortable="true" format="${pattern}" />
 	
 	<acme:column code="message.subject" property="subject"/>
 	

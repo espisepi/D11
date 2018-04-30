@@ -19,6 +19,7 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 <display:table name="messageDisplay" class="displaytag"
@@ -26,10 +27,18 @@
 
 	<!-- Attributes -->
 	<display:column>
-
-		<spring:message code="message.moment" />
+	
+	
+<%-- 		<spring:message code="message.format.date1" var="pattern"></spring:message>
+		<fmt:formatDate value="${row.moment}" pattern="${pattern}" var="patternvar"/>
+		<spring:message code="message.moment"/>
 		<jstl:out value=":" />
-		<jstl:out value="${row.moment}"></jstl:out>
+		<jstl:out value="${patternvar}"></jstl:out> --%>
+		
+		 <spring:message code="message.format.date1" var="pattern"></spring:message>
+		<fmt:formatDate value="${row.moment}" pattern="${pattern}" var="hola" />
+		<B><spring:message code="message.moment"></spring:message></B>
+		<c:out value="${hola}" />
 
 		<p>
 			<spring:message code="message.subject"></spring:message>
