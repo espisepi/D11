@@ -44,12 +44,12 @@
 	<spring:message code="followUp.text" var="textHeader" />
 	<display:column property="text" title="${textHeader}" sortable="true"/>
 	
-	<spring:message code="followUp.pictures" var="followPictures" />
-	<display:column title="${followPictures}">
+	<spring:message code="article.display" var="followDisplay" />
+	<display:column title="${followDisplay}">
 		<spring:url value="followUp/user/display.do" var="followUpPicturesURL">
 			<spring:param name="followUpId" value="${row.id }" />
 		</spring:url>
-			<a href="${followUpPicturesURL}"><spring:message code="followUp.pictures" /></a>
+			<a href="${followUpPicturesURL}"><spring:message code="article.display" /></a>
 	</display:column>
 
 		

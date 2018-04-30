@@ -16,12 +16,14 @@ import org.springframework.web.servlet.ModelAndView;
 import services.AdvertisementService;
 import services.ArticleService;
 import services.CustomerService;
+import services.FollowUpService;
 import services.NewspaperService;
 import services.UserService;
 import controllers.AbstractController;
 import domain.Advertisement;
 import domain.Article;
 import domain.Customer;
+import domain.FollowUp;
 import domain.Newspaper;
 import domain.User;
 
@@ -44,6 +46,9 @@ public class ArticleCustomerController extends AbstractController {
 
 	@Autowired
 	private AdvertisementService	advertisementService;
+
+	@Autowired
+	private FollowUpService			followUpService;
 
 
 	//Search -----------------------------------------------------------
@@ -100,10 +105,12 @@ public class ArticleCustomerController extends AbstractController {
 		final ModelAndView result;
 		Article article;
 		Collection<Newspaper> myNewspapersSubscription;
+		Collection<FollowUp> followsUp;
 		Advertisement advertisement;
 
 		article = this.articleService.findOne(articleId);
 		advertisement = this.advertisementService.randomAdvertisement(article.getNewspaper());
+		followsUp = this.followUpService.findFollowUpsByArticle(articleId);
 
 		if (!article.getNewspaper().isOpen()) {
 			myNewspapersSubscription = this.newspaperService.findNewspapersSubscribedByCustomerId(this.customerService.findByPrincipal().getId());
@@ -112,6 +119,7 @@ public class ArticleCustomerController extends AbstractController {
 
 		result = new ModelAndView("article/display");
 		result.addObject("article", article);
+		result.addObject("followsUp", followsUp);
 		result.addObject("advertisementrandom", advertisement);
 		result.addObject("requestURI", "article/customer/display.do");
 
