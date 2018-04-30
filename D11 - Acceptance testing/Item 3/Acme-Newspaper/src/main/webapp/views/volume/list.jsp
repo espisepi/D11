@@ -60,7 +60,7 @@
 	</security:authorize>
 	
 	<security:authorize access="isAnonymous()">
-		<spring:message code="volume.display" var="Edit" />
+		<spring:message code="volume.display.newspaper" var="Edit" />
 		<display:column title="${Edit}" sortable="true">
 
  			<spring:url value="volume/display.do" var="editURL">
