@@ -1,6 +1,7 @@
 
 package domain;
 
+import java.beans.Transient;
 import java.util.Collection;
 
 import javax.persistence.Access;
@@ -49,6 +50,15 @@ public class Volume extends DomainEntity {
 
 	public void setYear(final String year) {
 		this.year = year;
+	}
+	@Transient
+	public boolean isAllPublic(Volume volume) {
+		boolean result;
+		result = true;
+		for (Newspaper n : volume.getNewspapers())
+			if (n.isOpen() == false)
+				result = false;
+		return result;
 	}
 
 
