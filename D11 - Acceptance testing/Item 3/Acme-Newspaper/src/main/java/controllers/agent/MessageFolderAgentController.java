@@ -54,9 +54,8 @@ public class MessageFolderAgentController extends AbstractController{
 		result = new ModelAndView("messageFolder/list");
 		result.addObject("messageFolders", messageFolders);
 		result.addObject("RequestURIedit", "messageFolder/agent/edit.do");
-		result.addObject("RequestURImessages", "message/agent/list.do");
+		result.addObject("RequestURImessages", "message/agent/list.do?d-16544-p=1");
 		result.addObject("requestURI", "messageFolder/agent/list.do");
-		//result.addObject("modificable", true);
 
 		return result;
 	}

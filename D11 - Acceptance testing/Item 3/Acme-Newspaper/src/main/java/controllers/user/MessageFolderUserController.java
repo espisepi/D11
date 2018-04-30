@@ -56,8 +56,7 @@ public class MessageFolderUserController extends AbstractController{
 		result.addObject("messageFolders", messageFolders);
 		result.addObject("requestURI", "messageFolder/user/list.do");
 		result.addObject("RequestURIedit", "messageFolder/user/edit.do");
-		result.addObject("RequestURImessages", "message/user/list.do");
-		//result.addObject("modificable", true);
+		result.addObject("RequestURImessages", "message/user/list.do?d-16544-p=1");
 
 		return result;
 	}

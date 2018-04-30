@@ -2,7 +2,6 @@ package controllers.customer;
 
 import java.util.Collection;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -55,9 +54,8 @@ public class MessageFolderCustomerController extends AbstractController{
 		result = new ModelAndView("messageFolder/list");
 		result.addObject("messageFolders", messageFolders);
 		result.addObject("RequestURIedit", "messageFolder/customer/edit.do");
-		result.addObject("RequestURImessages", "message/customer/list.do");
+		result.addObject("RequestURImessages", "message/customer/list.do?d-16544-p=1");
 		result.addObject("requestURI", "messageFolder/customer/list.do");
-		//result.addObject("modificable", true);
 
 		return result;
 	}
