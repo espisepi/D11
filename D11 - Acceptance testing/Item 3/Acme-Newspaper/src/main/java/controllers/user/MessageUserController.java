@@ -3,7 +3,6 @@ package controllers.user;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -264,6 +263,7 @@ public class MessageUserController extends AbstractController{
 		result.addObject("message", message);
 		result.addObject("priorities", priorities);
 		result.addObject("show", true);
+		result.addObject("RequestURICancel", "messageFolder/user/list.do");
 		result.addObject("m", m);
 		return result;
 	}
@@ -343,6 +343,7 @@ public class MessageUserController extends AbstractController{
 		result.addObject("message", message);
 		result.addObject("priorities", priorities);
 		result.addObject("show", false);
+		result.addObject("RequestURICancel", "messageFolder/user/list.do");
 		result.addObject("m", m);
 		return result;
 	}

@@ -152,6 +152,7 @@ public class MessageFolderCustomerController extends AbstractController{
 			result.addObject("messageFolder", messageFolder);
 			result.addObject("mes", mess);
 			result.addObject("message", messageCode);
+			result.addObject("RequestURIcancel", "messageFolder/customer/list.do");
 			result.addObject("requestURI", "messageFolder/customer/edit.do");
 
 			return result;

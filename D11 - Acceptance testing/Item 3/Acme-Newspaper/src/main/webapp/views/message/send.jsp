@@ -44,7 +44,7 @@
 			
 
 			<acme:submit name="send" code="message.send.link"/>
-			<acme:cancel url="welcome/index.do" code="message.cancel.link"/>
+			<acme:cancel url="${RequestURICancel}" code="message.cancel.link"/>
 
 
 <br />  
