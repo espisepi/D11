@@ -26,7 +26,7 @@
 	pagesize="10" class="displaytag">
 
 		
-		<spring:message code="messageFolder.edit" var="Edit" />
+		<spring:message code="messageFolder.edit" var="Edit"/>
 		
 		<display:column title="${Edit}" sortable="true">
 		
@@ -44,7 +44,7 @@
 	
 	<!-- Attributes -->
 
-	<acme:column code="messageFolder.messages" property="name"/>
+	<acme:column code="messageFolder.name" property="name" sortable ="true"/>
 	
 	<spring:message code="messageFolder.messages" var="Messages" />
 		

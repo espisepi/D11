@@ -187,30 +187,37 @@ public class MessageCustomerController extends AbstractController{
 	}
 	
 	@RequestMapping(value = "/changeFolder", method = RequestMethod.POST, params = "change")
-	public ModelAndView send(Message m, BindingResult bindingResult, @RequestParam int messageId) {
+	public ModelAndView changeFolderMessage(@ModelAttribute("m") Message m, BindingResult binding, @RequestParam int messageId) {
 		ModelAndView result;
 		Message message;
 		Actor principal;
-
+		MessageFolder messageFolder;
 		
 		message = this.messageService.findOne(messageId);
 		principal = this.actorService.findPrincipal();
+		messageFolder = message.getMessageFolder();
 		
-		message = this.messageService.reconstruct(message, bindingResult);
+		message = this.messageService.reconstruct(message, binding);
 		
-		if (bindingResult.hasErrors())
+		if (binding.hasErrors())
 			result = this.createNewModelAndViewChange(m);
 		else
 			try {
 				this.messageService.saveMessageInFolder(principal, m.getMessageFolder().getName(), message);
 				result = new ModelAndView("redirect:/messageFolder/customer/list.do");
 			} catch (Throwable oops) {
-
-				result = this.createNewModelAndViewChange(m, "message.commit.error");
+				
+				if(message.getMessageFolder().equals(messageFolder))
+					result = this.createNewModelAndViewChange(message, "message.commit.error.move");
+				
+				else
+					
+					result = this.createNewModelAndViewChange(message, "message.commit.error");
 
 			}
 		return result;
-	}	
+	}
+	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(final int messageId) {
 		ModelAndView result;
@@ -282,12 +289,13 @@ public class MessageCustomerController extends AbstractController{
 		messageFolders = this.messageFolderService.findMessageFolderByActor(principal.getId());
 		messageFolders.remove(m.getMessageFolder());
 		
-		Assert.notNull(message);
+		Assert.notNull(m);
 
 		result = new ModelAndView("message/changeFolder");
 		result.addObject("folders", messageFolders);
 		result.addObject("requestURICancel", "message/customer/list.do?messageFolderId=" + m.getMessageFolder().getId());
-		result.addObject("msg", message);
+		result.addObject("msg", m);
+		result.addObject("message", message);
 		return result;
 	}
 	
