@@ -1431,6 +1431,12 @@
 		<property name="actor" ref="admin" />
 	</bean>
 	
+	<bean id="Folder1" class="domain.MessageFolder">
+		<property name="name" value="Folder 1" />
+		<property name="modifiable" value="true" />
+		<property name="actor" ref="admin" />
+	</bean>
+	
 	<!-- Default folder of agent -->
  
 	<bean id="InBoxAgent1" class="domain.MessageFolder">
