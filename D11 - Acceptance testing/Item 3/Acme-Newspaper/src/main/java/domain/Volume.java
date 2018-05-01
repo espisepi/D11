@@ -8,6 +8,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
@@ -50,10 +51,10 @@ public class Volume extends DomainEntity {
 		this.year = year;
 	}
 	@Transient
-	public boolean isAllPublic(Volume volume) {
+	public boolean isAllPublic(final Volume volume) {
 		boolean result;
 		result = true;
-		for (Newspaper n : volume.getNewspapers())
+		for (final Newspaper n : volume.getNewspapers())
 			if (n.isOpen() == false)
 				result = false;
 		return result;
@@ -66,6 +67,7 @@ public class Volume extends DomainEntity {
 
 
 	@ManyToMany
+	@Valid
 	public Collection<Newspaper> getNewspapers() {
 		return this.newspapers;
 	}

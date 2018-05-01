@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -70,11 +71,19 @@ public class VolumeService {
 	public Volume save(final Volume volume) {
 		Volume result;
 		User userPrincipal;
+		Collection<Newspaper> newspapersPrivateOfThisVolume;
 		Assert.notNull(volume);
 
 		Collection<Newspaper> newspapers;
 
 		userPrincipal = this.userService.findByPrincipal();
+
+		//Comprobamos si el volume tiene newspaper private, si no lo tiene el volume pasado por parametro no puede estar sin ningun newspaper
+		newspapersPrivateOfThisVolume = this.newspaperService.findAllNewspapersPrivateByVolumeId(volume.getId());
+		if (newspapersPrivateOfThisVolume.size() == 0) {
+			Assert.notNull(volume.getNewspapers(), "The volume must have at least one newspaper");
+			Assert.isTrue(volume.getNewspapers().size() != 0, "The volume must have at least one newspaper");
+		}
 
 		// Cuando editamos añadimos los periódicos que tenía el volumen antes de ser editado
 		if (volume.getId() != 0) {
@@ -82,18 +91,21 @@ public class VolumeService {
 			Subscription subcripcion;
 			newspapers = this.newspaperService.findAllNewspapersPrivateByVolumeId(volume.getId());
 			customerSubcriptos = this.customerService.customerWithUnderwriteToVolumeId(volume.getId());
-			for (Newspaper n : volume.getNewspapers())
-				if (n.isOpen() == false)
-					for (Customer customer : customerSubcriptos) {
-						CreditCard credito;
-						credito = this.underwriteService.credictcardByVolumenAndCustomer(volume.getId(), customer.getId());
-						subcripcion = this.subscriptionService.create(n.getId(), customer);
-						subcripcion.setCreditCard(credito);
-						subcripcion.setCustomer(customer);
-						this.subscriptionService.reconstruct(subcripcion, customer);
-						this.subscriptionService.save(subcripcion, customer);
-					}
-			volume.getNewspapers().addAll(newspapers);
+			if (volume.getNewspapers().size() != 0) {
+				for (final Newspaper n : volume.getNewspapers())
+					if (n.isOpen() == false)
+						for (final Customer customer : customerSubcriptos) {
+							CreditCard credito;
+							credito = this.underwriteService.credictcardByVolumenAndCustomer(volume.getId(), customer.getId());
+							subcripcion = this.subscriptionService.create(n.getId(), customer);
+							subcripcion.setCreditCard(credito);
+							subcripcion.setCustomer(customer);
+							this.subscriptionService.reconstruct(subcripcion, customer);
+							this.subscriptionService.save(subcripcion, customer);
+						}
+				volume.getNewspapers().addAll(newspapers);
+			} else
+				volume.setNewspapers(newspapers);
 
 		}
 
@@ -144,12 +156,16 @@ public class VolumeService {
 	public Volume reconstruct(final Volume volume, final BindingResult bindingResult) {
 		Volume result;
 		Volume volumeBD;
-		if (volume.getId() == 0)
+		if (volume.getId() == 0) {
+			if (volume.getNewspapers() == null)
+				volume.setNewspapers(new ArrayList<Newspaper>());
 			result = volume;
-		else {
+		} else {
 			volumeBD = this.volumeRepository.findOne(volume.getId());
 			volume.setId(volumeBD.getId());
 			volume.setVersion(volumeBD.getVersion());
+			if (volume.getNewspapers() == null)
+				volume.setNewspapers(new ArrayList<Newspaper>());
 			result = volume;
 		}
 		this.validator.validate(result, bindingResult);

@@ -1,6 +1,7 @@
 
 package controllers.user;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +82,13 @@ public class VolumeUserController extends AbstractController {
 	public ModelAndView save(Volume volume, final BindingResult bindingResult) {
 		ModelAndView result;
 
+		//Si entra aqui es que no se ha pulsado ninguna opcion en el formulario
+		if (volume.getNewspapers() == null)
+			volume.setNewspapers(new ArrayList<Newspaper>());
+		//Si entra aqui es que se ha pulsado la opcion de "----" del formulario
+		if (volume.getNewspapers().contains(null))
+			volume.getNewspapers().remove(null);
+
 		volume = this.volumeService.reconstruct(volume, bindingResult);
 		if (bindingResult.hasErrors())
 			result = this.createEditModelAndView(volume);
@@ -89,7 +97,10 @@ public class VolumeUserController extends AbstractController {
 				this.volumeService.save(volume);
 				result = new ModelAndView("redirect:mylist.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(volume, "volume.commit.error");
+				if (oops.getMessage().equals("The volume must have at least one newspaper"))
+					result = this.createEditModelAndView(volume, "volume.newspaperEmpty.error");
+				else
+					result = this.createEditModelAndView(volume, "volume.commit.error");
 			}
 		return result;
 	}
@@ -113,8 +124,8 @@ public class VolumeUserController extends AbstractController {
 			//Cuando lo creamos que salgan todos los periódicos del user
 			newspapers = this.newspaperService.findNewspapersCreatedByUserAndNotPublished();
 		else {
-			//Cuando lo editamos que salgan solo los periódicos publicos 
-			newspapers = this.newspaperService.findAllNewspapersPublicByUser();
+			//Cuando lo editamos que salgan solo los periódicos publicos que no esten publicados
+			newspapers = this.newspaperService.findAllNewspapersPublicByUserNotPublished();
 			newspapersprivate = this.newspaperService.findAllNewspapersPrivateByUser();
 			volumeBD = this.volumeService.findOne(volume.getId());
 			newspapersprivate.removeAll(volumeBD.getNewspapers());

@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.GregorianCalendar;
@@ -71,18 +72,20 @@ public class UnderwriteService {
 
 		//newspapaer a las que ahi que susbcribirse
 		Collection<Newspaper> newspapersnewsupcription;
-		newspapersnewsupcription = underwrite.getVolume().getNewspapers();
+		//Hay que hacer una copia porque si no al realizar la instruccion: newspapersnewsupcription.removeAll(newspapersubcripto);
+		//se elimina del propio volume las newspapers tambien
+		newspapersnewsupcription = new ArrayList<Newspaper>(underwrite.getVolume().getNewspapers());
 		//newspapaer a las que ya estoy subscrito
 		Collection<Newspaper> newspapersubcripto;
 		newspapersubcripto = this.newspaperService.findNewspapersSubscribedByCustomerId(customerPrincipal.getId());
-		//TODO subscribirse a un volumen significa subscribirsea todos sus periodicos.
+		//DONE subscribirse a un volumen significa subscribirsea todos sus periodicos.
 		newspapersnewsupcription.removeAll(newspapersubcripto);
 
 		Assert.isTrue(this.checkCreditCard(underwrite.getCreditCard()), "Invalid credit card");
 		result = this.underwriteRepository.save(underwrite);
 		customerPrincipal.getUnderwrites().add(result);
 		//Me subscribo a los periodicos
-		for (Newspaper n : newspapersnewsupcription)
+		for (final Newspaper n : newspapersnewsupcription)
 			if (n.isOpen() == false) {
 				subcripcion = this.subscriptionService.create(n.getId());
 				subcripcion.setCreditCard(underwrite.getCreditCard());
@@ -108,7 +111,7 @@ public class UnderwriteService {
 		this.underwriteRepository.flush();
 	}
 	//Other method
-	public CreditCard credictcardByVolumenAndCustomer(int volumeId, int customerId) {
+	public CreditCard credictcardByVolumenAndCustomer(final int volumeId, final int customerId) {
 		CreditCard resul;
 		resul = this.underwriteRepository.credictcardByVolumenAndCustomer(volumeId, customerId);
 		return resul;
