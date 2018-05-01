@@ -116,6 +116,7 @@ public class ArticleUserController extends AbstractController {
 
 		result = new ModelAndView("article/list");
 		result.addObject("articles", articles);
+		result.addObject("requestURI", "article/user/listArticles.do");
 
 		return result;
 	}

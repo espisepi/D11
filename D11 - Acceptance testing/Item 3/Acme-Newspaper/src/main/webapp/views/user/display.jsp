@@ -57,6 +57,7 @@
 	<B><jstl:out value ="${articlesHeader }:"></jstl:out></B>
 			<spring:url value="article/admin/listArticlesOfUserNotDraftMode.do" var="articlesURL">
 				<spring:param name="userId" value="${row.id }" />
+				<spring:param name="d-16544-p" value="1" />
 			</spring:url>
 			<a href="${articlesURL}"><spring:message code ="user.articles"/></a>
 		
@@ -67,6 +68,7 @@
 	<B><jstl:out value ="${articlesHeader }:"></jstl:out></B>
 			<spring:url value="article/user/listArticles.do" var="articlesURL">
 				<spring:param name="userId" value="${row.id }" />
+				<spring:param name="d-16544-p" value="1" />
 			</spring:url>
 			<a href="${articlesURL}"><spring:message code ="user.articles"/></a>
 		
@@ -82,6 +84,7 @@
 	<B><jstl:out value ="${articlesHeader }:"></jstl:out></B>
 			<spring:url value="article/customer/listb.do" var="articlesURL">
 				<spring:param name="userId" value="${row.id }" />
+				<spring:param name="d-16544-p" value="1" />
 			</spring:url>
 			<a href="${articlesURL}"><spring:message code ="user.articles"/></a>
 		
@@ -94,6 +97,7 @@
 	<B><jstl:out value ="${articlesHeader }:"></jstl:out></B>
 			<spring:url value="article/listb.do" var="articlesURL">
 				<spring:param name="userId" value="${row.id }" />
+				<spring:param name="d-16544-p" value="1" />
 			</spring:url>
 			<a href="${articlesURL}"><spring:message code ="user.articles"/></a>
 		
@@ -106,6 +110,7 @@
 	<B><jstl:out value ="${articlesHeader }:"></jstl:out></B>
 			<spring:url value="article/agent/listb.do" var="articlesURL">
 				<spring:param name="userId" value="${row.id }" />
+				<spring:param name="d-16544-p" value="1" />
 			</spring:url>
 			<a href="${articlesURL}"><spring:message code ="user.articles"/></a>
 		
@@ -115,6 +120,7 @@
 		<B><spring:message code="user.chirps1" />:</B>
 			<spring:url value="${requestChirpsURL}" var="chirpURL">
 			<spring:param name="userId" value="${row.id }" />
+			<spring:param name="d-16544-p" value="1" />
 			</spring:url>
 			<a href="${chirpURL}"><spring:message code="user.chirps" /></a>
 	</p>
