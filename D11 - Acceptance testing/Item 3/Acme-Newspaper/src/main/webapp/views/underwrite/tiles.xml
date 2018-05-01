@@ -17,7 +17,7 @@
 <tiles-definitions>
 
 	<definition name="underwrite/edit" extends="master.page">	
-		<put-attribute name="title" value="Edit underwrite" />
+		<put-attribute name="title" value="Edit subscription" />
 		<put-attribute name="body" value="/views/underwrite/edit.jsp" />
 	</definition>
 	
