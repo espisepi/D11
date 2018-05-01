@@ -48,9 +48,8 @@ public class UserController extends AbstractController {
 
 		ModelAndView result;
 		Collection<User> users;
-		
+
 		users = this.userService.findAll();
-	
 
 		result = new ModelAndView("user/list");
 		result.addObject("users", users);
@@ -96,7 +95,7 @@ public class UserController extends AbstractController {
 		result = new ModelAndView("user/list");
 		result.addObject("users", userConnected.getFollowers());
 		result.addObject("requestProfileURL", "/user/display.do");
-		result.addObject("requestURI", "/user/list.do");
+		result.addObject("requestURI", "/user/listFollowers.do");
 
 		return result;
 
@@ -113,7 +112,7 @@ public class UserController extends AbstractController {
 		result.addObject("users", userConnected.getFollowed());
 		result.addObject("seguidos", true);
 		result.addObject("requestProfileURL", "/user/display.do");
-		result.addObject("requestURI", "/user/list.do");
+		result.addObject("requestURI", "/user/listFollowed.do");
 
 		return result;
 
@@ -135,7 +134,7 @@ public class UserController extends AbstractController {
 		result.addObject("users", userNotFollowed);
 		result.addObject("seguidos", false);
 		result.addObject("requestProfileURL", "/user/display.do");
-		result.addObject("requestURI", "/user/list.do");
+		result.addObject("requestURI", "/user/listUserNotFollowed.do");
 
 		return result;
 

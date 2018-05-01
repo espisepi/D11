@@ -28,7 +28,7 @@
 	
 	<security:authorize access="hasRole('USER')">
 		<spring:message code="user.profile" var="userHeader" />
-		<display:column title="${userHeader}" sortable="true">
+		<display:column title="${userHeader}" sortable="false">
 			<spring:url value="user/display.do" var="userURL">
 				<spring:param name="userId" value="${row.id }" />
 			</spring:url>
@@ -79,7 +79,7 @@
 	
 	<jstl:if test="${seguidos}">
 	<spring:message code="user.action" var="actionHeader" />
-	<display:column title="${actionHeader}" sortable="true">
+	<display:column title="${actionHeader}" sortable="false">
 		
 		<spring:url value="user/unfollow.do" var="unfollowURL">
 		<spring:param name="userId" value="${row.id}"/>
@@ -92,7 +92,7 @@
 	
 	<jstl:if test="${seguidos==false}">
 	<spring:message code="user.action" var="actionHeader" />
-	<display:column title="${actionHeader}" sortable="true">
+	<display:column title="${actionHeader}" sortable="false">
 		
 		<spring:url value="user/follow.do" var="followURL">
 		<spring:param name="userId" value="${row.id}"/>
