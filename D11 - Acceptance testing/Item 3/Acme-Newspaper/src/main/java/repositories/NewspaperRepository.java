@@ -104,4 +104,7 @@ public interface NewspaperRepository extends JpaRepository<Newspaper, Integer> {
 	//Me devuelve todos los periodicos publicos no publicados de un user
 	@Query("select n from Newspaper n where n.publisher.id=?1 and n.open=true and n.publicationDate!=null")
 	Collection<Newspaper> findAllNewspapersPublicByUserNotPublished(int id);
+
+	@Query("select n from Newspaper n where n.publisher.id=?1 and n.open=false and n.publicationDate!=null")
+	Collection<Newspaper> findAllNewspapersPrivateByUserNotPublished(int id);
 }
