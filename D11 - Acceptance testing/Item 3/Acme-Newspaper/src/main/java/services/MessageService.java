@@ -100,7 +100,7 @@ public class MessageService {
 	
 	//Send-----------------------------------------------------
 	
-	public void send(Message message) {
+	public Message send(Message message) {
 		
 		Assert.notNull(message);
 		
@@ -109,13 +109,16 @@ public class MessageService {
 		Actor recipient;
 		Message messageSaved;
 		Message messageRecipient;
+		Actor principal;
 		
+		principal = this.actorService.findPrincipal();
 		moment = new Date(System.currentTimeMillis() - 1000);
 		sender = message.getSender();
 		recipient = message.getRecipient();
 		
 		message.setMoment(moment);
 		
+		Assert.isTrue(principal.equals(sender));
 		
 		messageSaved = this.messageRepository.save(message);
 		messageRecipient = this.messageRepository.save(message);
@@ -130,7 +133,7 @@ public class MessageService {
 		
 		Assert.notNull(messageSaved);
 		
-		
+		return messageRecipient;
 		
 	}
 	
@@ -140,7 +143,7 @@ public class MessageService {
 		
 		Assert.notNull(message);
 		
-		adminService.findByPrincipal();
+		this.adminService.checkPrincipal();
 		
 		Date moment;
 		Actor sender;
@@ -344,6 +347,10 @@ public class MessageService {
 		}
 		this.validator.validate(result, bindingResult);
 		return result;
+	}
+	
+	public void flush(){
+		this.messageRepository.flush();
 	}
 	
 
