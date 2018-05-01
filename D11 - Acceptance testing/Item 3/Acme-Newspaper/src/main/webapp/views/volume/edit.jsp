@@ -32,7 +32,7 @@
 	<%-- <acme:textbox code="volume.year" path="year" placeHolder="XXXX"/> --%>
 	<br />
 	<jstl:out value="Year"></jstl:out>
-	<form:input path="year" type="number" value = "1000" max="3000" min ="1000"/>
+	<form:input path="year" type="number" value = "${volume.year}" max="3000" min ="1000"/>
 	<acme:selectmultiple items="${newspapers}" itemLabel="title" code="volume.newspaper" path="newspapers"/>
 	<br />
 	
