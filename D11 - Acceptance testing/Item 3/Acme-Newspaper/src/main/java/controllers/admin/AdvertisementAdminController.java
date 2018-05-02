@@ -32,7 +32,7 @@ public class AdvertisementAdminController extends AbstractController {
 	//Listing
 
 	@RequestMapping(value = "/listAdvertisementWithTabooWord", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView listWithTabooWord() {
 
 		ModelAndView result;
 		Collection<Advertisement> advertisementWithTabooWord;
@@ -41,8 +41,26 @@ public class AdvertisementAdminController extends AbstractController {
 
 		result = new ModelAndView("advertisement/list");
 		result.addObject("advertisements", advertisementWithTabooWord);
-		result.addObject("showDelete", true);
+		result.addObject("showDelete", false);
 		result.addObject("requestURI", "advertisement/admin/listAdvertisementWithTabooWord.do?d-16544-p=1");
+		return result;
+
+	}
+
+	//Listing
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+
+		ModelAndView result;
+		Collection<Advertisement> advertisementWithTabooWord;
+
+		advertisementWithTabooWord = this.advertisementService.findAll();
+
+		result = new ModelAndView("advertisement/list");
+		result.addObject("advertisements", advertisementWithTabooWord);
+		result.addObject("showDelete", true);
+		result.addObject("requestURI", "advertisement/admin/list.do?d-16544-p=1");
 		return result;
 
 	}
@@ -57,7 +75,7 @@ public class AdvertisementAdminController extends AbstractController {
 		Assert.notNull(advertisement);
 		try {
 			this.advertisementService.delete(advertisement);
-			result = new ModelAndView("redirect:listAdvertisementWithTabooWord.do?d-16544-p=1");
+			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
 			result = this.listWithMessage("article.commit.error");
 		}
@@ -71,7 +89,7 @@ public class AdvertisementAdminController extends AbstractController {
 		advertisements = this.advertisementService.findAll();
 		result = new ModelAndView("comment/list");
 		result.addObject("advertisements", advertisements);
-		result.addObject("requestURI", "/advertisement/admin/listAdvertisementWithTabooWord.do");
+		result.addObject("requestURI", "advertisement/admin/list.do?d-16544-p=1");
 		result.addObject("message", message);
 		return result;
 
