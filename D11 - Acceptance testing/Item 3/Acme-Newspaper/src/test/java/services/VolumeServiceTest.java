@@ -71,7 +71,8 @@ public class VolumeServiceTest extends AbstractTest {
 			if (aux == 1)
 				volumes.add(volume);
 			Assert.isTrue(volumes.size() == 6);
-			this.volumeService.flush();
+			//this.volumeService.flush();
+			this.entityManager.flush();
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -144,7 +145,8 @@ public class VolumeServiceTest extends AbstractTest {
 			volume.setDescription(description);
 			volume.setYear(year);
 			volume = this.volumeService.save(volume);
-			this.volumeService.flush();
+			//this.volumeService.flush();
+			this.entityManager.flush();
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
