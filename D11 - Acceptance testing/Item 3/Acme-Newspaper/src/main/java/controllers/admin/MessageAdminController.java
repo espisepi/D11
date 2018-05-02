@@ -114,7 +114,6 @@ public class MessageAdminController extends AbstractController{
 		else
 			try {
 				MessageFolder folderToReturn = m.getMessageFolder();
-
 				this.messageService.send(m);
 				result = new ModelAndView("redirect:list.do?messageFolderId=" + folderToReturn.getId());
 			} catch (Throwable oops) {
