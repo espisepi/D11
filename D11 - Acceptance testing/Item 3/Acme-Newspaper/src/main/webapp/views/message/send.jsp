@@ -16,11 +16,11 @@
 			
 
 			<jstl:if test="${show}">
-			<jstl:if test="${m.recipient == null}">
+			<%-- <jstl:if test="${m.recipient == null}"> --%>
 				<acme:select code="message.sendTo" path="recipient"
 					items="${actors}" itemLabel="userAccount.username" />
 				<br />
-			</jstl:if>
+			<%-- </jstl:if> --%>
 			</jstl:if>
 			
  			<form:label path="priority">
