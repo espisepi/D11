@@ -77,13 +77,19 @@ public class MessageAdminController extends AbstractController{
 		ModelAndView result;
 		
 		Message message;
+		Actor principal;
 
+		principal = this.actorService.findPrincipal();
 		message = this.messageService.findOne(messageId);
 
 		result = new ModelAndView("message/display");
 		result.addObject("messageDisplay", message);
 		result.addObject("RequestURIreply", "message/admin/reply.do");
 		result.addObject("requestURI", "message/admin/display.do");
+		if(!message.getSender().equals(principal)){
+			result.addObject("show", true);
+		}else 
+			result.addObject("show", false);
 
 		return result;
 

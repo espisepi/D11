@@ -75,16 +75,23 @@ public class MessageUserController extends AbstractController{
 	public ModelAndView display(@RequestParam int messageId) {
 
 		ModelAndView result;
+		Actor principal;
 		
 		Message message;
+		principal = this.actorService.findPrincipal();
 
 		message = this.messageService.findOne(messageId);
-
+		
 		result = new ModelAndView("message/display");
 		result.addObject("messageDisplay", message);
 		result.addObject("RequestURIreply", "message/user/reply.do");
 		result.addObject("requestURI", "message/user/display.do");
+		if(!message.getSender().equals(principal)){
+			result.addObject("show", true);
+		}else 
+			result.addObject("show", false);
 
+		
 		return result;
 
 	}
