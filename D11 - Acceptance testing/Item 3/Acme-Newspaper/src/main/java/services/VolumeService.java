@@ -177,4 +177,8 @@ public class VolumeService {
 		result = this.volumeRepository.findByNewspaperId(newspaperId);
 		return result;
 	}
+
+	public void flush() {
+		this.volumeRepository.flush();
+	}
 }
