@@ -24,7 +24,7 @@ public class Volume extends DomainEntity {
 	private int		year;
 
 
-	@NotBlank
+	//@NotBlank
 	public String getTitle() {
 		return this.title;
 	}

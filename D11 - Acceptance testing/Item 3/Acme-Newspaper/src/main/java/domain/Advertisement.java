@@ -52,7 +52,7 @@ public class Advertisement extends DomainEntity {
 	}
 
 	@URL
-	@NotBlank
+	//@NotBlank
 	public String getTargetPage() {
 		return this.targetPage;
 	}

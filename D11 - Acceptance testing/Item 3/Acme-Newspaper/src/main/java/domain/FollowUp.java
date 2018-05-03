@@ -67,7 +67,7 @@ public class FollowUp extends DomainEntity {
 		this.summary = summary;
 	}
 
-	@NotBlank
+	//@NotBlank
 	public String getText() {
 		return this.text;
 	}

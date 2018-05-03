@@ -80,7 +80,7 @@ public class Article extends DomainEntity {
 		this.publishedMoment = publishedMoment;
 	}
 
-	@NotBlank
+	//@NotBlank
 	public String getBody() {
 		return this.body;
 	}
