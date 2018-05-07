@@ -91,45 +91,48 @@ public class VolumeServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 			{
 				//Se edita un volume correctamente
-				"user1", "volume1", "title nuevo", "description test", 2192, "newspaper1", null
+				"user1", "volume1", "title nuevo", "description test", 2192, "newspaper1", false, null
 			}, {
 				//Se edita un volume con un año incorrecto
-				"user1", "volume1", "title nuevo", "description test", 3001, "newspaper1", ConstraintViolationException.class
+				"user1", "volume1", "title nuevo", "description test", 3001, "newspaper1", false, ConstraintViolationException.class
 			}, {
-				//Se edita que no es de tu propiedad
-				"user1", "volume2", "title nuevo", "description test", 2192, "newspaper1", IllegalArgumentException.class
+				//Se edita un newspaper que no es de tu propiedad
+				"user1", "volume2", "title nuevo", "description test", 2192, "newspaper1", false, IllegalArgumentException.class
 			}, {
 				//Editar un volumen para añadir un nuevo newspapers privado
-				"user3", "volume5", "title nuevo", "description test", 2192, "newspaper4", null
+				"user3", "volume5", "title nuevo", "description test", 2192, "newspaper4", false, null
 			}, {
 				//Editar un volumen para añadir un nuevo newspapers publico
-				"user3", "volume5", "title nuevo", "description test", 2192, "newspaper7", null
+				"user3", "volume5", "title nuevo", "description test", 2192, "newspaper7", false, null
 			}, {
 				//Editar un volumen para añadir un nuevo newspapers privado que no es tuyo
-				"user3", "volume5", "title nuevo", "description test", 2192, "newspaper1", IllegalArgumentException.class
+				"user3", "volume5", "title nuevo", "description test", 2192, "newspaper1", false, IllegalArgumentException.class
 			}, {
 				//Editar un volumen para añadir un nuevo newspapers publico que no es tuyo
-				"user3", "volume5", "title nuevo", "description test", 2192, "newspaper2", IllegalArgumentException.class
+				"user3", "volume5", "title nuevo", "description test", 2192, "newspaper2", false, IllegalArgumentException.class
 			}, {
 				//Editar un volumen que no es tuyo
-				"user1", "volume5", "title nuevo", "description test", 2192, "newspaper2", IllegalArgumentException.class
+				"user1", "volume5", "title nuevo", "description test", 2192, "newspaper2", false, IllegalArgumentException.class
 			}, {
 				//Editar un volumen con titulo en blanco
-				"user1", "volume5", "", "description test", 2192, "newspaper2", IllegalArgumentException.class
+				"user1", "volume5", "", "description test", 2192, "newspaper2", false, IllegalArgumentException.class
 			}, {
 				//Editar un volumen con descripcion en blanco
-				"user1", "volume5", "title", "", 2192, "newspaper2", IllegalArgumentException.class
+				"user1", "volume5", "title", "", 2192, "newspaper2", false, IllegalArgumentException.class
 			}, {
 				//Editar un volumen por un customer
-				"customer1", "volume5", "title nuevo", "description test", 2192, "newspaper2", IllegalArgumentException.class
-			}
+				"customer1", "volume5", "title nuevo", "description test", 2192, "newspaper2", false, IllegalArgumentException.class
+			}, {
+				//Editar un volumen que no es tuyo comprobando el list
+				"user1", "volume5", "title nuevo", "description test", 2192, "newspaper2", true, IllegalArgumentException.class
+			},
 
 		};
 		for (int i = 0; i < testingData.length; i++)
 			this.templateListEdit((String) testingData[i][0], super.getEntityId((String) testingData[i][1]), (String) testingData[i][2], (String) testingData[i][3], (int) testingData[i][4], super.getEntityId((String) testingData[i][5]),
-				(Class<?>) testingData[i][6]);
+				(boolean) testingData[i][6], (Class<?>) testingData[i][7]);
 	}
-	private void templateListEdit(final String username, final int volumeId, final String title, final String description, final int year, final int newspaperId, final Class<?> expected) {
+	private void templateListEdit(final String username, final int volumeId, final String title, final String description, final int year, final int newspaperId, final boolean checkList, final Class<?> expected) {
 		Volume volume;
 		Collection<Volume> volumes;
 		Newspaper newspaper;
@@ -140,6 +143,8 @@ public class VolumeServiceTest extends AbstractTest {
 			volumes = this.volumeService.myVolumes();
 			newspaper = this.newspaperService.findOne(newspaperId);
 			volume = this.volumeService.findOne(volumeId);
+			if (checkList)
+				Assert.isTrue(volumes.contains(volume));
 			Assert.isTrue(volume.getNewspapers().contains(newspaper));
 			if (!volume.getNewspapers().contains(newspaper))
 				volume.getNewspapers().add(newspaper);
