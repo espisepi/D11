@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.NewspaperService;
-import services.UserService;
 import services.VolumeService;
 import controllers.AbstractController;
 import domain.Newspaper;
@@ -22,14 +20,9 @@ import domain.Volume;
 public class VolumeCustomerController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
-	@Autowired
-	private NewspaperService	newspaperService;
 
 	@Autowired
-	private UserService			userService;
-
-	@Autowired
-	private VolumeService		volumeService;
+	private VolumeService	volumeService;
 
 
 	//List volumen con los periodicos abiertos y publicados -----------------------------------------------------------
