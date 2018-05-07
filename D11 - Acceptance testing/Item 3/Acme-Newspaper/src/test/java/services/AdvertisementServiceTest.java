@@ -35,7 +35,7 @@ public class AdvertisementServiceTest extends AbstractTest {
 	EntityManager			entityManager;
 
 
-	//Caso de uso 4.4)Register an advertisement and place it in a newspaper.
+	//Caso de uso 4.2)Register an advertisement and place it in a newspaper.
 	@Test
 	public void driverCreateAndSave() {
 		final Collection<CreditCard> listCreditCards;

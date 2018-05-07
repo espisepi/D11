@@ -41,14 +41,13 @@ public class VolumeServiceTest extends AbstractTest {
 	EntityManager		entityManager;
 
 
-	//Caso de uso 8.1: Haga una lista de los volúmenes en el sistema y navegue por ellos tal y 
-	//como son (por ejemplo, un periódico privado no puede mostrarse completamente a los actores no autenticados).
+	//Caso de uso 8.1: List the volumes in the system and browse their newspapers as long as they are authorised (for instance, a private newspaper cannot be fully displayed to unauthenticated actors).
 	@Test
 	public void driverList() {
 
 		final Object testingData[][] = {
 			{
-				//Mostrar listado de los no autenticados
+				//Mostrar listado de los no autenticados y mirar periodico publico
 				"volume2", "newspaper3", 0, null
 			}, {
 				//Mostrar listado de los no autenticados y mirar periodico privado
@@ -110,9 +109,7 @@ public class VolumeServiceTest extends AbstractTest {
 			}, {
 				//Editar un volumen para añadir un nuevo newspapers publico que no es tuyo
 				"user3", "volume5", "title nuevo", "description test", 2192, "newspaper2", IllegalArgumentException.class
-			},
-
-			{
+			}, {
 				//Editar un volumen que no es tuyo
 				"user1", "volume5", "title nuevo", "description test", 2192, "newspaper2", IllegalArgumentException.class
 			}, {
@@ -121,7 +118,11 @@ public class VolumeServiceTest extends AbstractTest {
 			}, {
 				//Editar un volumen con descripcion en blanco
 				"user1", "volume5", "title", "", 2192, "newspaper2", IllegalArgumentException.class
-			},
+			}, {
+				//Editar un volumen por un customer
+				"customer1", "volume5", "title nuevo", "description test", 2192, "newspaper2", IllegalArgumentException.class
+			}
+
 		};
 		for (int i = 0; i < testingData.length; i++)
 			this.templateListEdit((String) testingData[i][0], super.getEntityId((String) testingData[i][1]), (String) testingData[i][2], (String) testingData[i][3], (int) testingData[i][4], super.getEntityId((String) testingData[i][5]),

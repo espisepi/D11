@@ -39,7 +39,7 @@ public class UnderwriteServiceTest extends AbstractTest {
 	EntityManager		entityManager;
 
 
-	//Caso de uso 9.1: Subscribirse a un Volumen 
+	//Caso de uso 9.1: Subscribe to a volume by providing a credit card.
 	@Test
 	public void driverCreateAndSave() {
 		final Collection<CreditCard> listCreditCards;

@@ -1232,6 +1232,7 @@ public class AdminServiceTest extends AbstractTest {
 			advertisements = this.advertisementService.advertisementWithTabooWord();
 			advertisementToCompare = this.advertisementService.findOne(this.getEntityId(advertisement));
 			Assert.isTrue(advertisements.contains(advertisementToCompare));
+			this.entityManager.flush();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 			//Se borra la cache para que no salte siempre el error del primer objeto que ha fallado en el test
@@ -1267,7 +1268,7 @@ public class AdminServiceTest extends AbstractTest {
 			super.authenticate(username);
 			advertisementDelete = this.advertisementService.findOne(this.getEntityId(advertisementId));
 			this.advertisementService.delete(advertisementDelete);
-
+			this.entityManager.flush();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 			//Se borra la cache para que no salte siempre el error del primer objeto que ha fallado en el test
@@ -1314,7 +1315,7 @@ public class AdminServiceTest extends AbstractTest {
 		super.unauthenticate();
 	}
 
-	//Caso de uso 5.3.1: The ratio of newspapers that have at least one advertisement versus the newspapers that havent any.
+	//Caso de uso 5.3.2: The ratio of advertisements that have taboo words
 	@Test
 	public void driverTheRatioOfAdvertisementsThatHaveTabooWords() {
 		final Object testingData[][] = {
