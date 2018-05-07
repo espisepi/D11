@@ -1,7 +1,5 @@
 package services;
 
-import java.util.Collection;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -39,16 +37,16 @@ public class MessageServiceTest extends AbstractTest{
 		EntityManager			entityManager;
 		
 		
-		//13.2. Send message
+		//13.1. Send message
 		@Test
 		public void driveSendMessage() {
 			
 			final Object testingData[][] = {
-				//user send message to customer, positive case
+				//user1 send message to customer, positive case
 				{
 					"user1", "user1", "customer1", "hola", "hola", "HIGH", null 
 				},
-				//user send message to customer, positive case
+				//user2 try that user1 send message to customer1, negative case
 				{
 					"user2", "user1", "customer1", "hola", "hola", "HIGH", java.lang.IllegalArgumentException.class
 				}
@@ -66,7 +64,7 @@ public class MessageServiceTest extends AbstractTest{
 			Class<?> caught;
 			Message result;
 			MessageFolder messageFolderRecipient;
-			MessageFolder messageFolderSender;
+			
 			
 			caught = null;
 			
@@ -141,7 +139,7 @@ public class MessageServiceTest extends AbstractTest{
 
 		}
 		
-		//14.1. Send spam message 
+		//13.1. Send spam message 
 		@Test
 		public void driveSendSpamMessage() {
 			
@@ -196,7 +194,7 @@ public class MessageServiceTest extends AbstractTest{
 		
 		
 		
-		//13.2. Delete message 
+		//13.1. Delete message 
 		@Test
 		public void driveDeleteMessage() {
 			
@@ -230,6 +228,53 @@ public class MessageServiceTest extends AbstractTest{
 				super.authenticate(username);
 				result = this.messageService.findOne(super.getEntityId(message));
 				this.messageService.delete(result);
+				this.messageService.flush();
+			} catch (final Throwable oops) {
+				caught = oops.getClass();
+				this.entityManager.clear();
+			}
+
+			this.checkExceptions(expected, caught);
+
+		}
+		
+		//13.1. Change message 
+		@Test
+		public void driveChangeMessageToFolder() {
+			
+			final Object testingData[][] = {
+				//agente change message from In box to notification box, positive case
+				{
+					"agent1", "message2", "NotificationBoxAgent1", null 
+				},
+				//user changer message from In box to notification box that it isn't his, negative case
+				{
+					"user1", "message2", "NotificationBoxAgent1", java.lang.IllegalArgumentException.class
+				}
+				
+			};
+
+			for (int i = 0; i < testingData.length; i++)
+				this.templateChangeMessageToFolder((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2],
+					(Class<?>) testingData[i][3]);
+			
+		}
+		
+		public void templateChangeMessageToFolder(final String username, String message, String messageFolderNew, final Class<?> expected) {
+
+			Class<?> caught;
+			Message result;
+			MessageFolder messageFolder;
+			
+			
+			caught = null;
+			
+
+			try {
+				super.authenticate(username);
+				result = this.messageService.findOne(super.getEntityId(message));
+				messageFolder = this.messageFolderService.findOne(super.getEntityId(messageFolderNew));
+				this.messageService.saveMessageInFolder(messageFolder.getActor(), messageFolder.getName(), result);
 				this.messageService.flush();
 			} catch (final Throwable oops) {
 				caught = oops.getClass();
