@@ -47,11 +47,11 @@ public class VolumeServiceTest extends AbstractTest {
 
 		final Object testingData[][] = {
 			{
-				//Mostrar listado de los no autenticados y mirar periodico publico
+				//Mostrar listado de los no autenticados y mirar que el volume2 contiene el newspaper3
 				"volume2", "newspaper3", 0, null
 			}, {
-				//Mostrar listado de los no autenticados y mirar periodico privado
-				"volume3", "newspaper8", 1, IllegalArgumentException.class
+				//Mostrar listado de los no autenticados y mirar que el volume2 no contiene el newspaper8
+				"volume2", "newspaper8", 1, IllegalArgumentException.class
 			}
 		};
 		for (int i = 0; i < testingData.length; i++)
@@ -62,14 +62,15 @@ public class VolumeServiceTest extends AbstractTest {
 		Collection<Volume> volumes;
 		Class<?> caught;
 		Volume volume;
+		Newspaper newspaper;
 
 		caught = null;
 		try {
 			volumes = this.volumeService.findAll();
 			volume = this.volumeService.findOne(volumeId);
-			if (aux == 1)
-				volumes.add(volume);
-			Assert.isTrue(volumes.size() == 6);
+			newspaper = this.newspaperService.findOne(newspaperId);
+			Assert.isTrue(volumes.contains(volume));
+			Assert.isTrue(volume.getNewspapers().contains(newspaper));
 			//this.volumeService.flush();
 			this.entityManager.flush();
 
