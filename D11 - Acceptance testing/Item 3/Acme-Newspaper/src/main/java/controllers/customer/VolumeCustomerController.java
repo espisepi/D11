@@ -30,8 +30,7 @@ public class VolumeCustomerController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Volume> volumes;
-		boolean showButtonSubscription;
-		showButtonSubscription = false;
+
 		volumes = this.volumeService.findAll();
 		Collection<Volume> volumeSubscribed;
 		volumeSubscribed = this.volumeService.volumesWithUnderwriteOneCustomer();
