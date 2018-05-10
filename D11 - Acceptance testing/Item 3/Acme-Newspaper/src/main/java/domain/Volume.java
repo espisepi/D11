@@ -15,7 +15,7 @@ import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Volume extends DomainEntity implements Subscribible {
+public class Volume extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 
