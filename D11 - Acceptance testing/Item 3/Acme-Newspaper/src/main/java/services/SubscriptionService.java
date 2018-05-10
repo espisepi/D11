@@ -17,6 +17,7 @@ import repositories.SubscriptionRepository;
 import domain.CreditCard;
 import domain.Customer;
 import domain.Newspaper;
+import domain.Subscribible;
 import domain.Subscription;
 
 @Service
@@ -36,6 +37,9 @@ public class SubscriptionService {
 	@Autowired
 	NewspaperService		newspaperService;
 
+	@Autowired
+	VolumeService			volumeService;
+
 	//Importar la que pertenece a Spring
 	@Autowired
 	private Validator		validator;
@@ -50,30 +54,31 @@ public class SubscriptionService {
 	// Simple CRUD methods ----------------------------------------------------
 
 	//CREATE
-	public Subscription create(final int newspaperId) {
+	public Subscription create(final int subscribibleId) {
 		Subscription result;
 		Customer customerPrincipal;
 		Newspaper newspaper;
 
 		newspaper = this.newspaperService.findOne(newspaperId);
-		Assert.isTrue(!newspaper.isOpen(), "the newspaper must be private");
+
+		Assert.isTrue(!newspaper.isOpen(), "the subscribible must be private");
 		customerPrincipal = this.customerService.findByPrincipal();
 		result = new Subscription();
 		result.setCustomer(customerPrincipal);
-		result.setNewspaper(newspaper);
+		result.setSubscribible(newspaper);
 
 		return result;
 	}
 
-	public Subscription create(final int newspaperId, Customer customer) {
+	public Subscription create(final int subscribibleId, final Customer customer) {
 		Subscription result;
-		Newspaper newspaper;
+		Subscribible subscribible;
 
-		newspaper = this.newspaperService.findOne(newspaperId);
-		Assert.isTrue(!newspaper.isOpen(), "the newspaper must be private");
+		subscribible = this.newspaperService.findOne(subscribibleId);
+		Assert.isTrue(!newspaper.isOpen(), "the subscribible must be private");
 		result = new Subscription();
 		result.setCustomer(customer);
-		result.setNewspaper(newspaper);
+		result.setSubscribible(subscribible);
 
 		return result;
 	}
@@ -87,22 +92,22 @@ public class SubscriptionService {
 		customerPrincipal = this.customerService.findByPrincipal();
 		Assert.isTrue(!customerPrincipal.getSubcriptions().contains(subscription), "el cliente ya esta subscrito a este periodico");
 		Assert.isTrue(subscription.getCustomer().equals(customerPrincipal), "El cliente de la subscripcion debe ser el mismo que el logueado");
-		Assert.isTrue(!subscription.getNewspaper().isOpen(), "solo se pueden subscribir a los periodicos privados");
-		Assert.notNull(subscription.getNewspaper().getPublicationDate(), "solo se pueden subscribir a los periodicos publicados");
+		Assert.isTrue(!subscription.getSubscribible().isOpen(), "solo se pueden subscribir a los periodicos privados");
+		Assert.notNull(subscription.getSubscribible().getPublicationDate(), "solo se pueden subscribir a los periodicos publicados");
 		Assert.isTrue(this.checkCreditCard(subscription.getCreditCard()), "Invalid credit card");
 
 		result = this.subscriptionRepository.save(subscription);
 		return result;
 	}
 
-	public Subscription save(final Subscription subscription, Customer customer) {
+	public Subscription save(final Subscription subscription, final Customer customer) {
 		Subscription result;
 
 		Assert.notNull(subscription);
 		Assert.isTrue(!customer.getSubcriptions().contains(subscription), "el cliente ya esta subscrito a este periodico");
 		Assert.isTrue(subscription.getCustomer().equals(customer), "El cliente de la subscripcion debe ser el mismo que el logueado");
-		Assert.isTrue(!subscription.getNewspaper().isOpen(), "solo se pueden subscribir a los periodicos privados");
-		Assert.notNull(subscription.getNewspaper().getPublicationDate(), "solo se pueden subscribir a los periodicos publicados");
+		Assert.isTrue(!subscription.getSubscribible().isOpen(), "solo se pueden subscribir a los periodicos privados");
+		Assert.notNull(subscription.getSubscribible().getPublicationDate(), "solo se pueden subscribir a los periodicos publicados");
 		Assert.isTrue(this.checkCreditCard(subscription.getCreditCard()), "Invalid credit card");
 
 		result = this.subscriptionRepository.save(subscription);
@@ -120,7 +125,7 @@ public class SubscriptionService {
 		final Customer customerPrincipal;
 		if (subscription.getId() == 0) {
 
-			Assert.isTrue(!subscription.getNewspaper().isOpen(), "the newspaper must be private");
+			Assert.isTrue(!subscription.getSubscribible().isOpen(), "the subscribible must be private");
 			customerPrincipal = this.customerService.findByPrincipal();
 			subscription.setCustomer(customerPrincipal);
 
@@ -138,7 +143,7 @@ public class SubscriptionService {
 		final Customer customerPrincipal;
 		if (subscription.getId() == 0) {
 
-			Assert.isTrue(!subscription.getNewspaper().isOpen(), "the newspaper must be private");
+			Assert.isTrue(!subscription.getSubscribible().isOpen(), "the subscribible must be private");
 			customerPrincipal = this.customerService.findByPrincipal();
 			subscription.setCustomer(customerPrincipal);
 
@@ -151,11 +156,11 @@ public class SubscriptionService {
 		return result;
 	}
 
-	public Subscription reconstruct(final Subscription subscription, Customer customer) {
+	public Subscription reconstruct(final Subscription subscription, final Customer customer) {
 		Subscription result;
 		if (subscription.getId() == 0) {
 
-			Assert.isTrue(!subscription.getNewspaper().isOpen(), "the newspaper must be private");
+			Assert.isTrue(!subscription.getSubscribible().isOpen(), "the subscribible must be private");
 			subscription.setCustomer(customer);
 
 			result = subscription;
@@ -167,11 +172,11 @@ public class SubscriptionService {
 		return result;
 	}
 
-	public Collection<Subscription> findSubscriptionByNewspaper(final int newspaperId) {
+	public Collection<Subscription> findSubscriptionBySubscribible(final int subscribibleId) {
 
 		Collection<Subscription> result;
 
-		result = this.subscriptionRepository.findSubscriptionByNewspaper(newspaperId);
+		result = this.subscriptionRepository.findSubscriptionBySubscribible(subscribibleId);
 
 		return result;
 	}

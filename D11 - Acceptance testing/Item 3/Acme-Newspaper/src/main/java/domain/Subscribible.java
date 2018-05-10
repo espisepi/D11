@@ -1,6 +1,8 @@
+
 package domain;
 
+public interface Subscribible<T> {
 
-public interface Subscribible {
+	public T getType();
 
 }
