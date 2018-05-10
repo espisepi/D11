@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(indexes = {
-	@Index(columnList = "customer_id,newspaper_id")
+	@Index(columnList = "customer_id,subscribible_id")
 })
 public class Subscription extends DomainEntity {
 
@@ -34,19 +34,19 @@ public class Subscription extends DomainEntity {
 
 	//Relationships------------------------------------------------------------------
 
-	private Newspaper	newspaper;
-	private Customer	customer;
+	private Subscribible	subscribible;
+	private Customer		customer;
 
 
 	@Valid
 	@NotNull
 	@ManyToOne(optional = false)
-	public Newspaper getNewspaper() {
-		return this.newspaper;
+	public Subscribible getSubscribible() {
+		return this.subscribible;
 	}
 
-	public void setNewspaper(final Newspaper newspaper) {
-		this.newspaper = newspaper;
+	public void setSubscribible(final Subscribible subscribible) {
+		this.subscribible = subscribible;
 	}
 
 	@ManyToOne(optional = false)

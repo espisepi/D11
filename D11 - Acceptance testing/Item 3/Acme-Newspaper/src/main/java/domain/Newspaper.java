@@ -26,7 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(indexes = {
 	@Index(columnList = "open,publicationDate,title,description,publisher_id")
 })
-public class Newspaper extends DomainEntity {
+public class Newspaper extends DomainEntity implements Subscribible {
 
 	// Attributes -------------------------------------------------------------
 
